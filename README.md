@@ -13,6 +13,9 @@
 [![AI Agents](https://img.shields.io/badge/AI%20Agents-6%20CLIs-c8f24e)](https://github.com/x5/new-mac-setting)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/x5/new-mac-setting/pulls)
+[![在线阅读](https://img.shields.io/badge/🌐_在线阅读-GitHub_Pages-c8f24e)](https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.html)
+
+### 🌐 [在线阅读精美单页版 →](https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.html)
 
 [English keywords](#-seo-keywords) · [完整手册](mac-mini-ai-dev-setup.md) · [精美单页版](mac-mini-ai-dev-setup.html) · [参考链接](#-参考)
 
@@ -41,7 +44,7 @@
 | 文件 | 说明 |
 |---|---|
 | 📄 [`mac-mini-ai-dev-setup.md`](mac-mini-ai-dev-setup.md) | 完整手册。16 章 + 名词脚注，可直接按章节执行 |
-| 🎨 [`mac-mini-ai-dev-setup.html`](mac-mini-ai-dev-setup.html) | 同内容的单页精美版：深色终端美学、章节导航、悬停术语 tooltip、代码一键复制，浏览器直接打开 |
+| 🎨 [`mac-mini-ai-dev-setup.html`](mac-mini-ai-dev-setup.html) · [🌐 在线版](https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.html) | 同内容的单页精美版：深色终端美学、章节导航、悬停术语 tooltip、代码一键复制，浏览器直接打开 |
 
 | Agent 工具栈 | 悬停术语解释 |
 |---|---|
