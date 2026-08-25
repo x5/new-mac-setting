@@ -106,6 +106,7 @@ Config     Homebrew Brewfile · chezmoi · bootstrap.sh · dotsync
 - [Best AI Coding Agent Harness 2026](https://aitoolsrecap.com/Blog/best-ai-coding-agent-harness-2026)
 - [Kimi Code 官方文档](https://www.kimi.com/code/docs/)
 - [cc-switch](https://github.com/farion1231/cc-switch) · [mcpm](https://mcpm.sh/) · [chezmoi](https://www.chezmoi.io/) · [OrbStack](https://orbstack.dev/)
+- 📐 [GitHub 发布标准（SOP）](docs/readme-standard.md) —— 本仓库 README / topics / 设置的提炼方法论
 
 ## 🔎 SEO Keywords
 
