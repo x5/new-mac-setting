@@ -304,7 +304,7 @@ footer .sig{font-family:var(--serif);font-style:italic;font-size:15px;color:var(
 <header class="hero" id="hero">
   <div class="kicker">Dev Environment · Field Manual</div>
   <h1 class="reveal">一台 <span class="ital">Mac Mini</span><br><span class="cjk">的</span> <span class="ital">AI Agent</span><br><span class="cjk">开发圣所</span></h1>
-  <p class="lede reveal">从零开机到多 Agent 并行作战。本指南遵循一条铁律：<strong>一切用代码声明</strong> —— Brewfile、dotfiles、bootstrap 脚本，换机 30 分钟完整复原。终端是主战场，<strong>Claude Code / Kimi Code / Codex / DSH / PI / WorkBuddy</strong> 六件套并存，各取所长。</p>
+  <p class="lede reveal">从零开机到多 Agent 并行作战。本指南遵循一条铁律：<strong>一切用代码声明</strong> —— Brewfile、dotfiles、bootstrap 脚本，换机 30 分钟完整复原。终端是主战场，<strong>Claude Code / Kimi Code / Codex / DSH / PI / WorkBuddy / ZCode</strong> 七件套并存，各取所长。</p>
   <div class="meta reveal">
     <span class="chip">macOS · Apple Silicon</span>
     <span class="chip">Homebrew + Brewfile</span>
@@ -532,7 +532,7 @@ brew install --cask zed                   <span class="c"># 备选：极速启�
       <h2>AI Agent 工具栈<em>multi-agent</em></h2>
     </div>
   </div>
-  <p class="lead reveal">2026 年的共识：<strong>不押注单一 Agent</strong>。核心阵容六件套 —— 长任务用 Claude Code，交付 PR 用 Codex，插件编排用 DSH，自我扩展用 PI，桌面全场景用 WorkBuddy。</p>
+  <p class="lead reveal">2026 年的共识：<strong>不押注单一 Agent</strong>。核心阵容七件套 —— 长任务用 Claude Code，交付 PR 用 Codex，插件编排用 DSH，自我扩展用 PI，桌面全场景用 WorkBuddy 与 ZCode。</p>
   <div class="agents reveal">
     <div class="agent">
       <div class="rank">主力 · Strongest</div>
@@ -569,6 +569,12 @@ brew install --cask zed                   <span class="c"># 备选：极速启�
       <h3>WorkBuddy · 腾讯</h3>
       <span class="cmd">官网下载桌面端</span>
       <p>桌面 AI Agent 工作站：Coding Mode 写码、Work Mode 办公，支持本地模型配置接入 DeepSeek 等模型。</p>
+    </div>
+    <div class="agent">
+      <div class="rank">国产 · 桌面 ADE</div>
+      <h3>ZCode · 智谱</h3>
+      <span class="cmd">zcode.z.ai/cn 下载 macOS 版</span>
+      <p>智谱桌面 Agent 开发环境：Goal 长程任务、微信/飞书/Telegram 远程唤起、GLM-5.3 深度集成，还能可视化管理其他 CLI Agent。首次启动选「连接 BigModel」（GLM Coding Plan），一个订阅还能给 Claude Code 等 20+ 工具用——正好配 cc-switch。</p>
     </div>
   </div>
 
@@ -727,6 +733,7 @@ mise ls                        <span class="c"># node / python / go 就位</span
 uv --version && node -v && python3 -V
 claude --version; kimi --version; codex --version; pi --version
 npx -y @deepseek-ai/dsh --version   <span class="c"># DSH</span>
+<span class="c"># 桌面端：ZCode / WorkBuddy 首次启动完成模型登录</span>
 docker run hello-world         <span class="c"># OrbStack</span>
 rg --version && fzf --version
 ssh -T git@github.com          <span class="c"># SSH 认证</span></pre>

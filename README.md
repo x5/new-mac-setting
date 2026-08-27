@@ -10,7 +10,7 @@
 [![macOS](https://img.shields.io/badge/macOS-Apple%20Silicon-000000?logo=apple&logoColor=white)](https://www.apple.com/macos/)
 [![Homebrew](https://img.shields.io/badge/Homebrew-Brewfile-FBB040?logo=homebrew&logoColor=white)](https://brew.sh/)
 [![dotfiles](https://img.shields.io/badge/dotfiles-chezmoi-4B6EAF)](https://www.chezmoi.io/)
-[![AI Agents](https://img.shields.io/badge/AI%20Agents-6%20CLIs-c8f24e)](https://github.com/x5/new-mac-setting)
+[![AI Agents](https://img.shields.io/badge/AI%20Agents-7%E4%BB%B6%E5%A5%97-c8f24e)](https://github.com/x5/new-mac-setting)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/x5/new-mac-setting/pulls)
 [![在线阅读](https://img.shields.io/badge/🌐_在线阅读-GitHub_Pages-c8f24e)](https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.html)
@@ -37,7 +37,7 @@
 
 - 📜 **一切用代码声明** —— Brewfile + dotfiles + bootstrap 脚本，换机 30 分钟完整复原
 - ⌨️ **终端优先** —— AI Agent 的主战场在终端：Ghostty + zsh + Starship + Nerd Font
-- 🤖 **多 Agent 并存** —— Claude Code / Kimi Code / Codex / DSH / PI / WorkBuddy 六件套，按任务选型，配合 cc-switch 统一切换供应商
+- 🤖 **多 Agent 并存** —— Claude Code / Kimi Code / Codex / DSH / PI / WorkBuddy / ZCode 七件套，按任务选型，配合 cc-switch 统一切换供应商
 
 ## 📖 内容形态
 
@@ -61,7 +61,7 @@
 | 05 | 🌿 Git 工具链 | gh、lazygit、git-delta、worktree |
 | 06 | 🧰 现代 CLI 工具箱 | ripgrep / fd / bat / eza / fzf / zoxide 等 13 件，全跨平台 |
 | 07 | 📝 编辑器与 IDE | VS Code 主力 + Zed 备选 |
-| 08 | 🤖 AI Agent 工具栈 | 六件套 + cc-switch 供应商总开关 |
+| 08 | 🤖 AI Agent 工具栈 | 七件套 + cc-switch 供应商总开关 |
 | 09 | 🔌 MCP 扩展 | Playwright / Context7 / GitHub / Figma，按需安装 |
 | 10 | 🐳 容器与本地服务 | OrbStack 取代 Docker Desktop |
 | 11 | 🔐 密钥与安全 | 免费路径优先：Keychain + direnv + age/sops，1Password 可选 |
@@ -88,6 +88,7 @@
 | **DSH（DeepSeek Harness）** | 插件化 Agent 运行时，一切皆插件 |
 | **PI（Pi Agent Harness）** | 开源自我扩展，统一多 provider API |
 | **WorkBuddy（腾讯）** | 桌面工作站：Coding Mode + 办公场景 |
+| **ZCode（智谱）** | 桌面 ADE：Goal 长程任务、Bot 远程唤起、GLM-5.3 深度集成 |
 
 配套：[cc-switch](https://github.com/farion1231/cc-switch) 统一管理各家 API 供应商，一键切换。
 
@@ -98,7 +99,7 @@ Terminal   Ghostty · zsh · Starship · JetBrainsMono Nerd Font
 Runtimes   mise (node/python/go) · uv · pnpm
 CLI        ripgrep · fd · bat · eza · fzf · zoxide · jq/yq · httpie · bottom
 Git        gh · lazygit · git-delta · worktree
-AI Agents  Claude Code · Kimi Code · Codex · DSH · PI · WorkBuddy · cc-switch
+AI Agents  Claude Code · Kimi Code · Codex · DSH · PI · WorkBuddy · ZCode · cc-switch
 Infra      OrbStack (Docker) · Syncthing
 Config     Homebrew Brewfile · chezmoi · bootstrap.sh · dotsync
 ```

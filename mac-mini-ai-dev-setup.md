@@ -2,7 +2,7 @@
 
 > 目标：在一台全新的 Apple Silicon Mac Mini 上，搭建一套**面向 AI Agent 开发**的现代化、可复现、可配置的终极开发环境。
 >
-> 原则：一切用代码声明（Brewfile / dotfiles / setup 脚本），换机 30 分钟内完整复原；终端优先（AI Agent 的主战场在终端）；多 Agent 并存（Claude Code / Kimi Code / Codex / Gemini CLI 各取所长）。
+> 原则：一切用代码声明（Brewfile / dotfiles / setup 脚本），换机 30 分钟内完整复原；终端优先（AI Agent 的主战场在终端）；多 Agent 并存（Claude Code / Kimi Code / Codex / DSH / PI / WorkBuddy / ZCode 各取所长）。
 
 ---
 
@@ -267,7 +267,7 @@ brew install --cask zed                  # 备选：极速启动、内置 AI 面
 
 ## 8. AI Agent 工具栈（核心章节）
 
-2026 年的共识：**不押注单一 Agent，终端里多 Agent 并存，按任务选型**。本方案以六件套为核心阵容：
+2026 年的共识：**不押注单一 Agent，终端里多 Agent 并存，按任务选型**。本方案以七件套为核心阵容：
 
 | Agent | 安装 | 定位 |
 |---|---|---|
@@ -277,12 +277,14 @@ brew install --cask zed                  # 备选：极速启动、内置 AI 面
 | **DSH（DeepSeek Harness）** | `npx -y @deepseek-ai/dsh` | 插件化 Agent 运行时：模型/工具/子 Agent 皆为插件，可桥接其他 CLI |
 | **PI（Pi Agent Harness）** | `npm install -g @earendil-works/pi-coding-agent` | 开源自我扩展 coding agent，pi-ai 统一多 provider LLM API |
 | **WorkBuddy（腾讯）** | 官网下载桌面端 | 桌面 AI Agent 工作站：Coding Mode 写码 + Work Mode 办公，支持自定义模型 |
+| **ZCode（智谱）** | [zcode.z.ai/cn](https://zcode.z.ai/cn) 下载 macOS 版 | 智谱桌面 ADE：Goal 长程任务、Bot 远程唤起、GLM-5.3 深度集成，可视化管理其他 CLI Agent |
 
 ### 8.1 阵容说明
 
 - **DSH** 是 DeepSeek 的插件化 Agent 运行时（[deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness)），理念是"一切皆插件"：模型、工具、子 Agent 自由拼装；早期为 Web/TUI 形态，配 [dshctl](https://github.com/deepseek-ai/deepseek-harness/discussions/2530) 可纯终端驱动，还有 bridge 插件（如 [dsh-codex-bridge](https://github.com/pandashere/dsh-codex-bridge)）把 Codex / Kimi 变成它的"第二意见"工具。
 - **PI** 是 MIT 开源的 Agent Harness（[earendil-works/pi](https://github.com/earendil-works/pi)），`pi-ai` 统一 OpenAI/Anthropic/Google 等多家 API。注意：**PI 无内置权限系统**，默认继承启动用户的全部权限，敏感项目建议按其官方文档容器化运行（Docker / OpenShell）。
 - **WorkBuddy** 是腾讯桌面 Agent 工作站（与 CodeBuddy 同族），Coding Mode 覆盖代码生成/审查/修复/全栈开发，Work Mode 处理办公任务，可通过本地模型配置接入 DeepSeek 等模型（[接入文档](https://api-docs.deepseek.com/quick_start/agent_integrations/workbuddy/)）。
+- **ZCode** 是智谱的桌面 Agent 开发环境（ADE，[官网](https://zcode.z.ai/cn)）：下载 macOS 版 dmg 拖入 Applications 即可；**配置**：首次启动在欢迎页选「连接 BigModel」（国内，GLM Coding Plan 订阅）或「连接 Z.ai」（海外），之后在对话框点模型名 → 管理模型调整。特色：Goal 长程任务管理、Bot 远程唤起（微信 / 飞书 / Telegram）、GLM-5.3 深度集成（含 Flash 多模态）、可视化管理其他 CLI Agent。**联动提示**：GLM Coding Plan 一个订阅同时支持 Claude Code 等 20+ 工具——配合 8.2 的 cc-switch，国产模型一处付费多处用。
 
 ### 8.2 配套工具：cc-switch（Claude Code / Codex 的供应商总开关）
 
@@ -426,6 +428,7 @@ mise ls                       # node/python/go 就位
 uv --version
 node -v && python3 -V
 claude --version 2>/dev/null; kimi --version; codex --version; pi --version; npx -y @deepseek-ai/dsh --version
+# 桌面端：ZCode / WorkBuddy 首次启动完成模型登录
 docker run hello-world        # OrbStack
 rg --version && fzf --version
 ssh -T git@github.com         # SSH 认证
