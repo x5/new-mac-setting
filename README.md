@@ -12,12 +12,13 @@
 [![dotfiles](https://img.shields.io/badge/dotfiles-chezmoi-4B6EAF)](https://www.chezmoi.io/)
 [![AI Agents](https://img.shields.io/badge/AI%20Agents-7%E4%BB%B6%E5%A5%97-c8f24e)](https://github.com/x5/new-mac-setting)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/x5/new-mac-setting?display_name=tag&label=version)](CHANGELOG.md)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/x5/new-mac-setting/pulls)
 [![在线阅读](https://img.shields.io/badge/🌐_在线阅读-GitHub_Pages-c8f24e)](https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.html)
 
 ### 🌐 [在线阅读精美单页版 →](https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.html)
 
-[English keywords](#-seo-keywords) · [完整手册](mac-mini-ai-dev-setup.md) · [精美单页版](mac-mini-ai-dev-setup.html) · [参考链接](#-参考)
+[English keywords](#-seo-keywords) · [完整手册](mac-mini-ai-dev-setup.md) · [精美单页版](mac-mini-ai-dev-setup.html) · [更新日志](CHANGELOG.md) · [参考链接](#-参考)
 
 </div>
 
