@@ -1,76 +1,80 @@
 # AGENTS.md
 
-本文件是给所有 Agent / 维护者的项目操作手册。改动本仓库前必读。
+Operating manual for every agent / maintainer working on this repository. **Read this before making any change.**
 
-## 项目概况
+## Project Overview
 
-《Mac × AI Agent — 开发环境完全配置指南》。内容型仓库：一份 16 章的 macOS AI Agent 开发环境手册（适用所有 Apple Silicon Mac），以 MD 和 HTML 双形态发布，GitHub Pages 自动部署。
+**Mac × AI Agent — The Complete Development Environment Setup Guide**. A content repository: a 16-chapter macOS setup manual for AI-agent-driven development (works on every Apple Silicon Mac), published in both Markdown and styled HTML, auto-deployed via GitHub Pages.
 
-## 文件结构与职责
+## Bilingual Layout (important)
+
+English is the **default** (no suffix); Chinese carries the `.zh-CN` suffix:
 
 ```
-mac-mini-ai-dev-setup.md    # 内容源头（single source of truth），16 章 + 文末名词脚注区
-mac-mini-ai-dev-setup.html  # 同内容的精美单页版（深色终端美学），必须与 MD 同步
-README.md                   # 仓库门面：徽章、章节导航表、Agent 阵容表、技术栈速览
-CHANGELOG.md                # Keep a Changelog 格式，每个版本记录变更
-docs/                       # README 截图（hero/agents/tooltip）、social-preview、readme-standard.md
+mac-mini-ai-dev-setup.md          # English manual — source of truth for content structure
+mac-mini-ai-dev-setup.zh-CN.md    # Chinese manual — full mirror of the English version
+mac-mini-ai-dev-setup.html        # English single-page edition (dark terminal aesthetic)
+mac-mini-ai-dev-setup.zh-CN.html  # Chinese single-page edition — full mirror
+README.md                         # Bilingual repo front page: English first, then 中文
+CHANGELOG.md                      # Keep a Changelog, bilingual entries (EN first)
+docs/                             # README screenshots, social-preview, readme-standard.md
 ```
 
-## 变更同步清单（核心纪律）
+The two language versions of each file are **full mirrors**: same sections, same order, same commands. Code, commands, paths, and identifiers stay in English in both versions; only prose and comments are translated.
 
-**任何内容改动，按此清单逐项检查，缺一不可：**
+## Change Sync Checklist (core discipline)
 
-1. **先改 MD**（内容源头）
-2. **同步 HTML** 对应章节：导语 `p.lead`、终端卡片 `.term`、工具卡 `.tool`、Agent 卡 `.agent`、提示块 `.note`、规则列表 `.rule`
-3. **检查 README** 是否需要同步：
-   - 章节导航表（章节标题/要点变化）
-   - AI Agent 阵容表（Agent 增删）
-   - 技术栈速览代码块
-   - 徽章（如 Agent 数量变化）
-4. **CHANGELOG.md 加条目**：按 Added / Changed / Fixed 分类，写日期
-5. **发 Release**：内容新增 → minor，修订勘误 → patch，结构重构 → major
+**For every content change, walk this list — no skipping:**
+
+1. **Edit the English MD first** (`mac-mini-ai-dev-setup.md`)
+2. **Mirror into the Chinese MD** (`mac-mini-ai-dev-setup.zh-CN.md`)
+3. **Sync both HTML pages** — every component: `p.lead`, `.term` cards, `.tool` cards, `.agent` cards, `.note` blocks, `.rule` lists
+4. **Check README** — chapter table, Agent lineup table, tech-stack block, badges (e.g. agent count)
+5. **CHANGELOG.md entry** — bilingual, Added / Changed / Fixed, with date
+6. **Cut a Release** — new content → minor, fixes → patch, restructure → major:
    `gh release create vX.Y.Z --title "..." --notes "..."`
-6. **验证 Pages 部署**（push 后自动触发，无需手动）：
+7. **Verify Pages deploy** (auto-triggered on push):
    `gh api repos/x5/new-mac-setting/pages/builds/latest --jq '{status, commit: .commit[0:7]}'`
 
-## 机制与约定
+## Conventions
 
-### MD 脚注
+### MD footnotes
 
-- 术语解释用脚注：`[^name]` 引用，定义集中在文末「名词注释」区
-- 脚注可含链接；内容 = 通俗解释 + 背景 + 注意事项
+- Term explanations use footnotes: `[^name]` references, definitions grouped in the glossary section at the end of the file.
+- Footnote = plain-language explanation + background + caveats; links allowed.
 
-### HTML tooltip
+### HTML tooltips
 
-- 行内术语：`<span class="tip">术语<span class="tip-bubble"><b>标题</b>解释</span></span>`
-- 工具卡片：`.tool` 内直接加 `<span class="tip-bubble">`（CSS 已支持 `.tool:hover` 触发）
-- **禁止把 tooltip 放进 `.term` 代码卡内**（`overflow:hidden` 会裁切气泡）
+- Inline term: `<span class="tip">term<span class="tip-bubble"><b>Title</b>explanation</span></span>`
+- Tool cards: add `<span class="tip-bubble">` directly inside `.tool` (CSS already handles `.tool:hover`)
+- **Never put tooltips inside `.term` code cards** (`overflow:hidden` clips the bubble)
 
-### HTML 新章节
+### HTML new sections
 
-- 结构：`section#sNN` + `.sec-head`（`.sec-no` 大号描边数字 + `.sec-title` 含 `.tag` 和 `h2`）+ 内容块
-- 左侧导航 `#nav` 里同步加 `<a href="#sNN">`
-- 内容块统一带 `reveal` class（入场动画）
-- 终端卡片代码高亮：注释 `.c`、提示符 `.p`、字符串 `.s`
+- Structure: `section#sNN` + `.sec-head` (`.sec-no` outlined number + `.sec-title` with `.tag` and `h2`) + content blocks
+- Add matching `<a href="#sNN">` to sidebar `#nav` — in **both** language pages
+- All content blocks carry the `reveal` class (entrance animation)
+- Code highlight classes inside `.term`: comments `.c`, prompts `.p`, strings `.s`
 
-### 验证
+### Verification
 
-- 每次 HTML 改动后用 Playwright 截图复验（`uv run --with playwright`，viewport 1440×900，截图文件不入库）
--  tooltip 要悬停验证一次（CSS 选择器曾踩过坑）
+- After any HTML change, re-verify with Playwright screenshots (`uv run --with playwright`, viewport 1440×900, screenshot files must not be committed)
+- Hover-test tooltips at least once (CSS selector pitfalls have bitten us before)
+- Verify **both** language pages
 
-### 提交与发布
+### Commits & releases
 
-- 提交信息：英文 Conventional Commits（`docs: ...`），单一目的
-- 内容中文，代码/命令/标识符保持原文
-- 推送后 Pages 自动构建，构建完成即上线
+- Commit messages: English, Conventional Commits (`docs: ...`), single purpose
+- Content languages: English + 中文; code / commands / identifiers stay in original form
+- Push → Pages builds automatically → live when the build finishes
 
-### 版本号规则
+### Versioning
 
-- minor：新增工具、新增章节、新增内容
-- patch：勘误、命令修正、措辞优化
-- major：章节结构重构、方向性调整
+- minor: new tools, new sections, new content
+- patch: errata, command fixes, wording
+- major: section restructuring, directional changes
 
-## 相关文档
+## Related Docs
 
-- 发布方法论：[docs/readme-standard.md](docs/readme-standard.md)
-- 版本历史：[CHANGELOG.md](CHANGELOG.md)
+- Publishing methodology: [docs/readme-standard.md](docs/readme-standard.md)
+- Version history: [CHANGELOG.md](CHANGELOG.md)

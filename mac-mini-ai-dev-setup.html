@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mac × AI Agent — 开发环境完全配置指南</title>
+<title>Mac × AI Agent — The Complete Development Environment Setup Guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,900&family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -276,25 +276,25 @@ footer .sig{font-family:var(--serif);font-style:italic;font-size:15px;color:var(
   <div class="brand">SETUP GUIDE <b>v2026</b></div>
   <div class="brand-sub">Mac × AI Agent</div>
   <nav id="nav">
-    <a href="#hero"><span class="no">00</span>开篇</a>
-    <a href="#s01"><span class="no">01</span>系统初始化</a>
-    <a href="#s02"><span class="no">02</span>Homebrew 地基</a>
-    <a href="#s03"><span class="no">03</span>终端与 Shell</a>
-    <a href="#s04"><span class="no">04</span>运行时：mise + uv</a>
-    <a href="#s05"><span class="no">05</span>Git 工具链</a>
-    <a href="#s06"><span class="no">06</span>现代 CLI 工具箱</a>
-    <a href="#s07"><span class="no">07</span>编辑器与 IDE</a>
-    <a href="#s08"><span class="no">08</span>AI Agent 工具栈</a>
-    <a href="#s09"><span class="no">09</span>MCP 扩展</a>
-    <a href="#s10"><span class="no">10</span>容器与本地服务</a>
-    <a href="#s11"><span class="no">11</span>密钥与安全</a>
-    <a href="#s12"><span class="no">12</span>效率应用</a>
-    <a href="#s13"><span class="no">13</span>一键复原自动化</a>
-    <a href="#s14"><span class="no">14</span>验收清单</a>
-    <a href="#s15"><span class="no">15</span>附录：Windows 迁移</a>
-    <a href="#s16"><span class="no">16</span>日常运维流程</a>
+    <a href="#hero"><span class="no">00</span>Intro</a>
+    <a href="#s01"><span class="no">01</span>System Initialization</a>
+    <a href="#s02"><span class="no">02</span>Homebrew Foundation</a>
+    <a href="#s03"><span class="no">03</span>Terminal & Shell</a>
+    <a href="#s04"><span class="no">04</span>Runtimes: mise + uv</a>
+    <a href="#s05"><span class="no">05</span>Git Toolchain</a>
+    <a href="#s06"><span class="no">06</span>Modern CLI Toolbox</a>
+    <a href="#s07"><span class="no">07</span>Editors & IDEs</a>
+    <a href="#s08"><span class="no">08</span>AI Agent Stack</a>
+    <a href="#s09"><span class="no">09</span>MCP Extensions</a>
+    <a href="#s10"><span class="no">10</span>Containers & Services</a>
+    <a href="#s11"><span class="no">11</span>Secrets & Security</a>
+    <a href="#s12"><span class="no">12</span>Productivity Apps</a>
+    <a href="#s13"><span class="no">13</span>One-Command Restore</a>
+    <a href="#s14"><span class="no">14</span>Acceptance Checklist</a>
+    <a href="#s15"><span class="no">15</span>Appendix: Windows Migration</a>
+    <a href="#s16"><span class="no">16</span>Day-2 Operations</a>
   </nav>
-  <div class="nav-foot">TARGET · Apple Silicon<br>PRINCIPLE · Everything as Code</div>
+  <div class="nav-foot">TARGET · Apple Silicon<br>PRINCIPLE · Everything as Code<br><a href="mac-mini-ai-dev-setup.zh-CN.html" style="color:var(--lime);text-decoration:none">中文版 →</a></div>
 </aside>
 
 <main>
@@ -303,8 +303,8 @@ footer .sig{font-family:var(--serif);font-style:italic;font-size:15px;color:var(
 <!-- ================= HERO ================= -->
 <header class="hero" id="hero">
   <div class="kicker">Dev Environment · Field Manual</div>
-  <h1 class="reveal">一台 <span class="ital">Mac</span><br><span class="cjk">的</span> <span class="ital">AI Agent</span><br><span class="cjk">开发圣所</span></h1>
-  <p class="lede reveal">从零开机到多 Agent 并行作战。适用所有 Apple Silicon Mac —— MacBook、iMac、Mac Studio、Mac Mini。本指南遵循一条铁律：<strong>一切用代码声明</strong> —— Brewfile、dotfiles、bootstrap 脚本，换机 30 分钟完整复原。终端是主战场，<strong>Claude Code / Kimi Code / Codex / DSH / PI / WorkBuddy / ZCode</strong> 七件套并存，各取所长。</p>
+  <h1 class="reveal">One <span class="ital">Mac.</span><br>Every <span class="ital">AI Agent.</span><br><span class="cjk">Fully Loaded.</span></h1>
+  <p class="lede reveal">From first boot to a multi-agent battle station. Works on every Apple Silicon Mac — MacBook, iMac, Mac Studio, Mac mini. This guide follows one iron rule: <strong>declare everything as code</strong> — Brewfile, dotfiles, bootstrap scripts — so a new machine is fully restored in 30 minutes. The terminal is the main battlefield, with <strong>Claude Code / Kimi Code / Codex / DSH / PI / WorkBuddy / ZCode</strong> running side by side, each playing to its strengths.</p>
   <div class="meta reveal">
     <span class="chip">macOS · Apple Silicon</span>
     <span class="chip">Homebrew + Brewfile</span>
@@ -321,29 +321,29 @@ footer .sig{font-family:var(--serif);font-style:italic;font-size:15px;color:var(
     <div class="sec-no">01</div>
     <div class="sec-title">
       <div class="tag">macOS Layer</div>
-      <h2>系统初始化<em>defaults write</em></h2>
+      <h2>System Initialization<em>defaults write</em></h2>
     </div>
   </div>
-  <p class="lead reveal">开机向导里开启 <strong class="tip">FileVault<span class="tip-bubble"><b>FileVault · 全盘加密</b>macOS 的全盘加密。Apple Silicon 的数据卷默认已加密，FileVault 把解密钥匙绑定到登录密码——不登录谁也读不了盘。你的 SSH 私钥和 API Key 全靠它兜底，性能损耗≈0，必开，并保管好恢复密钥。</span></strong> 磁盘加密；先别开 iCloud 桌面同步。然后用 <span class="tip">defaults write<span class="tip-bubble"><b>defaults write</b>macOS 偏好设置的命令行接口，直接读写应用配置。可脚本化、可进 dotfiles，新机器跑一次全部生效，不用手点系统设置。</span></span> 把系统偏好调成开发者形态 —— 全部可进 <span class="tip">dotfiles<span class="tip-bubble"><b>dotfiles</b>以 . 开头的隐藏配置文件（.zshrc、.gitconfig、.config/…）。收进 git 仓库管理 = 配置即代码，新机器一键恢复全部设置，详见第 13 章。</span></span>，换机自动生效。随后安装 <span class="tip">Xcode 命令行工具<span class="tip-bubble"><b>Xcode CLT</b>苹果独立的命令行开发工具包（git、clang、make 等），不用装完整 Xcode。Homebrew 和几乎所有编译工具都依赖它。</span></span>，这是一切编译链的前提。</p>
+  <p class="lead reveal">Enable <strong class="tip">FileVault<span class="tip-bubble"><b>FileVault · Full-Disk Encryption</b>macOS full-disk encryption. On Apple Silicon the data volume is encrypted by default; FileVault binds the decryption key to your login password — without logging in, nobody can read the disk. Your SSH private keys and API keys all depend on it as the last line of defense. Performance cost ≈ 0. Always turn it on, and keep the recovery key safe.</span></strong> disk encryption in the setup wizard; skip iCloud Desktop sync for now. Then use <span class="tip">defaults write<span class="tip-bubble"><b>defaults write</b>The command-line interface to macOS preferences — reads and writes app settings directly. Scriptable and dotfiles-friendly: run it once on a new machine and every setting takes effect, no clicking through System Settings.</span></span> to shape the system into developer form — all of it lives in your <span class="tip">dotfiles<span class="tip-bubble"><b>dotfiles</b>Hidden config files starting with a dot (.zshrc, .gitconfig, .config/…). Managing them in a git repo = configuration as code; one command restores every setting on a new machine. See Chapter 13.</span></span> and applies automatically on the next machine. Finally install the <span class="tip">Xcode Command Line Tools<span class="tip-bubble"><b>Xcode CLT</b>Apple's standalone command-line developer tools package (git, clang, make, etc.) — no need to install the full Xcode. Homebrew and nearly every build toolchain depend on it.</span></span>, the prerequisite for every build toolchain.</p>
   <div class="term reveal">
     <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — system defaults</span><button class="copy">copy</button></div>
-<pre><span class="c"># 键盘：最快的按键重复与最短延迟</span>
+<pre><span class="c"># Keyboard: fastest key repeat, shortest delay</span>
 defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
-<span class="c"># 触控板：轻点即点击</span>
+<span class="c"># Trackpad: tap to click</span>
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool <span class="s">true</span>
 
-<span class="c"># Finder：显示扩展名 + 状态栏 + 路径栏</span>
+<span class="c"># Finder: show extensions + status bar + path bar</span>
 defaults write NSGlobalDomain AppleShowAllExtensions -bool <span class="s">true</span>
 defaults write com.apple.finder ShowStatusBar -bool <span class="s">true</span>
 defaults write com.apple.finder ShowPathbar -bool <span class="s">true</span>
 
-<span class="c"># Dock：自动隐藏、关掉最近使用</span>
+<span class="c"># Dock: auto-hide, disable recent apps</span>
 defaults write com.apple.dock autohide -bool <span class="s">true</span>
 defaults write com.apple.dock show-recents -bool <span class="s">false</span>
 
-<span class="c"># 截图统一存到 ~/Screenshots</span>
+<span class="c"># Save screenshots to ~/Screenshots</span>
 mkdir -p ~/Screenshots
 defaults write com.apple.screencapture location ~/Screenshots
 
@@ -351,7 +351,7 @@ killall Finder Dock</pre>
   </div>
   <div class="term reveal">
     <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — prerequisite</span><button class="copy">copy</button></div>
-<pre><span class="c"># Xcode 命令行工具：git、clang 等一切编译链的前提</span>
+<pre><span class="c"># Xcode Command Line Tools: prerequisite for git, clang and every build toolchain</span>
 xcode-select --install</pre>
   </div>
 </section>
@@ -362,15 +362,15 @@ xcode-select --install</pre>
     <div class="sec-no">02</div>
     <div class="sec-title">
       <div class="tag">Foundation</div>
-      <h2>Homebrew：一切的地基<em>brew</em></h2>
+      <h2>Homebrew: The Foundation of Everything<em>brew</em></h2>
     </div>
   </div>
-  <p class="lead reveal">从这一刻起，<strong>不再用鼠标安装任何开发软件</strong>。全部走 <code>brew install</code> / <code>brew install --cask</code>，并记录进 Brewfile（见第 13 章）——这是「可复现」的核心。</p>
+  <p class="lead reveal">From this moment on, <strong>never install any dev software with a mouse again</strong>. Everything goes through <code>brew install</code> / <code>brew install --cask</code> and gets recorded in a Brewfile (see Chapter 13) — the core of "reproducible".</p>
   <div class="term reveal">
     <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — install homebrew</span><button class="copy">copy</button></div>
 <pre>/bin/bash -c <span class="s">"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</span>
 
-<span class="c"># Apple Silicon 默认装在 /opt/homebrew，写入 PATH</span>
+<span class="c"># Apple Silicon installs to /opt/homebrew by default; add it to PATH</span>
 echo <span class="s">'eval "$(/opt/homebrew/bin/brew shellenv)"'</span> >> ~/.zprofile
 eval <span class="s">"$(/opt/homebrew/bin/brew shellenv)"</span>
 
@@ -384,13 +384,13 @@ brew update && brew doctor</pre>
     <div class="sec-no">03</div>
     <div class="sec-title">
       <div class="tag">Battle Station</div>
-      <h2>终端与 Shell：Agent 的作战室<em>ghostty · starship</em></h2>
+      <h2>Terminal & Shell: The Agent's War Room<em>ghostty · starship</em></h2>
     </div>
   </div>
-  <p class="lead reveal">AI Agent 时代，<strong>终端是第一界面</strong>。推荐组合：<span class="tip">Ghostty<span class="tip-bubble"><b>Ghostty · 终端模拟器</b>提供窗口、渲染与交互层。GPU 加速渲染、原生 macOS 体验，全部设置收在单个配置文件里。</span></span>（GPU 渲染、原生快）+ <span class="tip">zsh<span class="tip-bubble"><b>zsh · Shell 命令解释器</b>你敲的每条命令（包括 AI Agent 执行的）都由 shell 解析后交给系统执行。macOS 默认 shell，全部配置在 ~/.zshrc。分工：Ghostty 是窗口，zsh 是窗口里的「语言」，Starship 是提示符外观，Nerd Font 负责图标。</span></span> + <span class="tip">Starship<span class="tip-bubble"><b>Starship · 提示符</b>跨 shell 的 prompt 工具：把目录、git 分支、Node/Python 版本、命令耗时渲染在提示符上，一个 starship.toml 配置。</span></span> 提示符 + <span class="tip">Nerd Font<span class="tip-bubble"><b>Nerd Font · 图标字体</b>在编程字体上追加数千个图标的补丁字体集。Starship、eza 等工具输出的图标靠它显示，否则全是问号方块。</span></span> 图标字体。</p>
+  <p class="lead reveal">In the AI agent era, <strong>the terminal is the primary interface</strong>. Recommended stack: <span class="tip">Ghostty<span class="tip-bubble"><b>Ghostty · Terminal Emulator</b>Provides the window, rendering and interaction layer. GPU-accelerated rendering, a native macOS feel, and every setting in a single config file.</span></span> (GPU rendering, natively fast) + <span class="tip">zsh<span class="tip-bubble"><b>zsh · Shell Command Interpreter</b>Every command you type (including the ones AI agents run) is parsed by the shell and handed to the system. The default macOS shell; all config lives in ~/.zshrc. Division of labor: Ghostty is the window, zsh is the "language" inside it, Starship is the prompt's appearance, Nerd Font draws the icons.</span></span> + <span class="tip">Starship<span class="tip-bubble"><b>Starship · Prompt</b>A cross-shell prompt tool: renders the directory, git branch, Node/Python versions and command duration right in the prompt, configured with a single starship.toml.</span></span> prompt + <span class="tip">Nerd Font<span class="tip-bubble"><b>Nerd Font · Icon Font</b>A patched font family that adds thousands of icons on top of programming fonts. Starship, eza and friends rely on it to render icons — otherwise you get question-mark squares.</span></span> icon font.</p>
   <div class="term reveal">
     <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — terminal stack</span><button class="copy">copy</button></div>
-<pre>brew install --cask ghostty   <span class="c"># 推荐。备选：wezterm / iterm2</span>
+<pre>brew install --cask ghostty   <span class="c"># recommended; alternatives: wezterm / iterm2</span>
 brew install --cask font-jetbrains-mono-nerd-font
 brew install starship zsh-autosuggestions zsh-syntax-highlighting
 
@@ -406,7 +406,7 @@ window-padding-x = <span class="s">12</span>
 window-padding-y = <span class="s">10</span>
 copy-on-select = <span class="s">clipboard</span></pre>
   </div>
-  <div class="note reveal"><b>装机实战建议：</b>第一、二节（系统设置 + Homebrew）必须手工；从本节开始，可以先装一个 Kimi Code（<code>curl -fsSL https://code.kimi.com/kimi-code/install.sh | bash</code>），把本文档丢给它，让 Agent 按章节替你执行和验证——这是这套环境的第一场实战。</div>
+  <div class="note reveal"><b>Hands-on tip:</b> Sections 1–2 (system settings + Homebrew) must be done by hand; from this section on, you can install Kimi Code first (<code>curl -fsSL https://code.kimi.com/kimi-code/install.sh | bash</code>), hand it this document, and let the agent execute and verify chapter by chapter — the first real battle for this setup.</div>
 </section>
 
 <!-- ================= 04 ================= -->
@@ -415,27 +415,27 @@ copy-on-select = <span class="s">clipboard</span></pre>
     <div class="sec-no">04</div>
     <div class="sec-title">
       <div class="tag">Runtimes</div>
-      <h2>运行时管理：mise + uv<em>node · python · go</em></h2>
+      <h2>Runtime Management: mise + uv<em>node · python · go</em></h2>
     </div>
   </div>
-  <p class="lead reveal"><strong>抛弃 nvm / pyenv / rbenv。</strong><span class="tip">mise<span class="tip-bubble"><b>mise · 语言版本总管家</b>不同项目要不同版本的 Node / Python / Go，mise 一个工具统一管理：项目里写 .mise.toml 声明版本，cd 进目录自动切换，提交 git 后团队版本一致。取代了 nvm / pyenv / rbenv 等一堆单语言管理器。类比手机：mise 管「系统版本」，uv 管「装哪些 App」。</span></span> 一个工具管理所有运行时，按项目目录自动切换、版本写进 <code>.mise.toml</code> 团队共享；<span class="tip">uv<span class="tip-bubble"><b>uv · Python 包管理器</b>负责装第三方库（openai、anthropic…），Rust 编写，比 pip 快 10-100 倍。自动为每个项目建隔离的虚拟环境，各项目的库互不干扰；uv run 跑脚本自动用项目环境。</span></span> 负责 Python 包与虚拟环境，比 pip 快 10-100 倍 —— AI 项目的标配。</p>
+  <p class="lead reveal"><strong>Ditch nvm / pyenv / rbenv.</strong> <span class="tip">mise<span class="tip-bubble"><b>mise · One Manager for All Language Versions</b>Different projects need different Node / Python / Go versions; mise manages them all in one tool: declare versions in .mise.toml per project, auto-switch on cd, commit to git so the whole team stays on the same versions. Replaces nvm / pyenv / rbenv and the rest of the single-language managers. Phone analogy: mise manages the "OS version", uv manages "which apps to install".</span></span> manages every runtime in one tool — auto-switches per project directory, versions live in <code>.mise.toml</code> shared with the team; <span class="tip">uv<span class="tip-bubble"><b>uv · Python Package Manager</b>Installs third-party libraries (openai, anthropic…). Written in Rust, 10–100× faster than pip. Automatically creates an isolated virtualenv per project so dependencies never clash; uv run executes scripts with the project environment.</span></span> handles Python packages and virtualenvs, 10–100× faster than pip — the standard for AI projects.</p>
   <div class="term reveal">
     <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — mise + uv</span><button class="copy">copy</button></div>
 <pre>brew install mise uv pnpm
 echo <span class="s">'eval "$(mise activate zsh)"'</span> >> ~/.zshrc
 
-mise use -g node@lts          <span class="c"># 全局默认</span>
+mise use -g node@lts          <span class="c"># global default</span>
 mise use -g python@3.12
 mise use -g go@latest
 
-<span class="c"># 项目内：mise use node@22 → 生成 .mise.toml，提交 git</span></pre>
+<span class="c"># In a project: mise use node@22 → generates .mise.toml, commit it to git</span></pre>
   </div>
   <div class="term reveal">
     <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — python workflow</span><button class="copy">copy</button></div>
 <pre>uv init my-agent && cd my-agent
-uv add openai anthropic           <span class="c"># 加依赖</span>
-uv run main.py                    <span class="c"># 跑脚本（自动用项目 venv）</span>
-uv run --with ruff ruff check .   <span class="c"># 临时工具，不污染环境</span></pre>
+uv add openai anthropic           <span class="c"># add dependencies</span>
+uv run main.py                    <span class="c"># run a script (auto-uses the project venv)</span>
+uv run --with ruff ruff check .   <span class="c"># ephemeral tool, keeps the environment clean</span></pre>
   </div>
 </section>
 
@@ -445,20 +445,20 @@ uv run --with ruff ruff check .   <span class="c"># 临时工具，不污染环�
     <div class="sec-no">05</div>
     <div class="sec-title">
       <div class="tag">Safety Net</div>
-      <h2>Git 与 GitHub 工具链<em>gh · lazygit · delta</em></h2>
+      <h2>Git & GitHub Toolchain<em>gh · lazygit · delta</em></h2>
     </div>
   </div>
-  <p class="lead reveal">AI Agent 会大量、快速地改代码，<strong>Git 是你唯一的安全网</strong>。习惯：让 Agent 动手前先 commit；用 <span class="tip">git worktree<span class="tip-bubble"><b>git worktree · 多工作区</b>同一个仓库同时检出多个分支到不同目录，各有独立工作区但共享 .git。多 Agent 并行的基础：每个 Agent 一个 worktree，各改各的互不踩踏。</span></span> 让多个 Agent 并行干活互不干扰。配套三件套：<span class="tip">gh<span class="tip-bubble"><b>gh · GitHub 官方 CLI</b>终端里完成 issue / PR / 仓库管理；gh auth login 一次登录，git push/pull 认证一并搞定。</span></span>（GitHub 官方 CLI）、<span class="tip">lazygit<span class="tip-bubble"><b>lazygit · Git 终端图形界面</b>不用背命令，全键盘完成暂存、提交、分支、rebase、解冲突。Agent 改完一堆代码后，逐个文件过 diff、分批提交的审查利器。</span></span>（Git 终端图形界面）、<span class="tip">git-delta<span class="tip-bubble"><b>git-delta · diff 渲染器</b>给 git diff 加语法高亮、行号、并排对比。pager = delta 启用后，git diff / git log / lazygit 的变更视图全部生效。lazygit 管「操作」，delta 管「显示」。</span></span>（diff 美化渲染器）。</p>
+  <p class="lead reveal">AI agents change code fast and in bulk — <strong>Git is your only safety net</strong>. Habits: commit before letting an agent touch anything; use <span class="tip">git worktree<span class="tip-bubble"><b>git worktree · Multiple Working Trees</b>Checks out multiple branches of the same repo into different directories — independent working trees sharing one .git. The foundation of multi-agent parallelism: one worktree per agent, no stepping on each other.</span></span> to run multiple agents in parallel without interference. Companion trio: <span class="tip">gh<span class="tip-bubble"><b>gh · Official GitHub CLI</b>Manage issues / PRs / repos from the terminal; gh auth login signs in once and covers git push/pull authentication too.</span></span> (official GitHub CLI), <span class="tip">lazygit<span class="tip-bubble"><b>lazygit · Terminal UI for Git</b>No command memorization — stage, commit, branch, rebase and resolve conflicts entirely from the keyboard. After an agent rewrites a pile of code, it's the perfect review tool for walking diffs file by file and committing in batches.</span></span> (terminal UI for Git), <span class="tip">git-delta<span class="tip-bubble"><b>git-delta · Diff Renderer</b>Adds syntax highlighting, line numbers and side-by-side view to git diffs. Enable it with pager = delta and it applies to git diff / git log / lazygit views. lazygit handles the "doing", delta handles the "display".</span></span> (pretty diff renderer).</p>
   <div class="term reveal">
     <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — git toolchain</span><button class="copy">copy</button></div>
 <pre>brew install git gh lazygit git-delta
-gh auth login   <span class="c"># 浏览器授权，一次搞定 git push 认证</span></pre>
+gh auth login   <span class="c"># browser authorization; covers git push auth in one go</span></pre>
   </div>
   <div class="term reveal">
     <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">~/.gitconfig</span><button class="copy">copy</button></div>
 <pre>[core]
     editor = code --wait
-    pager = delta               <span class="c"># 语法高亮的 diff</span>
+    pager = delta               <span class="c"># syntax-highlighted diffs</span>
 [merge]
     conflictstyle = zdiff3
 [pull]
@@ -475,34 +475,34 @@ gh auth login   <span class="c"># 浏览器授权，一次搞定 git push 认证
     <div class="sec-no">06</div>
     <div class="sec-title">
       <div class="tag">Toolbox</div>
-      <h2>现代 CLI 工具箱<em>rust 系全家桶</em></h2>
+      <h2>Modern CLI Toolbox<em>the rust tool family</em></h2>
     </div>
   </div>
-  <p class="lead reveal">一套 rust/go 重写的现代替代品。<strong>ripgrep 是 Agent 搜索代码的底层引擎</strong>，其余工具则让你的日常操作全面提速。<span class="tip">全部跨平台<span class="tip-bubble"><b>跨平台说明</b>本章工具全是 Rust/Go 编写，Windows 用 winget / scoop 装同一批，命令一致。文档里 macOS 专有的是：Homebrew、Ghostty、zsh、Raycast 系效率应用、OrbStack——Windows 对应物分别是 winget、Windows Terminal、PowerShell 7、PowerToys、Docker Desktop + WSL2。</span></span>，Windows 上也能提前练。</p>
+  <p class="lead reveal">A set of modern replacements rewritten in Rust/Go. <strong>ripgrep is the underlying search engine agents use to search code</strong>; the rest speed up everything you do daily. <span class="tip">All cross-platform<span class="tip-bubble"><b>Cross-platform note</b>Every tool in this chapter is written in Rust/Go — install the same set on Windows with winget / scoop, identical commands. The macOS-only items in this guide are: Homebrew, Ghostty, zsh, Raycast-style productivity apps, OrbStack — their Windows counterparts are winget, Windows Terminal, PowerShell 7, PowerToys, and Docker Desktop + WSL2.</span></span>, so you can practice on Windows in advance.</p>
   <div class="term reveal">
     <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — modern cli</span><button class="copy">copy</button></div>
 <pre>brew install ripgrep fd bat eza fzf zoxide jq yq sd httpie \
   hyperfine dust duf bottom tlrc
 
-<span class="c"># ~/.zshrc 收尾</span>
+<span class="c"># ~/.zshrc additions</span>
 eval <span class="s">"$(zoxide init zsh)"</span>
 source &lt;(fzf --zsh)
 alias ls=<span class="s">'eza --icons'</span> cat=<span class="s">'bat --style=plain'</span></pre>
   </div>
   <div class="tools reveal">
-    <div class="tool"><b>ripgrep</b><span>rg · grep 替代品，Agent 的搜索引擎</span><span class="tip-bubble"><b>替代 grep · 按内容搜代码</b>在整个代码库里搜文本，快 10 倍+，自动跳过 node_modules 和 gitignore。例：rg "getUserInfo" 找函数在哪被调用。Claude Code 等 Agent 搜索代码的底层引擎就是它。</span></div>
-    <div class="tool"><b>fd</b><span>find 替代品，语法友好</span><span class="tip-bubble"><b>替代 find · 按文件名找文件</b>语法像人话：fd config，对比老命令 find . -name "*config*"。默认忽略 gitignore，不会翻进 node_modules。</span></div>
-    <div class="tool"><b>bat</b><span>cat 高亮版，自动分页</span><span class="tip-bubble"><b>替代 cat · 看文件</b>查看文件带语法高亮、行号、git 改动标记，终端里快速读代码的体验质变。</span></div>
-    <div class="tool"><b>eza</b><span>ls 替代品，图标 + 树形</span><span class="tip-bubble"><b>替代 ls · 看目录</b>彩色 + 图标列目录；lt 树形展示——进陌生项目，一条命令看懂目录结构。</span></div>
-    <div class="tool"><b>fzf</b><span>模糊搜索，Ctrl+R 历史神器</span><span class="tip-bubble"><b>模糊搜索器</b>Ctrl+R 搜历史命令：只记得三天前那条命令里有 "docker"，敲几个字母就捞回来。还能接管管道搜文件、进程、git 分支。</span></div>
-    <div class="tool"><b>zoxide</b><span>cd 智能跳转，越用越聪明</span><span class="tip-bubble"><b>会学习的 cd</b>记住你去过的目录，之后 z proj 直接跳到最常去的匹配目录，不用敲全路径。用得越久越准。</span></div>
-    <div class="tool"><b>jq / yq</b><span>JSON / YAML 处理双雄</span><span class="tip-bubble"><b>结构化数据提取器</b>API 返回一大坨 JSON，jq '.data[0].name' 只取你要的字段；yq 同理处理 YAML。和 Agent 的结构化输出打交道天天用。</span></div>
-    <div class="tool"><b>httpie</b><span>curl 友好版，API 调试</span><span class="tip-bubble"><b>替代 curl · 调试 API</b>http POST api.x.com name=Tom——自动 JSON、自动高亮、自动格式化，不用背 curl 的参数旗标。</span></div>
-    <div class="tool"><b>hyperfine</b><span>命令耗时基准测试</span><span class="tip-bubble"><b>命令计时器</b>hyperfine '方案A' '方案B' 各跑多次给平均耗时和对比，"哪个写法更快"从此有数据说话。</span></div>
-    <div class="tool"><b>bottom</b><span>btm · htop 替代品</span><span class="tip-bubble"><b>系统监控</b>CPU / 内存 / 网络 / 进程一屏看全，图形化界面。Agent 满载跑长任务时开它盯负载。</span></div>
-    <div class="tool"><b>dust / duf</b><span>du / df 的现代形态</span><span class="tip-bubble"><b>磁盘空间可视化</b>dust 答"哪个目录最占地方"，duf 答"各磁盘用量"，都是直观的图形化进度条。</span></div>
-    <div class="tool"><b>sd</b><span>sed 替代品，正则即直觉</span><span class="tip-bubble"><b>替代 sed · 查找替换</b>sd "旧文本" "新文本" 文件——语法就是直觉，不用记 sed 的正则转义和 -i 旗标。</span></div>
-    <div class="tool"><b>tlrc</b><span>tldr 命令速查</span><span class="tip-bubble"><b>命令速查手册</b>tldr tar 直接给最常用的 5 个例子，比啃 man 手册人性化一百倍。忘了某个命令怎么用先问它。</span></div>
+    <div class="tool"><b>ripgrep</b><span>rg · grep replacement, the agent's search engine</span><span class="tip-bubble"><b>Replaces grep · search code by content</b>Searches text across the whole codebase, 10×+ faster, auto-skips node_modules and gitignore'd files. Example: rg "getUserInfo" finds where a function is called. It's the underlying code-search engine for agents like Claude Code.</span></div>
+    <div class="tool"><b>fd</b><span>find replacement, friendlier syntax</span><span class="tip-bubble"><b>Replaces find · locate files by name</b>Human-readable syntax: fd config, versus the old find . -name "*config*". Respects gitignore by default — never digs into node_modules.</span></div>
+    <div class="tool"><b>bat</b><span>cat with highlighting, auto-paging</span><span class="tip-bubble"><b>Replaces cat · read files</b>Views files with syntax highlighting, line numbers and git change markers — a qualitative leap for reading code in the terminal.</span></div>
+    <div class="tool"><b>eza</b><span>ls replacement, icons + tree</span><span class="tip-bubble"><b>Replaces ls · list directories</b>Colorful listings with icons; lt shows a tree — one command to grasp an unfamiliar project's structure.</span></div>
+    <div class="tool"><b>fzf</b><span>fuzzy finder, the Ctrl+R history wizard</span><span class="tip-bubble"><b>Fuzzy Finder</b>Ctrl+R searches command history: only remember that a command from three days ago contained "docker"? Type a few letters and it's back. Also plugs into pipes to search files, processes and git branches.</span></div>
+    <div class="tool"><b>zoxide</b><span>smarter cd, learns as you go</span><span class="tip-bubble"><b>A cd that learns</b>Remembers the directories you visit; later z proj jumps straight to your most-frequented match — no full paths. Gets sharper the longer you use it.</span></div>
+    <div class="tool"><b>jq / yq</b><span>JSON / YAML processing duo</span><span class="tip-bubble"><b>Structured Data Extractors</b>An API returns a blob of JSON; jq '.data[0].name' pulls out just the field you want; yq does the same for YAML. Daily drivers when working with agents' structured output.</span></div>
+    <div class="tool"><b>httpie</b><span>friendlier curl for API debugging</span><span class="tip-bubble"><b>Replaces curl · debug APIs</b>http POST api.x.com name=Tom — automatic JSON, highlighting and formatting; no memorizing curl flags.</span></div>
+    <div class="tool"><b>hyperfine</b><span>command benchmarking</span><span class="tip-bubble"><b>Command Stopwatch</b>hyperfine 'option A' 'option B' runs each command multiple times and reports average timings — "which one is faster" now has data behind it.</span></div>
+    <div class="tool"><b>bottom</b><span>btm · htop replacement</span><span class="tip-bubble"><b>System Monitor</b>CPU / memory / network / processes on one screen, with graphs. Open it to watch the load while agents run long tasks at full throttle.</span></div>
+    <div class="tool"><b>dust / duf</b><span>du / df in modern form</span><span class="tip-bubble"><b>Disk Space Visualization</b>dust answers "which directory eats the most space", duf answers "how is each disk used" — both with intuitive bar charts.</span></div>
+    <div class="tool"><b>sd</b><span>sed replacement, regex as intuition</span><span class="tip-bubble"><b>Replaces sed · find & replace</b>sd "old text" "new text" file — the syntax is pure intuition; no sed escaping or -i flags to remember.</span></div>
+    <div class="tool"><b>tlrc</b><span>tldr command cheat sheet</span><span class="tip-bubble"><b>Command Cheat Sheets</b>tldr tar shows the 5 most common examples — a hundred times friendlier than man pages. Ask it first when you forget a command.</span></div>
   </div>
 </section>
 
@@ -512,14 +512,14 @@ alias ls=<span class="s">'eza --icons'</span> cat=<span class="s">'bat --style=p
     <div class="sec-no">07</div>
     <div class="sec-title">
       <div class="tag">Editor</div>
-      <h2>编辑器与 IDE<em>vscode · zed</em></h2>
+      <h2>Editors & IDEs<em>vscode · zed</em></h2>
     </div>
   </div>
-  <p class="lead reveal">终端 Agent 是主力，编辑器只看 diff、做精细调整。策略：<strong>VS Code 主力</strong>（沿用既有习惯，生态最全）+ <span class="tip">Zed<span class="tip-bubble"><b>Zed · Zed Industries</b>GitHub Atom 编辑器原班人马打造（他们还创造了 Tree-sitter 语法解析引擎）。Atom 停更后用 Rust 从零重写：GPU 加速、毫秒级启动、原生多人协作，2024 年开源，内置 AI 面板。</span></span> 轻量备选（秒开大文件）。<strong>不装 Cursor</strong>：AI 主力已在终端 Agent，编辑器再叠 AI 订阅价值重叠。</p>
+  <p class="lead reveal">Terminal agents do the heavy lifting; the editor is only for reviewing diffs and fine adjustments. Strategy: <strong>VS Code as the mainstay</strong> (keeps your existing habits, richest ecosystem) + <span class="tip">Zed<span class="tip-bubble"><b>Zed · Zed Industries</b>Built by the original team behind GitHub's Atom editor (they also created the Tree-sitter parsing engine). After Atom was sunset they rewrote it from scratch in Rust: GPU-accelerated, millisecond startup, native multiplayer collaboration, open-sourced in 2024, with a built-in AI panel.</span></span> as the lightweight alternative (opens huge files in a blink). <strong>No Cursor</strong>: your AI horsepower already lives in terminal agents; stacking another AI subscription on the editor duplicates value.</p>
   <div class="term reveal">
     <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — editors</span><button class="copy">copy</button></div>
-<pre>brew install --cask visual-studio-code    <span class="c"># 主力：生态最全</span>
-brew install --cask zed                   <span class="c"># 备选：极速启动，内置 AI 面板</span></pre>
+<pre>brew install --cask visual-studio-code    <span class="c"># mainstay: richest ecosystem</span>
+brew install --cask zed                   <span class="c"># alternative: instant startup, built-in AI panel</span></pre>
   </div>
 </section>
 
@@ -529,71 +529,71 @@ brew install --cask zed                   <span class="c"># 备选：极速启�
     <div class="sec-no">08</div>
     <div class="sec-title">
       <div class="tag">Core · The Fleet</div>
-      <h2>AI Agent 工具栈<em>multi-agent</em></h2>
+      <h2>AI Agent Stack<em>multi-agent</em></h2>
     </div>
   </div>
-  <p class="lead reveal">2026 年的共识：<strong>不押注单一 Agent</strong>。核心阵容七件套 —— 长任务用 Claude Code，交付 PR 用 Codex，插件编排用 DSH，自我扩展用 PI，桌面全场景用 WorkBuddy 与 ZCode。</p>
+  <p class="lead reveal">The 2026 consensus: <strong>don't bet on a single agent</strong>. The core lineup is a set of seven — Claude Code for long tasks, Codex for PR delivery, DSH for plugin orchestration, PI for self-extension, WorkBuddy and ZCode for full-scenario desktop work.</p>
   <div class="agents reveal">
     <div class="agent">
-      <div class="rank">主力 · Strongest</div>
+      <div class="rank">Main Force · Strongest</div>
       <h3>Claude Code</h3>
       <span class="cmd">curl -fsSL https://claude.ai/install.sh | bash</span>
-      <p>综合能力最强：仓库理解、子 Agent、git worktree 并行、数小时无人值守的长任务。</p>
+      <p>The strongest all-rounder: repo comprehension, sub-agents, git worktree parallelism, hours-long unattended tasks.</p>
     </div>
     <div class="agent">
-      <div class="rank">开源 · MIT</div>
+      <div class="rank">Open Source · MIT</div>
       <h3>Kimi Code CLI</h3>
       <span class="cmd">curl -fsSL https://code.kimi.com/kimi-code/install.sh | bash</span>
-      <p>Moonshot 出品的终端 Agent。内置 coder / explore / plan 子 Agent，MCP 用 /mcp-config 对话式配置，性价比高。亦可用 npm 安装。</p>
+      <p>Moonshot's terminal agent. Built-in coder / explore / plan sub-agents, conversational MCP setup via /mcp-config, great value. Also installable via npm.</p>
     </div>
     <div class="agent">
-      <div class="rank">交付 · PR</div>
+      <div class="rank">Delivery · PR</div>
       <h3>Codex CLI</h3>
       <span class="cmd">npm install -g @openai/codex</span>
-      <p>OpenAI 的开源终端 Agent，任务以 Pull Request 形式交回，ChatGPT 订阅内含。</p>
+      <p>OpenAI's open-source terminal agent; tasks come back as Pull Requests. Included with ChatGPT subscriptions.</p>
     </div>
     <div class="agent">
-      <div class="rank">插件化 · 编排</div>
+      <div class="rank">Plugin-based · Orchestration</div>
       <h3>DSH · DeepSeek Harness</h3>
       <span class="cmd">npx -y @deepseek-ai/dsh</span>
-      <p>DeepSeek 的插件化 Agent 运行时：模型、工具、子 Agent 一切皆插件；bridge 插件可把 Codex / Kimi 变成它的「第二意见」。</p>
+      <p>DeepSeek's plugin-based agent runtime: models, tools, sub-agents — everything is a plugin; bridge plugins can turn Codex / Kimi into its "second opinion".</p>
     </div>
     <div class="agent">
-      <div class="rank">自我扩展</div>
+      <div class="rank">Self-Extending</div>
       <h3>PI · Agent Harness</h3>
       <span class="cmd">npm install -g @earendil-works/pi-coding-agent</span>
-      <p>MIT 开源 coding agent，pi-ai 统一多家 LLM API。注意：无内置权限系统，敏感项目建议容器化运行。</p>
+      <p>MIT-licensed open-source coding agent; pi-ai unifies multiple LLM APIs. Note: no built-in permission system — containerize it for sensitive projects.</p>
     </div>
     <div class="agent">
-      <div class="rank">桌面 · 全场景</div>
-      <h3>WorkBuddy · 腾讯</h3>
-      <span class="cmd">官网下载桌面端</span>
-      <p>桌面 AI Agent 工作站：Coding Mode 写码、Work Mode 办公，支持本地模型配置接入 DeepSeek 等模型。</p>
+      <div class="rank">Desktop · All Scenarios</div>
+      <h3>WorkBuddy · Tencent</h3>
+      <span class="cmd">Download the desktop app from the official site</span>
+      <p>A desktop AI agent workstation: Coding Mode for code, Work Mode for office tasks; supports local model configs connecting DeepSeek and other models.</p>
     </div>
     <div class="agent">
-      <div class="rank">国产 · 桌面 ADE</div>
-      <h3>ZCode · 智谱</h3>
-      <span class="cmd">zcode.z.ai/cn 下载 macOS 版</span>
-      <p>智谱桌面 Agent 开发环境：Goal 长程任务、微信/飞书/Telegram 远程唤起、GLM-5.3 深度集成，还能可视化管理其他 CLI Agent。首次启动选「连接 BigModel」（GLM Coding Plan），一个订阅还能给 Claude Code 等 20+ 工具用——正好配 cc-switch。</p>
+      <div class="rank">China-made · Desktop ADE</div>
+      <h3>ZCode · Zhipu</h3>
+      <span class="cmd">Download the macOS build at zcode.z.ai/cn</span>
+      <p>Zhipu's desktop agent development environment: Goal long-horizon tasks, remote invocation via WeChat/Feishu/Telegram, deep GLM-5.3 integration, plus visual management of other CLI agents. On first launch choose "Connect BigModel" (GLM Coding Plan) — one subscription also powers 20+ tools like Claude Code, which pairs perfectly with cc-switch.</p>
     </div>
   </div>
 
   <div class="rules reveal">
-    <div class="rule"><div><b>每个项目写 AGENTS.md</b>写明构建命令、代码规范、目录结构、禁区。Agent 的表现上限 = 你给的上下文质量。Claude Code 同时认 CLAUDE.md。</div></div>
-    <div class="rule"><div><b>配好权限与钩子</b>在各 Agent 的配置（~/.claude/settings.json、kimi 的 config.toml）里声明权限模式与危险命令拦截，避免每次手动确认，也防止 Agent 越权。</div></div>
-    <div class="rule"><div><b>API Key 集中管理</b>Key 绝不写进项目文件、dotfiles 明文或 shell 历史 —— 见第 11 章。</div></div>
+    <div class="rule"><div><b>Write an AGENTS.md for every project</b>Build commands, code conventions, directory layout, forbidden zones. An agent's performance ceiling = the quality of context you give it. Claude Code also reads CLAUDE.md.</div></div>
+    <div class="rule"><div><b>Configure permissions and hooks</b>Declare permission modes and dangerous-command interception in each agent's config (~/.claude/settings.json, kimi's config.toml), so you're not confirming every step and agents can't overstep.</div></div>
+    <div class="rule"><div><b>Centralize API key management</b>Keys never go into project files, plaintext dotfiles, or shell history — see Chapter 11.</div></div>
   </div>
 
-  <div class="note reveal"><b>配套：cc-switch —— Claude Code / Codex 的供应商总开关</b>。开源桌面应用（Tauri + Rust），把各家 API 供应商（官方 / DeepSeek / GLM / 第三方网关）的 base URL、Key、模型做成图形化预设，<b>一键切换</b>，不用手改 settings.json；新版还集成 MCP / Skills 管理。安装：<code>brew tap farion1231/ccswitch && brew install --cask cc-switch</code>；若报 macOS 版本兼容错误（已知问题），改从 GitHub Releases 下载 DMG。</div>
+  <div class="note reveal"><b>Companion: cc-switch — the provider master switch for Claude Code / Codex</b>. An open-source desktop app (Tauri + Rust) that turns each API provider's base URL, key and model (official / DeepSeek / GLM / third-party gateways) into graphical presets with <b>one-click switching</b> — no hand-editing settings.json; the new version also integrates MCP / Skills management. Install: <code>brew tap farion1231/ccswitch && brew install --cask cc-switch</code>; if you hit a macOS version compatibility error (a known issue), grab the DMG from GitHub Releases instead.</div>
 
   <div class="term reveal">
-    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — 多 Agent 并行工作流</span><button class="copy">copy</button></div>
-<pre><span class="c"># 用 git worktree 开隔离工作区，多个 Agent 并行不打架</span>
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — multi-agent parallel workflow</span><button class="copy">copy</button></div>
+<pre><span class="c"># Use git worktree for isolated workspaces — parallel agents without conflicts</span>
 git worktree add ../proj-feat-a feat-a
 git worktree add ../proj-feat-b feat-b
 
-<span class="c"># 窗口 1:  cd ../proj-feat-a && claude</span>
-<span class="c"># 窗口 2:  cd ../proj-feat-b && kimi</span></pre>
+<span class="c"># Window 1:  cd ../proj-feat-a && claude</span>
+<span class="c"># Window 2:  cd ../proj-feat-b && kimi</span></pre>
   </div>
 </section>
 
@@ -603,17 +603,17 @@ git worktree add ../proj-feat-b feat-b
     <div class="sec-no">09</div>
     <div class="sec-title">
       <div class="tag">Extension</div>
-      <h2>MCP：给 Agent 装上「手」<em>model context protocol</em></h2>
+      <h2>MCP: Giving Agents "Hands"<em>model context protocol</em></h2>
     </div>
   </div>
-  <p class="lead reveal"><span class="tip">MCP<span class="tip-bubble"><b>MCP · Model Context Protocol</b>Agent 与外部工具之间的「标准化插座」，类比 USB-C：Agent 实现一次客户端、工具方实现一次 Server 即可互插。Server 暴露 tools（可调用函数，99% 的用途）/ resources（数据）/ prompts（模板）；本地 Server 是 Agent 的子进程，远程走 HTTP。</span></span> 让 Agent 接入外部工具。各 Agent 配置方式不同（Claude Code 用 <code>claude mcp add</code>，Kimi Code 用 <code>/mcp-config</code>）。<strong>只装当前项目真正用到的</strong> —— MCP 越多，上下文越臃肿。</p>
+  <p class="lead reveal"><span class="tip">MCP<span class="tip-bubble"><b>MCP · Model Context Protocol</b>The "standardized socket" between agents and external tools — think USB-C: an agent implements the client once, a tool implements the server once, and they plug together. Servers expose tools (callable functions, 99% of use cases) / resources (data) / prompts (templates); local servers run as the agent's subprocess, remote ones over HTTP.</span></span> lets agents plug into external tools. Each agent configures it differently (Claude Code uses <code>claude mcp add</code>, Kimi Code uses <code>/mcp-config</code>). <strong>Only install what the current project actually uses</strong> — more MCPs mean a more bloated context.</p>
   <div class="tools reveal">
-    <div class="tool"><b>Playwright MCP</b><span>浏览器自动化，Agent 自己验证前端页面</span></div>
-    <div class="tool"><b>Context7</b><span>实时拉取库的最新文档，消除过时 API 幻觉</span></div>
-    <div class="tool"><b>GitHub MCP</b><span>Issue / PR / 代码搜索操作</span></div>
-    <div class="tool"><b>Figma MCP</b><span>设计稿直达代码</span></div>
+    <div class="tool"><b>Playwright MCP</b><span>Browser automation; agents verify frontend pages themselves</span></div>
+    <div class="tool"><b>Context7</b><span>Pulls up-to-date library docs on demand, eliminating stale-API hallucinations</span></div>
+    <div class="tool"><b>GitHub MCP</b><span>Issue / PR / code search operations</span></div>
+    <div class="tool"><b>Figma MCP</b><span>Design files straight to code</span></div>
   </div>
-  <div class="note reveal"><b>统一管理多个 Agent 的 MCP：</b>你已在用的 <b>cc-switch</b> 新版（v3.x）内置了 MCP 集中管理——一处配置、多处同步，兼管 Skills；专门的 CLI 方案还有 <span class="tip">mcpm<span class="tip-bubble"><b>mcpm · MCP 包管理器</b>像 Homebrew 管软件一样管 MCP Server：中央注册表搜索安装、profile 分组启停、多客户端同步，路由器聚合多个 Server 为一个端点。对 Claude Code 原生支持有限，需手动接线。安装：brew install mcpm</span></span>。注意：这类工具本质是「一处维护、多处同步」的翻译层，各家 Agent 的 MCP 配置格式尚未完全统一。</div>
+  <div class="note reveal"><b>Managing MCP across multiple agents:</b> the new version (v3.x) of <b>cc-switch</b> you're already using has centralized MCP management built in — configure once, sync everywhere, and it handles Skills too; a dedicated CLI alternative is <span class="tip">mcpm<span class="tip-bubble"><b>mcpm · MCP Package Manager</b>Manages MCP servers the way Homebrew manages software: search and install from a central registry, group and toggle with profiles, sync across clients, and aggregate multiple servers behind one router endpoint. Limited native support for Claude Code — manual wiring required. Install: brew install mcpm</span></span>. Note: these tools are essentially a "maintain once, sync everywhere" translation layer — the agents' MCP config formats aren't fully unified yet.</div>
 </section>
 
 <!-- ================= 10 ================= -->
@@ -622,14 +622,14 @@ git worktree add ../proj-feat-b feat-b
     <div class="sec-no">10</div>
     <div class="sec-title">
       <div class="tag">Runtime Sandbox</div>
-      <h2>容器与本地服务<em>orbstack</em></h2>
+      <h2>Containers & Local Services<em>orbstack</em></h2>
     </div>
   </div>
-  <p class="lead reveal"><strong><span class="tip">OrbStack<span class="tip-bubble"><b>OrbStack · Danny Lin (kdrag0n)</b>独立开发者一人公司的作品，2023 年发布。作者此前是 Android 定制内核圈知名开发者（Proton Kernel 作者），用 Swift / Rust 原生重写整套 Docker + Linux 虚拟化栈——「一个人打败了 Docker 官方产品」。个人免费，商用付费。</span></span> 取代 Docker Desktop</strong>：macOS 上最快、最省电的 Docker / Linux 运行环境。数据库一律容器化，不污染系统。</p>
+  <p class="lead reveal"><strong><span class="tip">OrbStack<span class="tip-bubble"><b>OrbStack · Danny Lin (kdrag0n)</b>The work of an indie developer's one-person company, released in 2023. The author was previously a well-known Android custom-kernel developer (creator of Proton Kernel) and rewrote the entire Docker + Linux virtualization stack natively in Swift / Rust — "one person beat Docker's official product". Free for personal use, paid for commercial use.</span></span> replaces Docker Desktop</strong>: the fastest, most power-efficient Docker / Linux runtime on macOS. All databases run containerized — nothing pollutes the system.</p>
   <div class="term reveal">
     <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — containers</span><button class="copy">copy</button></div>
 <pre>brew install --cask orbstack
-brew install lazydocker   <span class="c"># 容器 TUI：lazygit 的 Docker 版</span>
+brew install lazydocker   <span class="c"># container TUI: lazygit for Docker</span>
 
 docker run -d --name pg -p 5432:5432 \
   -e POSTGRES_PASSWORD=dev postgres:17
@@ -643,22 +643,22 @@ docker run -d --name redis -p 6379:6379 redis:7</pre>
     <div class="sec-no">11</div>
     <div class="sec-title">
       <div class="tag">Security</div>
-      <h2>密钥与安全管理<em>1password · direnv</em></h2>
+      <h2>Secrets & Security Management<em>1password · direnv</em></h2>
     </div>
   </div>
-  <p class="lead reveal">AI 时代你手里的 API Key 比信用卡还多。<strong>铁律：Key 不进 git、不进 dotfiles 明文、不进 ~/.zshrc 明文。</strong>免费路径先走，<span class="tip">1Password<span class="tip-bubble"><b>1Password · 付费订阅</b>个人版约 $3/月（按年付），无免费档，仅 14 天试用。独特价值：op run 运行时注入 API Key、跨设备体验。免费替代已够用——SSH 私钥用 macOS 钥匙串，密码管理用 Bitwarden（免费档，也有 CLI 和 SSH Agent）。</span></span> 是可选付费项（订阅制约 $3/月）。</p>
+  <p class="lead reveal">In the AI era you hold more API keys than credit cards. <strong>Iron rules: keys never enter git, never enter dotfiles in plaintext, never enter ~/.zshrc in plaintext.</strong> Take the free path first; <span class="tip">1Password<span class="tip-bubble"><b>1Password · Paid Subscription</b>About $3/month (billed annually) for the personal plan; no free tier, just a 14-day trial. Unique value: op run injects API keys at runtime, plus a cross-device experience. Free alternatives are good enough — macOS Keychain for SSH keys, Bitwarden (free tier, with CLI and SSH agent) for passwords.</span></span> is an optional paid extra (subscription ≈ $3/month).</p>
   <div class="term reveal">
-    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — secrets（免费路径）</span><button class="copy">copy</button></div>
-<pre>brew install direnv age sops     <span class="c"># .env 自动加载 + 敏感配置加密</span>
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — secrets (free path)</span><button class="copy">copy</button></div>
+<pre>brew install direnv age sops     <span class="c"># auto-load .env + encrypt sensitive configs</span>
 
-<span class="c"># SSH 私钥用 macOS 原生钥匙串托管（免费、系统自带）</span>
+<span class="c"># SSH private keys managed by the native macOS Keychain (free, built-in)</span>
 ssh-keygen -t ed25519
 ssh-add --apple-use-keychain ~/.ssh/id_ed25519
 
-<span class="c"># 可选付费：brew install --cask 1password 1password-cli</span>
-<span class="c"># 跨项目注入 Key：op run --env-file=.env.tpl -- claude</span></pre>
+<span class="c"># Optional paid: brew install --cask 1password 1password-cli</span>
+<span class="c"># Inject keys across projects: op run --env-file=.env.tpl -- claude</span></pre>
   </div>
-  <div class="note warn reveal"><b>SSH Key</b> 免费方案：<span class="tip">macOS 钥匙串<span class="tip-bubble"><b>1Password + Keychain 组合流程</b>分层分工：Keychain 管「系统自己要用的」（SSH passphrase 开机解锁一次、整天无感），1Password 管「你和 Agent 要用的」（网站密码、API Key）。跑 Agent 时项目里只放 .env.tpl 引用模板，op run 注入时指纹授权一次，Key 全程不落盘。纪律：两者的 SSH Agent 只启用一个，建议固定在 Keychain。</span></span> 托管（上面命令）；付费方案：1Password SSH Agent，私钥不落盘。密码管理免费替代：<b>Bitwarden</b>。</div>
+  <div class="note warn reveal"><b>SSH Key</b> free option: <span class="tip">macOS Keychain<span class="tip-bubble"><b>1Password + Keychain Workflow</b>A layered division of labor: Keychain handles "what the system itself needs" (SSH passphrase unlocked once at boot, invisible all day), 1Password handles "what you and your agents need" (website passwords, API keys). When running agents, keep only a .env.tpl reference template in the project; op run injects at runtime with one Touch ID authorization — keys never land on disk. Discipline: enable only one of the two SSH agents; stick with Keychain.</span></span> management (command above); paid option: 1Password SSH Agent, where the private key never touches disk. Free password-manager alternative: <b>Bitwarden</b>.</div>
 </section>
 
 <!-- ================= 12 ================= -->
@@ -667,7 +667,7 @@ ssh-add --apple-use-keychain ~/.ssh/id_ed25519
     <div class="sec-no">12</div>
     <div class="sec-title">
       <div class="tag">Productivity</div>
-      <h2>macOS 效率应用<em>raycast &amp; friends</em></h2>
+      <h2>macOS Productivity Apps<em>raycast &amp; friends</em></h2>
     </div>
   </div>
   <div class="term reveal">
@@ -675,28 +675,28 @@ ssh-add --apple-use-keychain ~/.ssh/id_ed25519
 <pre>brew install --cask raycast rectangle alt-tab stats karabiner-elements</pre>
   </div>
   <div class="tools reveal">
-    <div class="tool"><b>Raycast</b><span>启动器之王：剪贴板历史 / 窗口管理 / 快捷指令全包 · 免费档够用</span></div>
-    <div class="tool"><b>Rectangle</b><span>开源窗口分屏快捷键 · 免费</span></div>
-    <div class="tool"><b>AltTab</b><span>Windows 式窗口切换 · 免费开源</span></div>
-    <div class="tool"><b>Stats</b><span>菜单栏负载监控，跑 Agent 时看 CPU/内存 · 免费开源</span></div>
-    <div class="tool"><b>Karabiner</b><span>键盘改键：CapsLock → Esc/Ctrl · 免费开源</span></div>
+    <div class="tool"><b>Raycast</b><span>The launcher king: clipboard history / window management / quicklinks all included · free tier is enough</span></div>
+    <div class="tool"><b>Rectangle</b><span>Open-source window snapping shortcuts · free</span></div>
+    <div class="tool"><b>AltTab</b><span>Windows-style window switching · free & open source</span></div>
+    <div class="tool"><b>Stats</b><span>Menu-bar load monitor; watch CPU/memory while agents run · free & open source</span></div>
+    <div class="tool"><b>Karabiner</b><span>Keyboard remapping: CapsLock → Esc/Ctrl · free & open source</span></div>
   </div>
-  <div class="note reveal"><b>收费情况：</b>Rectangle / AltTab / Stats / Karabiner 全部<b>免费开源</b>；Raycast 免费档已覆盖核心功能，Pro（约 $8/月）主要买 AI 与云同步——AI 需求都在终端 Agent 上，<b>免费档够用</b>。</div>
+  <div class="note reveal"><b>Pricing:</b> Rectangle / AltTab / Stats / Karabiner are all <b>free and open source</b>; Raycast's free tier already covers the core features — Pro (≈ $8/month) mainly buys AI and cloud sync, and your AI needs already live in terminal agents, so <b>the free tier is enough</b>.</div>
 
-  <p class="lead reveal" style="margin-top:44px">第二梯队（日常增强，参考 <span class="tip">Omarchy<span class="tip-bubble"><b>Omarchy · DHH 的满配 Linux</b>Ruby on Rails 作者 DHH 主导的 Arch 发行版，预装一整套精选开发/效率工具，2025 年很火。本梯队参考其清单做 macOS 映射；它清单里的 fzf / ripgrep / lazygit / Neovim 等本指南已覆盖。</span></span> 清单做的 macOS 映射）：</p>
+  <p class="lead reveal" style="margin-top:44px">Second tier (daily enhancements — a macOS mapping of the <span class="tip">Omarchy<span class="tip-bubble"><b>Omarchy · DHH's Fully-Loaded Linux</b>An Arch distribution led by DHH (creator of Ruby on Rails), preloaded with a curated set of dev/productivity tools; very popular in 2025. This tier maps its list to macOS; items like fzf / ripgrep / lazygit / Neovim are already covered by this guide.</span></span> list):</p>
   <div class="term reveal">
     <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — daily essentials</span><button class="copy">copy</button></div>
 <pre>brew install --cask google-chrome obsidian shottr localsend iina tailscale</pre>
   </div>
   <div class="tools reveal">
-    <div class="tool"><b>Chrome</b><span>浏览器 · 前端调试基准 · 免费</span></div>
-    <div class="tool"><b>Obsidian</b><span>Markdown 笔记 · 免费</span><span class="tip-bubble"><b>Agent 时代的知识库</b>笔记存纯 .md 文件——你写的知识库，Agent 可以直接读、直接整理。这是 AI 时代笔记软件和普通文档的分水岭。</span></div>
-    <div class="tool"><b>Shottr</b><span>截图标注 · 滚动截图 / 打码 / 量尺寸 · 免费</span></div>
-    <div class="tool"><b>LocalSend</b><span>跨平台 AirDrop · 免费开源</span><span class="tip-bubble"><b>Windows ↔ Mac 互传</b>同一局域网下直接拖文件，不用命令不用线。第 15 章迁移小文件的最省事路径。</span></div>
-    <div class="tool"><b>IINA</b><span>视频播放器 · macOS 原生最强 · 免费开源</span></div>
-    <div class="tool"><b>Tailscale</b><span>mesh VPN · 个人免费</span><span class="tip-bubble"><b>Mac 常开的绝配</b>装好后，你在公司 / 外面能安全 SSH 回家里这台 Mac，跑在上面的 Agent 任务随时接管。</span></div>
+    <div class="tool"><b>Chrome</b><span>Browser · frontend debugging baseline · free</span></div>
+    <div class="tool"><b>Obsidian</b><span>Markdown notes · free</span><span class="tip-bubble"><b>The Knowledge Base for the Agent Era</b>Notes stored as plain .md files — your knowledge base can be read and organized by agents directly. That's the dividing line between note software for the AI era and ordinary documents.</span></div>
+    <div class="tool"><b>Shottr</b><span>Screenshot annotation · scrolling capture / redaction / measuring · free</span></div>
+    <div class="tool"><b>LocalSend</b><span>Cross-platform AirDrop · free & open source</span><span class="tip-bubble"><b>Windows ↔ Mac Transfers</b>Drag files directly between machines on the same LAN — no commands, no cables. The easiest path for small files in the Chapter 15 migration.</span></div>
+    <div class="tool"><b>IINA</b><span>Video player · the best native macOS player · free & open source</span></div>
+    <div class="tool"><b>Tailscale</b><span>Mesh VPN · free for personal use</span><span class="tip-bubble"><b>The Perfect Match for an Always-On Mac</b>Once set up, you can securely SSH back into this Mac from the office or on the road, taking over agent tasks running on it anytime.</span></div>
   </div>
-  <div class="note reveal"><b>按需自选：</b>LibreOffice（办公套件）、Typora（Markdown 写作，$15 买断）、Spotify、Dropbox。</div>
+  <div class="note reveal"><b>Pick as needed:</b> LibreOffice (office suite), Typora (Markdown writing, $15 one-time), Spotify, Dropbox.</div>
 </section>
 
 <!-- ================= 13 ================= -->
@@ -705,28 +705,28 @@ ssh-add --apple-use-keychain ~/.ssh/id_ed25519
     <div class="sec-no">13</div>
     <div class="sec-title">
       <div class="tag">Infrastructure as Code</div>
-      <h2>自动化：一键复原整个环境<em>brewfile · chezmoi</em></h2>
+      <h2>Automation: Restore the Entire Environment with One Command<em>brewfile · chezmoi</em></h2>
     </div>
   </div>
-  <p class="lead reveal">这是整套方案的灵魂：<strong>软件清单、配置、运行时全部代码化</strong>，存进 git 私有仓库。首次装机按 1-12 章顺序执行，<strong>本章在收尾时做一次</strong>；回报在下一台机器——只跑一条 bootstrap，30 分钟复原。dotfiles 用 <span class="tip">chezmoi<span class="tip-bubble"><b>chezmoi · dotfiles 管理器</b>免费开源（Go 编写，Tom Payne 2019 年发布），该领域最主流。把散落的点文件收进 git 仓库，新机器一条命令还原；强在模板（多机器差异化配置）和加密（敏感配置 age 加密入库）。</span></span> 管理。</p>
+  <p class="lead reveal">This is the soul of the whole setup: <strong>software list, configs and runtimes — all as code</strong>, stored in a private git repo. For the first setup, follow chapters 1–12 in order, then <strong>do this chapter once at the end</strong>; the payoff comes with your next machine — run a single bootstrap and you're restored in 30 minutes. Manage dotfiles with <span class="tip">chezmoi<span class="tip-bubble"><b>chezmoi · Dotfiles Manager</b>Free and open source (written in Go, released by Tom Payne in 2019), the most mainstream tool in its category. Collects scattered dotfiles into a git repo and restores them on a new machine with one command; its strengths are templating (per-machine differences) and encryption (sensitive configs age-encrypted into the repo).</span></span>.</p>
   <div class="term reveal">
     <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — snapshot &amp; restore</span><button class="copy">copy</button></div>
-<pre><span class="c"># 装完所有软件后导出清单</span>
+<pre><span class="c"># After installing everything, export the list</span>
 brew bundle dump --file=~/dotfiles/Brewfile --force
 
-<span class="c"># dotfiles 用 chezmoi 管理（支持模板与加密）</span>
+<span class="c"># Manage dotfiles with chezmoi (supports templates & encryption)</span>
 brew install chezmoi
-chezmoi init --apply &lt;你的dotfiles仓库&gt;</pre>
+chezmoi init --apply &lt;your-dotfiles-repo&gt;</pre>
   </div>
   <div class="term reveal">
-    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">bootstrap.sh — 新机器总入口</span><button class="copy">copy</button></div>
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">bootstrap.sh — new-machine entry point</span><button class="copy">copy</button></div>
 <pre><span class="c">#!/bin/bash</span>
-<span class="c"># 新 Mac 只跑这一条</span>
+<span class="c"># The only script a new Mac needs to run</span>
 xcode-select --install 2>/dev/null
 /bin/bash -c <span class="s">"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</span>
 eval <span class="s">"$(/opt/homebrew/bin/brew shellenv)"</span>
-brew bundle --file=&lt;你的Brewfile&gt;
-chezmoi init --apply &lt;你的dotfiles仓库&gt;
+brew bundle --file=&lt;your-Brewfile&gt;
+chezmoi init --apply &lt;your-dotfiles-repo&gt;
 mise install
 gh auth login</pre>
   </div>
@@ -738,23 +738,23 @@ gh auth login</pre>
     <div class="sec-no">14</div>
     <div class="sec-title">
       <div class="tag">Verify</div>
-      <h2>验收清单<em>final check</em></h2>
+      <h2>Acceptance Checklist<em>final check</em></h2>
     </div>
   </div>
   <div class="term reveal">
     <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — acceptance</span><button class="copy">copy</button></div>
 <pre>brew doctor && echo OK
 git --version && gh auth status
-mise ls                        <span class="c"># node / python / go 就位</span>
+mise ls                        <span class="c"># node / python / go in place</span>
 uv --version && node -v && python3 -V
 claude --version; kimi --version; codex --version; pi --version
 npx -y @deepseek-ai/dsh --version   <span class="c"># DSH</span>
-<span class="c"># 桌面端：ZCode / WorkBuddy 首次启动完成模型登录</span>
+<span class="c"># Desktop: complete model sign-in on first launch of ZCode / WorkBuddy</span>
 docker run hello-world         <span class="c"># OrbStack</span>
 rg --version && fzf --version
-ssh -T git@github.com          <span class="c"># SSH 认证</span></pre>
+ssh -T git@github.com          <span class="c"># SSH auth</span></pre>
   </div>
-  <div class="note reveal">全部通过后执行 <code>brew bundle dump</code> 并提交 dotfiles —— 你的环境从此<b>可复现、可迁移、可演进</b>。</div>
+  <div class="note reveal">Once everything passes, run <code>brew bundle dump</code> and commit your dotfiles — your environment is now <b>reproducible, portable, and evolvable</b>.</div>
 </section>
 
 <!-- ================= 15 ================= -->
@@ -763,22 +763,22 @@ ssh -T git@github.com          <span class="c"># SSH 认证</span></pre>
     <div class="sec-no">15</div>
     <div class="sec-title">
       <div class="tag">Appendix · Migration</div>
-      <h2>附录：从 Windows 迁移到 Mac<em>workspace → mac</em></h2>
+      <h2>Appendix: Migrating from Windows to Mac<em>workspace → mac</em></h2>
     </div>
   </div>
-  <p class="lead reveal">总原则一句话：<strong>代码走 git，配置重建为主，依赖目录永不迁移</strong>。</p>
+  <p class="lead reveal">The one-line principle: <strong>code travels via git, configs are rebuilt, dependency directories are never migrated</strong>.</p>
   <div class="rules reveal">
-    <div class="rule"><div><b>项目文件：git 优先</b>能 push 的全部 push 到 GitHub，Mac 上 clone——历史、分支、remote 全在。未入库的走 scp / LocalSend / exFAT 硬盘（小文件 LocalSend 最省事，见第 12 章）。<b>绝不迁 node_modules / .venv / target / __pycache__</b>：x86 与 arm64 不通用，到 Mac 用 mise / uv / pnpm 一分钟重建，只迁源码 + .git。</div></div>
-    <div class="rule"><div><b>配置文件：重建为主，少数可搬</b>VS Code 开 Settings Sync（GitHub 账号）全自动同步；Agent 配置（~/.claude、config.toml）可直接复制，注意改掉 Windows 路径字段；SSH Key 在 Mac 重新生成，API Key 趁机录入 1Password / Keychain。</div></div>
-    <div class="rule"><div><b>并行期：Syncthing + git 纪律</b>需要实时同步目录就上 <span class="tip">Syncthing<span class="tip-bubble"><b>Syncthing · 点对点同步</b>免费开源的设备直连同步工具，无云端中转。Workspace 目录双向同步，务必加忽略规则排除 node_modules 等依赖目录。</span></span>（免费开源、点对点）双向同步 Workspace；养成「换机器前 push」的习惯。终态：Mac 主力、Windows 备用、git 为中心，无需长期双向同步。</div></div>
+    <div class="rule"><div><b>Project files: git first</b>Push everything pushable to GitHub and clone on the Mac — history, branches and remotes all come along. Anything not in git goes via scp / LocalSend / an exFAT drive (LocalSend is easiest for small files, see Chapter 12). <b>Never migrate node_modules / .venv / target / __pycache__</b>: x86 and arm64 binaries are incompatible — rebuild them on the Mac with mise / uv / pnpm in a minute; migrate only source + .git.</div></div>
+    <div class="rule"><div><b>Config files: rebuild mostly, carry a few</b>VS Code Settings Sync (GitHub account) syncs automatically; agent configs (~/.claude, config.toml) can be copied directly — just fix the Windows path fields; regenerate SSH keys on the Mac, and take the chance to enroll API keys into 1Password / Keychain.</div></div>
+    <div class="rule"><div><b>Overlap period: Syncthing + git discipline</b>If you need live directory sync, use <span class="tip">Syncthing<span class="tip-bubble"><b>Syncthing · Peer-to-Peer Sync</b>Free, open-source, direct device-to-device sync with no cloud middleman. Two-way sync for the Workspace directory; be sure to add ignore rules excluding dependency directories like node_modules.</span></span> (free, open source, peer-to-peer) for two-way Workspace sync; build the habit of "push before switching machines". End state: Mac primary, Windows backup, git at the center — no long-term two-way sync needed.</div></div>
   </div>
   <div class="term reveal">
-    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">Windows Git Bash → Mac（Mac 需先开「远程登录」）</span><button class="copy">copy</button></div>
-<pre><span class="c"># 在 Windows 的 Git Bash 里执行，把项目推到 Mac</span>
-scp -r /c/Users/TUF/Workspace/&lt;项目&gt; user@&lt;mac-ip&gt;:~/Workspace/
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">Windows Git Bash → Mac (enable "Remote Login" on the Mac first)</span><button class="copy">copy</button></div>
+<pre><span class="c"># Run in Git Bash on Windows to push projects to the Mac</span>
+scp -r /c/Users/TUF/Workspace/&lt;project&gt; user@&lt;mac-ip&gt;:~/Workspace/
 
-<span class="c"># 大文件兜底：exFAT 移动硬盘（两边原生读写）</span>
-<span class="c"># 或 Mac 开「文件共享」SMB → Windows 访问 \\&lt;mac-ip&gt; 拖拽</span></pre>
+<span class="c"># Big-file fallback: an exFAT external drive (native read/write on both sides)</span>
+<span class="c"># Or enable SMB "File Sharing" on the Mac → drag & drop from Windows via \\&lt;mac-ip&gt;</span></pre>
   </div>
 </section>
 
@@ -788,26 +788,26 @@ scp -r /c/Users/TUF/Workspace/&lt;项目&gt; user@&lt;mac-ip&gt;:~/Workspace/
     <div class="sec-no">16</div>
     <div class="sec-title">
       <div class="tag">Day-2 Operations</div>
-      <h2>日常运维：装、删、改、更新<em>dotsync</em></h2>
+      <h2>Day-2 Operations: Install, Remove, Change, Update<em>dotsync</em></h2>
     </div>
   </div>
-  <p class="lead reveal">核心心智：<strong>两层资产，各有一条纪律</strong>——软件层对 Brewfile 负责，配置层对 chezmoi 负责。<strong>不是每步都要跑 chezmoi</strong>：一个 <code>dotsync</code> 别名把所有收尾动作打包。</p>
+  <p class="lead reveal">Core mental model: <strong>two layers of assets, each with one discipline</strong> — the software layer answers to the Brewfile, the config layer answers to chezmoi. <strong>You don't run chezmoi for every step</strong>: a single <code>dotsync</code> alias bundles all the wrap-up actions.</p>
   <div class="rules reveal">
-    <div class="rule"><div><b>软件层：装 / 删 / 更新</b>brew install / uninstall / upgrade 之后，收尾动作永远一样：重新导出 Brewfile。清单不记版本号，upgrade 后 dump 一次即可。运行时归 mise（mise upgrade），Agent CLI 各自升级（kimi upgrade 等）。</div></div>
-    <div class="rule"><div><b>配置层：只有改 dotfiles 才碰 chezmoi</b>直接改源文件（如 ~/.zshrc），改完 chezmoi re-add 收进仓库；新纳管文件用 chezmoi add。除此之外的日常操作完全不用想 chezmoi。</div></div>
-    <div class="rule"><div><b>dotsync：一条命令收尾</b>装 / 删 / 改完任何东西跑一次：导出清单 + 收纳配置 + 提交推送。<b>忘了跑也不会坏</b>——只是下一台机器少一点变化。建议 chezmoi 源目录就用 ~/dotfiles，Brewfile 也放里面。</div></div>
+    <div class="rule"><div><b>Software layer: install / remove / update</b>After brew install / uninstall / upgrade, the wrap-up is always the same: re-export the Brewfile. The list records no version numbers — one dump after upgrading is enough. Runtimes belong to mise (mise upgrade); agent CLIs upgrade themselves (kimi upgrade, etc.).</div></div>
+    <div class="rule"><div><b>Config layer: touch chezmoi only when dotfiles change</b>Edit the source file directly (e.g. ~/.zshrc), then chezmoi re-add to pull it into the repo; use chezmoi add for newly managed files. Everything else in daily life never touches chezmoi.</div></div>
+    <div class="rule"><div><b>dotsync: one command to wrap up</b>Run it once after installing / removing / changing anything: export the list + collect configs + commit and push. <b>Forgetting it breaks nothing</b> — the next machine just misses a few changes. Tip: use ~/dotfiles as the chezmoi source dir and keep the Brewfile inside it too.</div></div>
   </div>
   <div class="term reveal">
-    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">~/.zshrc — dotsync 收尾函数</span><button class="copy">copy</button></div>
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">~/.zshrc — dotsync wrap-up function</span><button class="copy">copy</button></div>
 <pre>dotsync() {
-  brew bundle dump --file=~/dotfiles/Brewfile --force  <span class="c"># 软件清单</span>
-  chezmoi re-add                                       <span class="c"># 收纳配置变更</span>
+  brew bundle dump --file=~/dotfiles/Brewfile --force  <span class="c"># software list</span>
+  chezmoi re-add                                       <span class="c"># collect config changes</span>
   git -C ~/dotfiles add -A
   git -C ~/dotfiles commit -m <span class="s">"chore: sync $(date +%F)"</span>
   git -C ~/dotfiles push
 }</pre>
   </div>
-  <div class="note reveal"><b>节奏建议：</b>随手 dotsync；每周或每月 <code>brew update && brew upgrade && brew cleanup</code> 和 <code>mise upgrade</code>；懒人选项——把维护流程写成 prompt 让 Agent 定期执行，或用 launchd 定时跑 brew upgrade。</div>
+  <div class="note reveal"><b>Suggested rhythm:</b> dotsync casually; weekly or monthly <code>brew update && brew upgrade && brew cleanup</code> and <code>mise upgrade</code>; the lazy option — write the maintenance routine as a prompt for an agent to run regularly, or schedule brew upgrade with launchd.</div>
 </section>
 
 <footer>
@@ -818,7 +818,6 @@ scp -r /c/Users/TUF/Workspace/&lt;项目&gt; user@&lt;mac-ip&gt;:~/Workspace/
 </div><!-- /wrap -->
 </main>
 </div><!-- /shell -->
-
 <script>
 // 顶部阅读进度
 const bar = document.getElementById('progress');

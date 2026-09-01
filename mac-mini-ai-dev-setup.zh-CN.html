@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mac × AI Agent — 开发环境完全配置指南</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,900&family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0c0e;
+  --bg2:#0e1114;
+  --panel:#12161a;
+  --line:#22282e;
+  --line-soft:#1a2025;
+  --text:#e9ebe6;
+  --muted:#8b939b;
+  --dim:#5b646c;
+  --lime:#c8f24e;
+  --lime-dim:rgba(200,242,78,.12);
+  --amber:#ffb35c;
+  --serif:"Fraunces","Noto Serif SC",serif;
+  --sans:"Noto Sans SC",-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --nav-w:264px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--sans);font-weight:300;
+  font-size:15.5px;line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:var(--lime);color:#0a0c0e}
+
+/* ---------- 氛围层 ---------- */
+.noise{
+  position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.gridlines{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:100% 56px;
+}
+#progress{
+  position:fixed;top:0;left:0;height:2px;width:0;
+  background:linear-gradient(90deg,var(--lime),#8fe07a);
+  z-index:100;box-shadow:0 0 12px rgba(200,242,78,.5);
+}
+
+/* ---------- 布局 ---------- */
+.shell{display:flex;position:relative;z-index:1}
+
+/* ---------- 侧边导航 ---------- */
+aside{
+  width:var(--nav-w);flex-shrink:0;
+  position:sticky;top:0;height:100vh;
+  border-right:1px solid var(--line-soft);
+  padding:44px 30px;display:flex;flex-direction:column;
+  background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);
+}
+.brand{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--dim);text-transform:uppercase;margin-bottom:6px}
+.brand b{color:var(--lime);font-weight:600}
+.brand-sub{font-family:var(--serif);font-weight:600;font-size:19px;color:var(--text);margin-bottom:34px;letter-spacing:.01em}
+nav{flex:1;overflow-y:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{
+  display:flex;align-items:baseline;gap:10px;
+  padding:7px 10px;margin:1px -10px;border-radius:6px;
+  color:var(--muted);text-decoration:none;font-size:12.5px;font-weight:400;
+  border-left:2px solid transparent;
+  transition:color .25s,border-color .25s,background .25s;
+}
+nav a .no{font-family:var(--mono);font-size:10px;color:var(--dim);transition:color .25s}
+nav a:hover{color:var(--text);background:rgba(255,255,255,.03)}
+nav a.active{color:var(--lime);border-left-color:var(--lime);background:var(--lime-dim)}
+nav a.active .no{color:var(--lime)}
+.nav-foot{font-family:var(--mono);font-size:10.5px;color:var(--dim);border-top:1px solid var(--line-soft);padding-top:18px;margin-top:18px;line-height:2}
+
+/* ---------- 主内容 ---------- */
+main{flex:1;min-width:0;padding:0 clamp(28px,6vw,96px) 120px}
+.wrap{max-width:860px;margin:0 auto}
+
+/* ---------- Hero ---------- */
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:80px 0 60px;position:relative}
+.hero .kicker{
+  font-family:var(--mono);font-size:12px;letter-spacing:.3em;color:var(--lime);
+  text-transform:uppercase;margin-bottom:28px;display:flex;align-items:center;gap:14px;
+}
+.hero .kicker::before{content:"";width:44px;height:1px;background:var(--lime)}
+.hero h1{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(46px,7.2vw,96px);line-height:1.08;letter-spacing:-.01em;
+}
+.hero h1 .ital{font-style:italic;font-weight:300;color:var(--lime)}
+.hero h1 .cjk{font-family:"Noto Serif SC",serif}
+.hero .lede{
+  margin-top:34px;max-width:600px;color:var(--muted);
+  font-size:16.5px;line-height:2;font-weight:300;
+}
+.hero .lede strong{color:var(--text);font-weight:500}
+.hero .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:44px}
+.chip{
+  font-family:var(--mono);font-size:11.5px;color:var(--muted);
+  border:1px solid var(--line);border-radius:999px;padding:6px 16px;
+  background:rgba(255,255,255,.02);letter-spacing:.04em;
+  transition:border-color .3s,color .3s;
+}
+.chip:hover{border-color:var(--lime);color:var(--lime)}
+.hero .scrollhint{
+  position:absolute;bottom:26px;left:0;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.28em;color:var(--dim);
+  text-transform:uppercase;display:flex;align-items:center;gap:12px;
+}
+.hero .scrollhint::after{content:"";width:1px;height:38px;background:linear-gradient(var(--dim),transparent);animation:drip 2.2s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(.2);transform-origin:top}55%{transform:scaleY(1);transform-origin:top}56%{transform-origin:bottom}100%{transform:scaleY(.2);transform-origin:bottom}}
+
+/* ---------- 章节 ---------- */
+section{padding:96px 0 30px;position:relative;border-top:1px solid var(--line-soft)}
+.sec-head{display:flex;align-items:flex-start;gap:26px;margin-bottom:40px}
+.sec-no{
+  font-family:var(--serif);font-style:italic;font-weight:300;
+  font-size:clamp(52px,5.5vw,74px);line-height:.95;color:transparent;
+  -webkit-text-stroke:1px #2c333a;flex-shrink:0;user-select:none;
+  transition:all .5s;
+}
+section:hover .sec-no{-webkit-text-stroke-color:var(--lime);text-shadow:0 0 34px rgba(200,242,78,.14)}
+.sec-title{padding-top:8px}
+.sec-title .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;color:var(--lime);text-transform:uppercase}
+.sec-title h2{font-family:"Noto Serif SC",serif;font-weight:900;font-size:clamp(24px,3vw,34px);margin-top:6px;letter-spacing:.01em}
+.sec-title h2 em{font-family:var(--serif);font-style:italic;font-weight:300;color:var(--muted);font-size:.72em;margin-left:10px;letter-spacing:0}
+p.lead{color:var(--muted);max-width:680px;margin-bottom:26px}
+p.lead strong,li strong{color:var(--text);font-weight:500}
+p.lead code,li code{
+  font-family:var(--mono);font-size:.86em;color:var(--lime);
+  background:var(--lime-dim);padding:2px 7px;border-radius:5px;
+}
+
+/* ---------- 终端卡片 ---------- */
+.term{
+  background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  margin:22px 0;overflow:hidden;
+  box-shadow:0 20px 50px -20px rgba(0,0,0,.7);
+  transition:border-color .35s,transform .35s;
+}
+.term:hover{border-color:#333c44;transform:translateY(-2px)}
+.term-bar{
+  display:flex;align-items:center;gap:8px;
+  padding:11px 16px;border-bottom:1px solid var(--line-soft);
+  background:rgba(255,255,255,.015);
+}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+.term-title{font-family:var(--mono);font-size:11px;color:var(--dim);margin-left:8px;letter-spacing:.06em;flex:1}
+.copy{
+  font-family:var(--mono);font-size:10px;color:var(--dim);cursor:pointer;
+  border:1px solid var(--line);border-radius:5px;padding:3px 10px;background:transparent;
+  letter-spacing:.08em;transition:all .25s;
+}
+.copy:hover{color:var(--lime);border-color:var(--lime)}
+.term pre{
+  padding:18px 20px;overflow-x:auto;
+  font-family:var(--mono);font-size:12.8px;line-height:1.9;font-weight:400;
+}
+.term .c{color:var(--dim);font-style:italic}   /* 注释 */
+.term .p{color:var(--lime)}                     /* 提示符/命令头 */
+.term .s{color:var(--amber)}                    /* 字符串 */
+
+/* ---------- 工具芯片墙 ---------- */
+.tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin:22px 0}
+.tool{
+  position:relative;cursor:help;
+  border:1px solid var(--line);border-radius:10px;padding:14px 16px;
+  background:rgba(255,255,255,.015);
+  transition:border-color .3s,background .3s,transform .3s;
+}
+.tool:hover{border-color:var(--lime);background:var(--lime-dim);transform:translateY(-3px)}
+.tool b{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--text);display:block}
+.tool span{font-size:11.5px;color:var(--muted);line-height:1.6;display:block;margin-top:3px}
+
+/* ---------- Agent 卡片 ---------- */
+.agents{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin:24px 0}
+.agent{
+  position:relative;border:1px solid var(--line);border-radius:14px;
+  padding:22px 20px 20px;background:linear-gradient(160deg,rgba(255,255,255,.025),rgba(255,255,255,0) 55%);
+  overflow:hidden;transition:border-color .35s,transform .35s;
+}
+.agent::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--lime),transparent);
+  opacity:0;transition:opacity .35s;
+}
+.agent:hover{border-color:#3a444d;transform:translateY(-4px)}
+.agent:hover::before{opacity:1}
+.agent .rank{font-family:var(--mono);font-size:10px;color:var(--lime);letter-spacing:.2em;text-transform:uppercase}
+.agent h3{font-family:var(--serif);font-weight:600;font-size:20px;margin:8px 0 4px}
+.agent .cmd{font-family:var(--mono);font-size:10.5px;color:var(--amber);background:rgba(255,179,92,.08);border-radius:6px;padding:5px 9px;display:inline-block;margin:6px 0 10px;word-break:break-all}
+.agent p{font-size:12.5px;color:var(--muted);line-height:1.75}
+
+/* ---------- 规则列表 ---------- */
+.rules{counter-reset:r;margin:22px 0;display:grid;gap:12px}
+.rule{
+  counter-increment:r;display:flex;gap:18px;align-items:flex-start;
+  border:1px solid var(--line);border-radius:12px;padding:18px 20px;
+  background:rgba(255,255,255,.015);
+}
+.rule::before{
+  content:counter(r,decimal-leading-zero);
+  font-family:var(--serif);font-style:italic;font-size:26px;font-weight:300;
+  color:var(--lime);line-height:1.2;flex-shrink:0;
+}
+.rule div{font-size:13.5px;color:var(--muted);line-height:1.8}
+.rule div b{color:var(--text);font-weight:500;display:block;font-size:14px;margin-bottom:2px}
+
+/* ---------- 提示块 ---------- */
+.note{
+  border-left:2px solid var(--lime);background:var(--lime-dim);
+  border-radius:0 10px 10px 0;padding:16px 20px;margin:22px 0;
+  font-size:13.5px;color:var(--text);line-height:1.8;
+}
+.note.warn{border-left-color:var(--amber);background:rgba(255,179,92,.08)}
+.note b{font-weight:500}
+.note code{font-family:var(--mono);font-size:.88em;color:var(--lime)}
+
+/* ---------- 术语 tooltip ---------- */
+.tip{position:relative;border-bottom:1px dashed #4a525a;cursor:help}
+.tip .tip-bubble,.tool .tip-bubble{
+  position:absolute;left:0;bottom:calc(100% + 10px);width:310px;
+  background:#171c21;border:1px solid #2c333a;border-left:2px solid var(--lime);
+  border-radius:10px;padding:13px 15px;
+  font-size:12px;line-height:1.8;color:var(--muted);font-weight:300;font-style:normal;
+  opacity:0;transform:translateY(6px);pointer-events:none;
+  transition:opacity .25s,transform .25s;z-index:50;
+  box-shadow:0 18px 44px -12px rgba(0,0,0,.85);
+}
+.tip:hover .tip-bubble,.tool:hover .tip-bubble{opacity:1;transform:none}
+.tip .tip-bubble b,.tool .tip-bubble b{
+  display:block;font-family:var(--mono);font-size:10px;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--lime);margin-bottom:5px;
+}
+
+/* ---------- 入场动画 ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- 页脚 ---------- */
+footer{
+  border-top:1px solid var(--line-soft);margin-top:90px;padding:50px 0 20px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
+  font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.08em;
+}
+footer .sig{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--muted)}
+
+@media(max-width:980px){
+  aside{display:none}
+  :root{--nav-w:0}
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div class="gridlines"></div>
+<div id="progress"></div>
+
+<div class="shell">
+
+<aside>
+  <div class="brand">SETUP GUIDE <b>v2026</b></div>
+  <div class="brand-sub">Mac × AI Agent</div>
+  <nav id="nav">
+    <a href="#hero"><span class="no">00</span>开篇</a>
+    <a href="#s01"><span class="no">01</span>系统初始化</a>
+    <a href="#s02"><span class="no">02</span>Homebrew 地基</a>
+    <a href="#s03"><span class="no">03</span>终端与 Shell</a>
+    <a href="#s04"><span class="no">04</span>运行时：mise + uv</a>
+    <a href="#s05"><span class="no">05</span>Git 工具链</a>
+    <a href="#s06"><span class="no">06</span>现代 CLI 工具箱</a>
+    <a href="#s07"><span class="no">07</span>编辑器与 IDE</a>
+    <a href="#s08"><span class="no">08</span>AI Agent 工具栈</a>
+    <a href="#s09"><span class="no">09</span>MCP 扩展</a>
+    <a href="#s10"><span class="no">10</span>容器与本地服务</a>
+    <a href="#s11"><span class="no">11</span>密钥与安全</a>
+    <a href="#s12"><span class="no">12</span>效率应用</a>
+    <a href="#s13"><span class="no">13</span>一键复原自动化</a>
+    <a href="#s14"><span class="no">14</span>验收清单</a>
+    <a href="#s15"><span class="no">15</span>附录：Windows 迁移</a>
+    <a href="#s16"><span class="no">16</span>日常运维流程</a>
+  </nav>
+  <div class="nav-foot">TARGET · Apple Silicon<br>PRINCIPLE · Everything as Code<br><a href="mac-mini-ai-dev-setup.html" style="color:var(--lime);text-decoration:none">English →</a></div>
+</aside>
+
+<main>
+<div class="wrap">
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="hero">
+  <div class="kicker">Dev Environment · Field Manual</div>
+  <h1 class="reveal">一台 <span class="ital">Mac</span><br><span class="cjk">的</span> <span class="ital">AI Agent</span><br><span class="cjk">开发圣所</span></h1>
+  <p class="lede reveal">从零开机到多 Agent 并行作战。适用所有 Apple Silicon Mac —— MacBook、iMac、Mac Studio、Mac Mini。本指南遵循一条铁律：<strong>一切用代码声明</strong> —— Brewfile、dotfiles、bootstrap 脚本，换机 30 分钟完整复原。终端是主战场，<strong>Claude Code / Kimi Code / Codex / DSH / PI / WorkBuddy / ZCode</strong> 七件套并存，各取所长。</p>
+  <div class="meta reveal">
+    <span class="chip">macOS · Apple Silicon</span>
+    <span class="chip">Homebrew + Brewfile</span>
+    <span class="chip">Ghostty · zsh · Starship</span>
+    <span class="chip">mise + uv</span>
+    <span class="chip">Multi-Agent Workflow</span>
+  </div>
+  <div class="scrollhint">Scroll</div>
+</header>
+
+<!-- ================= 01 ================= -->
+<section id="s01">
+  <div class="sec-head reveal">
+    <div class="sec-no">01</div>
+    <div class="sec-title">
+      <div class="tag">macOS Layer</div>
+      <h2>系统初始化<em>defaults write</em></h2>
+    </div>
+  </div>
+  <p class="lead reveal">开机向导里开启 <strong class="tip">FileVault<span class="tip-bubble"><b>FileVault · 全盘加密</b>macOS 的全盘加密。Apple Silicon 的数据卷默认已加密，FileVault 把解密钥匙绑定到登录密码——不登录谁也读不了盘。你的 SSH 私钥和 API Key 全靠它兜底，性能损耗≈0，必开，并保管好恢复密钥。</span></strong> 磁盘加密；先别开 iCloud 桌面同步。然后用 <span class="tip">defaults write<span class="tip-bubble"><b>defaults write</b>macOS 偏好设置的命令行接口，直接读写应用配置。可脚本化、可进 dotfiles，新机器跑一次全部生效，不用手点系统设置。</span></span> 把系统偏好调成开发者形态 —— 全部可进 <span class="tip">dotfiles<span class="tip-bubble"><b>dotfiles</b>以 . 开头的隐藏配置文件（.zshrc、.gitconfig、.config/…）。收进 git 仓库管理 = 配置即代码，新机器一键恢复全部设置，详见第 13 章。</span></span>，换机自动生效。随后安装 <span class="tip">Xcode 命令行工具<span class="tip-bubble"><b>Xcode CLT</b>苹果独立的命令行开发工具包（git、clang、make 等），不用装完整 Xcode。Homebrew 和几乎所有编译工具都依赖它。</span></span>，这是一切编译链的前提。</p>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — system defaults</span><button class="copy">copy</button></div>
+<pre><span class="c"># 键盘：最快的按键重复与最短延迟</span>
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
+
+<span class="c"># 触控板：轻点即点击</span>
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool <span class="s">true</span>
+
+<span class="c"># Finder：显示扩展名 + 状态栏 + 路径栏</span>
+defaults write NSGlobalDomain AppleShowAllExtensions -bool <span class="s">true</span>
+defaults write com.apple.finder ShowStatusBar -bool <span class="s">true</span>
+defaults write com.apple.finder ShowPathbar -bool <span class="s">true</span>
+
+<span class="c"># Dock：自动隐藏、关掉最近使用</span>
+defaults write com.apple.dock autohide -bool <span class="s">true</span>
+defaults write com.apple.dock show-recents -bool <span class="s">false</span>
+
+<span class="c"># 截图统一存到 ~/Screenshots</span>
+mkdir -p ~/Screenshots
+defaults write com.apple.screencapture location ~/Screenshots
+
+killall Finder Dock</pre>
+  </div>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — prerequisite</span><button class="copy">copy</button></div>
+<pre><span class="c"># Xcode 命令行工具：git、clang 等一切编译链的前提</span>
+xcode-select --install</pre>
+  </div>
+</section>
+
+<!-- ================= 02 ================= -->
+<section id="s02">
+  <div class="sec-head reveal">
+    <div class="sec-no">02</div>
+    <div class="sec-title">
+      <div class="tag">Foundation</div>
+      <h2>Homebrew：一切的地基<em>brew</em></h2>
+    </div>
+  </div>
+  <p class="lead reveal">从这一刻起，<strong>不再用鼠标安装任何开发软件</strong>。全部走 <code>brew install</code> / <code>brew install --cask</code>，并记录进 Brewfile（见第 13 章）——这是「可复现」的核心。</p>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — install homebrew</span><button class="copy">copy</button></div>
+<pre>/bin/bash -c <span class="s">"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</span>
+
+<span class="c"># Apple Silicon 默认装在 /opt/homebrew，写入 PATH</span>
+echo <span class="s">'eval "$(/opt/homebrew/bin/brew shellenv)"'</span> >> ~/.zprofile
+eval <span class="s">"$(/opt/homebrew/bin/brew shellenv)"</span>
+
+brew update && brew doctor</pre>
+  </div>
+</section>
+
+<!-- ================= 03 ================= -->
+<section id="s03">
+  <div class="sec-head reveal">
+    <div class="sec-no">03</div>
+    <div class="sec-title">
+      <div class="tag">Battle Station</div>
+      <h2>终端与 Shell：Agent 的作战室<em>ghostty · starship</em></h2>
+    </div>
+  </div>
+  <p class="lead reveal">AI Agent 时代，<strong>终端是第一界面</strong>。推荐组合：<span class="tip">Ghostty<span class="tip-bubble"><b>Ghostty · 终端模拟器</b>提供窗口、渲染与交互层。GPU 加速渲染、原生 macOS 体验，全部设置收在单个配置文件里。</span></span>（GPU 渲染、原生快）+ <span class="tip">zsh<span class="tip-bubble"><b>zsh · Shell 命令解释器</b>你敲的每条命令（包括 AI Agent 执行的）都由 shell 解析后交给系统执行。macOS 默认 shell，全部配置在 ~/.zshrc。分工：Ghostty 是窗口，zsh 是窗口里的「语言」，Starship 是提示符外观，Nerd Font 负责图标。</span></span> + <span class="tip">Starship<span class="tip-bubble"><b>Starship · 提示符</b>跨 shell 的 prompt 工具：把目录、git 分支、Node/Python 版本、命令耗时渲染在提示符上，一个 starship.toml 配置。</span></span> 提示符 + <span class="tip">Nerd Font<span class="tip-bubble"><b>Nerd Font · 图标字体</b>在编程字体上追加数千个图标的补丁字体集。Starship、eza 等工具输出的图标靠它显示，否则全是问号方块。</span></span> 图标字体。</p>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — terminal stack</span><button class="copy">copy</button></div>
+<pre>brew install --cask ghostty   <span class="c"># 推荐。备选：wezterm / iterm2</span>
+brew install --cask font-jetbrains-mono-nerd-font
+brew install starship zsh-autosuggestions zsh-syntax-highlighting
+
+echo <span class="s">'eval "$(starship init zsh)"'</span> >> ~/.zshrc</pre>
+  </div>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">~/.config/ghostty/config</span><button class="copy">copy</button></div>
+<pre>font-family = <span class="s">JetBrainsMono Nerd Font</span>
+font-size = <span class="s">14</span>
+theme = <span class="s">catppuccin-mocha</span>
+background-opacity = <span class="s">0.96</span>
+window-padding-x = <span class="s">12</span>
+window-padding-y = <span class="s">10</span>
+copy-on-select = <span class="s">clipboard</span></pre>
+  </div>
+  <div class="note reveal"><b>装机实战建议：</b>第一、二节（系统设置 + Homebrew）必须手工；从本节开始，可以先装一个 Kimi Code（<code>curl -fsSL https://code.kimi.com/kimi-code/install.sh | bash</code>），把本文档丢给它，让 Agent 按章节替你执行和验证——这是这套环境的第一场实战。</div>
+</section>
+
+<!-- ================= 04 ================= -->
+<section id="s04">
+  <div class="sec-head reveal">
+    <div class="sec-no">04</div>
+    <div class="sec-title">
+      <div class="tag">Runtimes</div>
+      <h2>运行时管理：mise + uv<em>node · python · go</em></h2>
+    </div>
+  </div>
+  <p class="lead reveal"><strong>抛弃 nvm / pyenv / rbenv。</strong><span class="tip">mise<span class="tip-bubble"><b>mise · 语言版本总管家</b>不同项目要不同版本的 Node / Python / Go，mise 一个工具统一管理：项目里写 .mise.toml 声明版本，cd 进目录自动切换，提交 git 后团队版本一致。取代了 nvm / pyenv / rbenv 等一堆单语言管理器。类比手机：mise 管「系统版本」，uv 管「装哪些 App」。</span></span> 一个工具管理所有运行时，按项目目录自动切换、版本写进 <code>.mise.toml</code> 团队共享；<span class="tip">uv<span class="tip-bubble"><b>uv · Python 包管理器</b>负责装第三方库（openai、anthropic…），Rust 编写，比 pip 快 10-100 倍。自动为每个项目建隔离的虚拟环境，各项目的库互不干扰；uv run 跑脚本自动用项目环境。</span></span> 负责 Python 包与虚拟环境，比 pip 快 10-100 倍 —— AI 项目的标配。</p>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — mise + uv</span><button class="copy">copy</button></div>
+<pre>brew install mise uv pnpm
+echo <span class="s">'eval "$(mise activate zsh)"'</span> >> ~/.zshrc
+
+mise use -g node@lts          <span class="c"># 全局默认</span>
+mise use -g python@3.12
+mise use -g go@latest
+
+<span class="c"># 项目内：mise use node@22 → 生成 .mise.toml，提交 git</span></pre>
+  </div>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — python workflow</span><button class="copy">copy</button></div>
+<pre>uv init my-agent && cd my-agent
+uv add openai anthropic           <span class="c"># 加依赖</span>
+uv run main.py                    <span class="c"># 跑脚本（自动用项目 venv）</span>
+uv run --with ruff ruff check .   <span class="c"># 临时工具，不污染环境</span></pre>
+  </div>
+</section>
+
+<!-- ================= 05 ================= -->
+<section id="s05">
+  <div class="sec-head reveal">
+    <div class="sec-no">05</div>
+    <div class="sec-title">
+      <div class="tag">Safety Net</div>
+      <h2>Git 与 GitHub 工具链<em>gh · lazygit · delta</em></h2>
+    </div>
+  </div>
+  <p class="lead reveal">AI Agent 会大量、快速地改代码，<strong>Git 是你唯一的安全网</strong>。习惯：让 Agent 动手前先 commit；用 <span class="tip">git worktree<span class="tip-bubble"><b>git worktree · 多工作区</b>同一个仓库同时检出多个分支到不同目录，各有独立工作区但共享 .git。多 Agent 并行的基础：每个 Agent 一个 worktree，各改各的互不踩踏。</span></span> 让多个 Agent 并行干活互不干扰。配套三件套：<span class="tip">gh<span class="tip-bubble"><b>gh · GitHub 官方 CLI</b>终端里完成 issue / PR / 仓库管理；gh auth login 一次登录，git push/pull 认证一并搞定。</span></span>（GitHub 官方 CLI）、<span class="tip">lazygit<span class="tip-bubble"><b>lazygit · Git 终端图形界面</b>不用背命令，全键盘完成暂存、提交、分支、rebase、解冲突。Agent 改完一堆代码后，逐个文件过 diff、分批提交的审查利器。</span></span>（Git 终端图形界面）、<span class="tip">git-delta<span class="tip-bubble"><b>git-delta · diff 渲染器</b>给 git diff 加语法高亮、行号、并排对比。pager = delta 启用后，git diff / git log / lazygit 的变更视图全部生效。lazygit 管「操作」，delta 管「显示」。</span></span>（diff 美化渲染器）。</p>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — git toolchain</span><button class="copy">copy</button></div>
+<pre>brew install git gh lazygit git-delta
+gh auth login   <span class="c"># 浏览器授权，一次搞定 git push 认证</span></pre>
+  </div>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">~/.gitconfig</span><button class="copy">copy</button></div>
+<pre>[core]
+    editor = code --wait
+    pager = delta               <span class="c"># 语法高亮的 diff</span>
+[merge]
+    conflictstyle = zdiff3
+[pull]
+    rebase = <span class="s">true</span>
+[alias]
+    lg = log --graph --oneline --decorate --all
+    st = status -sb</pre>
+  </div>
+</section>
+
+<!-- ================= 06 ================= -->
+<section id="s06">
+  <div class="sec-head reveal">
+    <div class="sec-no">06</div>
+    <div class="sec-title">
+      <div class="tag">Toolbox</div>
+      <h2>现代 CLI 工具箱<em>rust 系全家桶</em></h2>
+    </div>
+  </div>
+  <p class="lead reveal">一套 rust/go 重写的现代替代品。<strong>ripgrep 是 Agent 搜索代码的底层引擎</strong>，其余工具则让你的日常操作全面提速。<span class="tip">全部跨平台<span class="tip-bubble"><b>跨平台说明</b>本章工具全是 Rust/Go 编写，Windows 用 winget / scoop 装同一批，命令一致。文档里 macOS 专有的是：Homebrew、Ghostty、zsh、Raycast 系效率应用、OrbStack——Windows 对应物分别是 winget、Windows Terminal、PowerShell 7、PowerToys、Docker Desktop + WSL2。</span></span>，Windows 上也能提前练。</p>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — modern cli</span><button class="copy">copy</button></div>
+<pre>brew install ripgrep fd bat eza fzf zoxide jq yq sd httpie \
+  hyperfine dust duf bottom tlrc
+
+<span class="c"># ~/.zshrc 收尾</span>
+eval <span class="s">"$(zoxide init zsh)"</span>
+source &lt;(fzf --zsh)
+alias ls=<span class="s">'eza --icons'</span> cat=<span class="s">'bat --style=plain'</span></pre>
+  </div>
+  <div class="tools reveal">
+    <div class="tool"><b>ripgrep</b><span>rg · grep 替代品，Agent 的搜索引擎</span><span class="tip-bubble"><b>替代 grep · 按内容搜代码</b>在整个代码库里搜文本，快 10 倍+，自动跳过 node_modules 和 gitignore。例：rg "getUserInfo" 找函数在哪被调用。Claude Code 等 Agent 搜索代码的底层引擎就是它。</span></div>
+    <div class="tool"><b>fd</b><span>find 替代品，语法友好</span><span class="tip-bubble"><b>替代 find · 按文件名找文件</b>语法像人话：fd config，对比老命令 find . -name "*config*"。默认忽略 gitignore，不会翻进 node_modules。</span></div>
+    <div class="tool"><b>bat</b><span>cat 高亮版，自动分页</span><span class="tip-bubble"><b>替代 cat · 看文件</b>查看文件带语法高亮、行号、git 改动标记，终端里快速读代码的体验质变。</span></div>
+    <div class="tool"><b>eza</b><span>ls 替代品，图标 + 树形</span><span class="tip-bubble"><b>替代 ls · 看目录</b>彩色 + 图标列目录；lt 树形展示——进陌生项目，一条命令看懂目录结构。</span></div>
+    <div class="tool"><b>fzf</b><span>模糊搜索，Ctrl+R 历史神器</span><span class="tip-bubble"><b>模糊搜索器</b>Ctrl+R 搜历史命令：只记得三天前那条命令里有 "docker"，敲几个字母就捞回来。还能接管管道搜文件、进程、git 分支。</span></div>
+    <div class="tool"><b>zoxide</b><span>cd 智能跳转，越用越聪明</span><span class="tip-bubble"><b>会学习的 cd</b>记住你去过的目录，之后 z proj 直接跳到最常去的匹配目录，不用敲全路径。用得越久越准。</span></div>
+    <div class="tool"><b>jq / yq</b><span>JSON / YAML 处理双雄</span><span class="tip-bubble"><b>结构化数据提取器</b>API 返回一大坨 JSON，jq '.data[0].name' 只取你要的字段；yq 同理处理 YAML。和 Agent 的结构化输出打交道天天用。</span></div>
+    <div class="tool"><b>httpie</b><span>curl 友好版，API 调试</span><span class="tip-bubble"><b>替代 curl · 调试 API</b>http POST api.x.com name=Tom——自动 JSON、自动高亮、自动格式化，不用背 curl 的参数旗标。</span></div>
+    <div class="tool"><b>hyperfine</b><span>命令耗时基准测试</span><span class="tip-bubble"><b>命令计时器</b>hyperfine '方案A' '方案B' 各跑多次给平均耗时和对比，"哪个写法更快"从此有数据说话。</span></div>
+    <div class="tool"><b>bottom</b><span>btm · htop 替代品</span><span class="tip-bubble"><b>系统监控</b>CPU / 内存 / 网络 / 进程一屏看全，图形化界面。Agent 满载跑长任务时开它盯负载。</span></div>
+    <div class="tool"><b>dust / duf</b><span>du / df 的现代形态</span><span class="tip-bubble"><b>磁盘空间可视化</b>dust 答"哪个目录最占地方"，duf 答"各磁盘用量"，都是直观的图形化进度条。</span></div>
+    <div class="tool"><b>sd</b><span>sed 替代品，正则即直觉</span><span class="tip-bubble"><b>替代 sed · 查找替换</b>sd "旧文本" "新文本" 文件——语法就是直觉，不用记 sed 的正则转义和 -i 旗标。</span></div>
+    <div class="tool"><b>tlrc</b><span>tldr 命令速查</span><span class="tip-bubble"><b>命令速查手册</b>tldr tar 直接给最常用的 5 个例子，比啃 man 手册人性化一百倍。忘了某个命令怎么用先问它。</span></div>
+  </div>
+</section>
+
+<!-- ================= 07 ================= -->
+<section id="s07">
+  <div class="sec-head reveal">
+    <div class="sec-no">07</div>
+    <div class="sec-title">
+      <div class="tag">Editor</div>
+      <h2>编辑器与 IDE<em>vscode · zed</em></h2>
+    </div>
+  </div>
+  <p class="lead reveal">终端 Agent 是主力，编辑器只看 diff、做精细调整。策略：<strong>VS Code 主力</strong>（沿用既有习惯，生态最全）+ <span class="tip">Zed<span class="tip-bubble"><b>Zed · Zed Industries</b>GitHub Atom 编辑器原班人马打造（他们还创造了 Tree-sitter 语法解析引擎）。Atom 停更后用 Rust 从零重写：GPU 加速、毫秒级启动、原生多人协作，2024 年开源，内置 AI 面板。</span></span> 轻量备选（秒开大文件）。<strong>不装 Cursor</strong>：AI 主力已在终端 Agent，编辑器再叠 AI 订阅价值重叠。</p>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — editors</span><button class="copy">copy</button></div>
+<pre>brew install --cask visual-studio-code    <span class="c"># 主力：生态最全</span>
+brew install --cask zed                   <span class="c"># 备选：极速启动，内置 AI 面板</span></pre>
+  </div>
+</section>
+
+<!-- ================= 08 ================= -->
+<section id="s08">
+  <div class="sec-head reveal">
+    <div class="sec-no">08</div>
+    <div class="sec-title">
+      <div class="tag">Core · The Fleet</div>
+      <h2>AI Agent 工具栈<em>multi-agent</em></h2>
+    </div>
+  </div>
+  <p class="lead reveal">2026 年的共识：<strong>不押注单一 Agent</strong>。核心阵容七件套 —— 长任务用 Claude Code，交付 PR 用 Codex，插件编排用 DSH，自我扩展用 PI，桌面全场景用 WorkBuddy 与 ZCode。</p>
+  <div class="agents reveal">
+    <div class="agent">
+      <div class="rank">主力 · Strongest</div>
+      <h3>Claude Code</h3>
+      <span class="cmd">curl -fsSL https://claude.ai/install.sh | bash</span>
+      <p>综合能力最强：仓库理解、子 Agent、git worktree 并行、数小时无人值守的长任务。</p>
+    </div>
+    <div class="agent">
+      <div class="rank">开源 · MIT</div>
+      <h3>Kimi Code CLI</h3>
+      <span class="cmd">curl -fsSL https://code.kimi.com/kimi-code/install.sh | bash</span>
+      <p>Moonshot 出品的终端 Agent。内置 coder / explore / plan 子 Agent，MCP 用 /mcp-config 对话式配置，性价比高。亦可用 npm 安装。</p>
+    </div>
+    <div class="agent">
+      <div class="rank">交付 · PR</div>
+      <h3>Codex CLI</h3>
+      <span class="cmd">npm install -g @openai/codex</span>
+      <p>OpenAI 的开源终端 Agent，任务以 Pull Request 形式交回，ChatGPT 订阅内含。</p>
+    </div>
+    <div class="agent">
+      <div class="rank">插件化 · 编排</div>
+      <h3>DSH · DeepSeek Harness</h3>
+      <span class="cmd">npx -y @deepseek-ai/dsh</span>
+      <p>DeepSeek 的插件化 Agent 运行时：模型、工具、子 Agent 一切皆插件；bridge 插件可把 Codex / Kimi 变成它的「第二意见」。</p>
+    </div>
+    <div class="agent">
+      <div class="rank">自我扩展</div>
+      <h3>PI · Agent Harness</h3>
+      <span class="cmd">npm install -g @earendil-works/pi-coding-agent</span>
+      <p>MIT 开源 coding agent，pi-ai 统一多家 LLM API。注意：无内置权限系统，敏感项目建议容器化运行。</p>
+    </div>
+    <div class="agent">
+      <div class="rank">桌面 · 全场景</div>
+      <h3>WorkBuddy · 腾讯</h3>
+      <span class="cmd">官网下载桌面端</span>
+      <p>桌面 AI Agent 工作站：Coding Mode 写码、Work Mode 办公，支持本地模型配置接入 DeepSeek 等模型。</p>
+    </div>
+    <div class="agent">
+      <div class="rank">国产 · 桌面 ADE</div>
+      <h3>ZCode · 智谱</h3>
+      <span class="cmd">zcode.z.ai/cn 下载 macOS 版</span>
+      <p>智谱桌面 Agent 开发环境：Goal 长程任务、微信/飞书/Telegram 远程唤起、GLM-5.3 深度集成，还能可视化管理其他 CLI Agent。首次启动选「连接 BigModel」（GLM Coding Plan），一个订阅还能给 Claude Code 等 20+ 工具用——正好配 cc-switch。</p>
+    </div>
+  </div>
+
+  <div class="rules reveal">
+    <div class="rule"><div><b>每个项目写 AGENTS.md</b>写明构建命令、代码规范、目录结构、禁区。Agent 的表现上限 = 你给的上下文质量。Claude Code 同时认 CLAUDE.md。</div></div>
+    <div class="rule"><div><b>配好权限与钩子</b>在各 Agent 的配置（~/.claude/settings.json、kimi 的 config.toml）里声明权限模式与危险命令拦截，避免每次手动确认，也防止 Agent 越权。</div></div>
+    <div class="rule"><div><b>API Key 集中管理</b>Key 绝不写进项目文件、dotfiles 明文或 shell 历史 —— 见第 11 章。</div></div>
+  </div>
+
+  <div class="note reveal"><b>配套：cc-switch —— Claude Code / Codex 的供应商总开关</b>。开源桌面应用（Tauri + Rust），把各家 API 供应商（官方 / DeepSeek / GLM / 第三方网关）的 base URL、Key、模型做成图形化预设，<b>一键切换</b>，不用手改 settings.json；新版还集成 MCP / Skills 管理。安装：<code>brew tap farion1231/ccswitch && brew install --cask cc-switch</code>；若报 macOS 版本兼容错误（已知问题），改从 GitHub Releases 下载 DMG。</div>
+
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — 多 Agent 并行工作流</span><button class="copy">copy</button></div>
+<pre><span class="c"># 用 git worktree 开隔离工作区，多个 Agent 并行不打架</span>
+git worktree add ../proj-feat-a feat-a
+git worktree add ../proj-feat-b feat-b
+
+<span class="c"># 窗口 1:  cd ../proj-feat-a && claude</span>
+<span class="c"># 窗口 2:  cd ../proj-feat-b && kimi</span></pre>
+  </div>
+</section>
+
+<!-- ================= 09 ================= -->
+<section id="s09">
+  <div class="sec-head reveal">
+    <div class="sec-no">09</div>
+    <div class="sec-title">
+      <div class="tag">Extension</div>
+      <h2>MCP：给 Agent 装上「手」<em>model context protocol</em></h2>
+    </div>
+  </div>
+  <p class="lead reveal"><span class="tip">MCP<span class="tip-bubble"><b>MCP · Model Context Protocol</b>Agent 与外部工具之间的「标准化插座」，类比 USB-C：Agent 实现一次客户端、工具方实现一次 Server 即可互插。Server 暴露 tools（可调用函数，99% 的用途）/ resources（数据）/ prompts（模板）；本地 Server 是 Agent 的子进程，远程走 HTTP。</span></span> 让 Agent 接入外部工具。各 Agent 配置方式不同（Claude Code 用 <code>claude mcp add</code>，Kimi Code 用 <code>/mcp-config</code>）。<strong>只装当前项目真正用到的</strong> —— MCP 越多，上下文越臃肿。</p>
+  <div class="tools reveal">
+    <div class="tool"><b>Playwright MCP</b><span>浏览器自动化，Agent 自己验证前端页面</span></div>
+    <div class="tool"><b>Context7</b><span>实时拉取库的最新文档，消除过时 API 幻觉</span></div>
+    <div class="tool"><b>GitHub MCP</b><span>Issue / PR / 代码搜索操作</span></div>
+    <div class="tool"><b>Figma MCP</b><span>设计稿直达代码</span></div>
+  </div>
+  <div class="note reveal"><b>统一管理多个 Agent 的 MCP：</b>你已在用的 <b>cc-switch</b> 新版（v3.x）内置了 MCP 集中管理——一处配置、多处同步，兼管 Skills；专门的 CLI 方案还有 <span class="tip">mcpm<span class="tip-bubble"><b>mcpm · MCP 包管理器</b>像 Homebrew 管软件一样管 MCP Server：中央注册表搜索安装、profile 分组启停、多客户端同步，路由器聚合多个 Server 为一个端点。对 Claude Code 原生支持有限，需手动接线。安装：brew install mcpm</span></span>。注意：这类工具本质是「一处维护、多处同步」的翻译层，各家 Agent 的 MCP 配置格式尚未完全统一。</div>
+</section>
+
+<!-- ================= 10 ================= -->
+<section id="s10">
+  <div class="sec-head reveal">
+    <div class="sec-no">10</div>
+    <div class="sec-title">
+      <div class="tag">Runtime Sandbox</div>
+      <h2>容器与本地服务<em>orbstack</em></h2>
+    </div>
+  </div>
+  <p class="lead reveal"><strong><span class="tip">OrbStack<span class="tip-bubble"><b>OrbStack · Danny Lin (kdrag0n)</b>独立开发者一人公司的作品，2023 年发布。作者此前是 Android 定制内核圈知名开发者（Proton Kernel 作者），用 Swift / Rust 原生重写整套 Docker + Linux 虚拟化栈——「一个人打败了 Docker 官方产品」。个人免费，商用付费。</span></span> 取代 Docker Desktop</strong>：macOS 上最快、最省电的 Docker / Linux 运行环境。数据库一律容器化，不污染系统。</p>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — containers</span><button class="copy">copy</button></div>
+<pre>brew install --cask orbstack
+brew install lazydocker   <span class="c"># 容器 TUI：lazygit 的 Docker 版</span>
+
+docker run -d --name pg -p 5432:5432 \
+  -e POSTGRES_PASSWORD=dev postgres:17
+docker run -d --name redis -p 6379:6379 redis:7</pre>
+  </div>
+</section>
+
+<!-- ================= 11 ================= -->
+<section id="s11">
+  <div class="sec-head reveal">
+    <div class="sec-no">11</div>
+    <div class="sec-title">
+      <div class="tag">Security</div>
+      <h2>密钥与安全管理<em>1password · direnv</em></h2>
+    </div>
+  </div>
+  <p class="lead reveal">AI 时代你手里的 API Key 比信用卡还多。<strong>铁律：Key 不进 git、不进 dotfiles 明文、不进 ~/.zshrc 明文。</strong>免费路径先走，<span class="tip">1Password<span class="tip-bubble"><b>1Password · 付费订阅</b>个人版约 $3/月（按年付），无免费档，仅 14 天试用。独特价值：op run 运行时注入 API Key、跨设备体验。免费替代已够用——SSH 私钥用 macOS 钥匙串，密码管理用 Bitwarden（免费档，也有 CLI 和 SSH Agent）。</span></span> 是可选付费项（订阅制约 $3/月）。</p>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — secrets（免费路径）</span><button class="copy">copy</button></div>
+<pre>brew install direnv age sops     <span class="c"># .env 自动加载 + 敏感配置加密</span>
+
+<span class="c"># SSH 私钥用 macOS 原生钥匙串托管（免费、系统自带）</span>
+ssh-keygen -t ed25519
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+
+<span class="c"># 可选付费：brew install --cask 1password 1password-cli</span>
+<span class="c"># 跨项目注入 Key：op run --env-file=.env.tpl -- claude</span></pre>
+  </div>
+  <div class="note warn reveal"><b>SSH Key</b> 免费方案：<span class="tip">macOS 钥匙串<span class="tip-bubble"><b>1Password + Keychain 组合流程</b>分层分工：Keychain 管「系统自己要用的」（SSH passphrase 开机解锁一次、整天无感），1Password 管「你和 Agent 要用的」（网站密码、API Key）。跑 Agent 时项目里只放 .env.tpl 引用模板，op run 注入时指纹授权一次，Key 全程不落盘。纪律：两者的 SSH Agent 只启用一个，建议固定在 Keychain。</span></span> 托管（上面命令）；付费方案：1Password SSH Agent，私钥不落盘。密码管理免费替代：<b>Bitwarden</b>。</div>
+</section>
+
+<!-- ================= 12 ================= -->
+<section id="s12">
+  <div class="sec-head reveal">
+    <div class="sec-no">12</div>
+    <div class="sec-title">
+      <div class="tag">Productivity</div>
+      <h2>macOS 效率应用<em>raycast &amp; friends</em></h2>
+    </div>
+  </div>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — productivity casks</span><button class="copy">copy</button></div>
+<pre>brew install --cask raycast rectangle alt-tab stats karabiner-elements</pre>
+  </div>
+  <div class="tools reveal">
+    <div class="tool"><b>Raycast</b><span>启动器之王：剪贴板历史 / 窗口管理 / 快捷指令全包 · 免费档够用</span></div>
+    <div class="tool"><b>Rectangle</b><span>开源窗口分屏快捷键 · 免费</span></div>
+    <div class="tool"><b>AltTab</b><span>Windows 式窗口切换 · 免费开源</span></div>
+    <div class="tool"><b>Stats</b><span>菜单栏负载监控，跑 Agent 时看 CPU/内存 · 免费开源</span></div>
+    <div class="tool"><b>Karabiner</b><span>键盘改键：CapsLock → Esc/Ctrl · 免费开源</span></div>
+  </div>
+  <div class="note reveal"><b>收费情况：</b>Rectangle / AltTab / Stats / Karabiner 全部<b>免费开源</b>；Raycast 免费档已覆盖核心功能，Pro（约 $8/月）主要买 AI 与云同步——AI 需求都在终端 Agent 上，<b>免费档够用</b>。</div>
+
+  <p class="lead reveal" style="margin-top:44px">第二梯队（日常增强，参考 <span class="tip">Omarchy<span class="tip-bubble"><b>Omarchy · DHH 的满配 Linux</b>Ruby on Rails 作者 DHH 主导的 Arch 发行版，预装一整套精选开发/效率工具，2025 年很火。本梯队参考其清单做 macOS 映射；它清单里的 fzf / ripgrep / lazygit / Neovim 等本指南已覆盖。</span></span> 清单做的 macOS 映射）：</p>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — daily essentials</span><button class="copy">copy</button></div>
+<pre>brew install --cask google-chrome obsidian shottr localsend iina tailscale</pre>
+  </div>
+  <div class="tools reveal">
+    <div class="tool"><b>Chrome</b><span>浏览器 · 前端调试基准 · 免费</span></div>
+    <div class="tool"><b>Obsidian</b><span>Markdown 笔记 · 免费</span><span class="tip-bubble"><b>Agent 时代的知识库</b>笔记存纯 .md 文件——你写的知识库，Agent 可以直接读、直接整理。这是 AI 时代笔记软件和普通文档的分水岭。</span></div>
+    <div class="tool"><b>Shottr</b><span>截图标注 · 滚动截图 / 打码 / 量尺寸 · 免费</span></div>
+    <div class="tool"><b>LocalSend</b><span>跨平台 AirDrop · 免费开源</span><span class="tip-bubble"><b>Windows ↔ Mac 互传</b>同一局域网下直接拖文件，不用命令不用线。第 15 章迁移小文件的最省事路径。</span></div>
+    <div class="tool"><b>IINA</b><span>视频播放器 · macOS 原生最强 · 免费开源</span></div>
+    <div class="tool"><b>Tailscale</b><span>mesh VPN · 个人免费</span><span class="tip-bubble"><b>Mac 常开的绝配</b>装好后，你在公司 / 外面能安全 SSH 回家里这台 Mac，跑在上面的 Agent 任务随时接管。</span></div>
+  </div>
+  <div class="note reveal"><b>按需自选：</b>LibreOffice（办公套件）、Typora（Markdown 写作，$15 买断）、Spotify、Dropbox。</div>
+</section>
+
+<!-- ================= 13 ================= -->
+<section id="s13">
+  <div class="sec-head reveal">
+    <div class="sec-no">13</div>
+    <div class="sec-title">
+      <div class="tag">Infrastructure as Code</div>
+      <h2>自动化：一键复原整个环境<em>brewfile · chezmoi</em></h2>
+    </div>
+  </div>
+  <p class="lead reveal">这是整套方案的灵魂：<strong>软件清单、配置、运行时全部代码化</strong>，存进 git 私有仓库。首次装机按 1-12 章顺序执行，<strong>本章在收尾时做一次</strong>；回报在下一台机器——只跑一条 bootstrap，30 分钟复原。dotfiles 用 <span class="tip">chezmoi<span class="tip-bubble"><b>chezmoi · dotfiles 管理器</b>免费开源（Go 编写，Tom Payne 2019 年发布），该领域最主流。把散落的点文件收进 git 仓库，新机器一条命令还原；强在模板（多机器差异化配置）和加密（敏感配置 age 加密入库）。</span></span> 管理。</p>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — snapshot &amp; restore</span><button class="copy">copy</button></div>
+<pre><span class="c"># 装完所有软件后导出清单</span>
+brew bundle dump --file=~/dotfiles/Brewfile --force
+
+<span class="c"># dotfiles 用 chezmoi 管理（支持模板与加密）</span>
+brew install chezmoi
+chezmoi init --apply &lt;你的dotfiles仓库&gt;</pre>
+  </div>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">bootstrap.sh — 新机器总入口</span><button class="copy">copy</button></div>
+<pre><span class="c">#!/bin/bash</span>
+<span class="c"># 新 Mac 只跑这一条</span>
+xcode-select --install 2>/dev/null
+/bin/bash -c <span class="s">"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</span>
+eval <span class="s">"$(/opt/homebrew/bin/brew shellenv)"</span>
+brew bundle --file=&lt;你的Brewfile&gt;
+chezmoi init --apply &lt;你的dotfiles仓库&gt;
+mise install
+gh auth login</pre>
+  </div>
+</section>
+
+<!-- ================= 14 ================= -->
+<section id="s14">
+  <div class="sec-head reveal">
+    <div class="sec-no">14</div>
+    <div class="sec-title">
+      <div class="tag">Verify</div>
+      <h2>验收清单<em>final check</em></h2>
+    </div>
+  </div>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — acceptance</span><button class="copy">copy</button></div>
+<pre>brew doctor && echo OK
+git --version && gh auth status
+mise ls                        <span class="c"># node / python / go 就位</span>
+uv --version && node -v && python3 -V
+claude --version; kimi --version; codex --version; pi --version
+npx -y @deepseek-ai/dsh --version   <span class="c"># DSH</span>
+<span class="c"># 桌面端：ZCode / WorkBuddy 首次启动完成模型登录</span>
+docker run hello-world         <span class="c"># OrbStack</span>
+rg --version && fzf --version
+ssh -T git@github.com          <span class="c"># SSH 认证</span></pre>
+  </div>
+  <div class="note reveal">全部通过后执行 <code>brew bundle dump</code> 并提交 dotfiles —— 你的环境从此<b>可复现、可迁移、可演进</b>。</div>
+</section>
+
+<!-- ================= 15 ================= -->
+<section id="s15">
+  <div class="sec-head reveal">
+    <div class="sec-no">15</div>
+    <div class="sec-title">
+      <div class="tag">Appendix · Migration</div>
+      <h2>附录：从 Windows 迁移到 Mac<em>workspace → mac</em></h2>
+    </div>
+  </div>
+  <p class="lead reveal">总原则一句话：<strong>代码走 git，配置重建为主，依赖目录永不迁移</strong>。</p>
+  <div class="rules reveal">
+    <div class="rule"><div><b>项目文件：git 优先</b>能 push 的全部 push 到 GitHub，Mac 上 clone——历史、分支、remote 全在。未入库的走 scp / LocalSend / exFAT 硬盘（小文件 LocalSend 最省事，见第 12 章）。<b>绝不迁 node_modules / .venv / target / __pycache__</b>：x86 与 arm64 不通用，到 Mac 用 mise / uv / pnpm 一分钟重建，只迁源码 + .git。</div></div>
+    <div class="rule"><div><b>配置文件：重建为主，少数可搬</b>VS Code 开 Settings Sync（GitHub 账号）全自动同步；Agent 配置（~/.claude、config.toml）可直接复制，注意改掉 Windows 路径字段；SSH Key 在 Mac 重新生成，API Key 趁机录入 1Password / Keychain。</div></div>
+    <div class="rule"><div><b>并行期：Syncthing + git 纪律</b>需要实时同步目录就上 <span class="tip">Syncthing<span class="tip-bubble"><b>Syncthing · 点对点同步</b>免费开源的设备直连同步工具，无云端中转。Workspace 目录双向同步，务必加忽略规则排除 node_modules 等依赖目录。</span></span>（免费开源、点对点）双向同步 Workspace；养成「换机器前 push」的习惯。终态：Mac 主力、Windows 备用、git 为中心，无需长期双向同步。</div></div>
+  </div>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">Windows Git Bash → Mac（Mac 需先开「远程登录」）</span><button class="copy">copy</button></div>
+<pre><span class="c"># 在 Windows 的 Git Bash 里执行，把项目推到 Mac</span>
+scp -r /c/Users/TUF/Workspace/&lt;项目&gt; user@&lt;mac-ip&gt;:~/Workspace/
+
+<span class="c"># 大文件兜底：exFAT 移动硬盘（两边原生读写）</span>
+<span class="c"># 或 Mac 开「文件共享」SMB → Windows 访问 \\&lt;mac-ip&gt; 拖拽</span></pre>
+  </div>
+</section>
+
+<!-- ================= 16 ================= -->
+<section id="s16">
+  <div class="sec-head reveal">
+    <div class="sec-no">16</div>
+    <div class="sec-title">
+      <div class="tag">Day-2 Operations</div>
+      <h2>日常运维：装、删、改、更新<em>dotsync</em></h2>
+    </div>
+  </div>
+  <p class="lead reveal">核心心智：<strong>两层资产，各有一条纪律</strong>——软件层对 Brewfile 负责，配置层对 chezmoi 负责。<strong>不是每步都要跑 chezmoi</strong>：一个 <code>dotsync</code> 别名把所有收尾动作打包。</p>
+  <div class="rules reveal">
+    <div class="rule"><div><b>软件层：装 / 删 / 更新</b>brew install / uninstall / upgrade 之后，收尾动作永远一样：重新导出 Brewfile。清单不记版本号，upgrade 后 dump 一次即可。运行时归 mise（mise upgrade），Agent CLI 各自升级（kimi upgrade 等）。</div></div>
+    <div class="rule"><div><b>配置层：只有改 dotfiles 才碰 chezmoi</b>直接改源文件（如 ~/.zshrc），改完 chezmoi re-add 收进仓库；新纳管文件用 chezmoi add。除此之外的日常操作完全不用想 chezmoi。</div></div>
+    <div class="rule"><div><b>dotsync：一条命令收尾</b>装 / 删 / 改完任何东西跑一次：导出清单 + 收纳配置 + 提交推送。<b>忘了跑也不会坏</b>——只是下一台机器少一点变化。建议 chezmoi 源目录就用 ~/dotfiles，Brewfile 也放里面。</div></div>
+  </div>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">~/.zshrc — dotsync 收尾函数</span><button class="copy">copy</button></div>
+<pre>dotsync() {
+  brew bundle dump --file=~/dotfiles/Brewfile --force  <span class="c"># 软件清单</span>
+  chezmoi re-add                                       <span class="c"># 收纳配置变更</span>
+  git -C ~/dotfiles add -A
+  git -C ~/dotfiles commit -m <span class="s">"chore: sync $(date +%F)"</span>
+  git -C ~/dotfiles push
+}</pre>
+  </div>
+  <div class="note reveal"><b>节奏建议：</b>随手 dotsync；每周或每月 <code>brew update && brew upgrade && brew cleanup</code> 和 <code>mise upgrade</code>；懒人选项——把维护流程写成 prompt 让 Agent 定期执行，或用 launchd 定时跑 brew upgrade。</div>
+</section>
+
+<footer>
+  <div class="sig">Crafted for the agentic era.</div>
+  <div>MAC × AI AGENT · SETUP FIELD MANUAL · 2026</div>
+</footer>
+
+</div><!-- /wrap -->
+</main>
+</div><!-- /shell -->
+
+<script>
+// 顶部阅读进度
+const bar = document.getElementById('progress');
+addEventListener('scroll', () => {
+  const h = document.documentElement;
+  bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+}, {passive:true});
+
+// 滚动入场
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), {threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// 导航高亮当前章节
+const links = [...document.querySelectorAll('#nav a')];
+const secs = links.map(a => document.querySelector(a.getAttribute('href')));
+const nio = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) {
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+  }
+}), {rootMargin:'-30% 0px -60% 0px'});
+secs.forEach(s => s && nio.observe(s));
+
+// 代码复制
+document.querySelectorAll('.copy').forEach(btn => btn.addEventListener('click', () => {
+  const pre = btn.closest('.term').querySelector('pre');
+  navigator.clipboard.writeText(pre.innerText).then(() => {
+    btn.textContent = 'copied ✓';
+    setTimeout(() => btn.textContent = 'copy', 1600);
+  });
+}));
+</script>
+</body>
+</html>
