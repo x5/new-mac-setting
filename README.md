@@ -65,7 +65,7 @@
 | 09 | 🔌 MCP 扩展 | Playwright / Context7 / GitHub / Figma，按需安装 |
 | 10 | 🐳 容器与本地服务 | OrbStack 取代 Docker Desktop |
 | 11 | 🔐 密钥与安全 | 免费路径优先：Keychain + direnv + age/sops，1Password 可选 |
-| 12 | ⚡ 效率应用 | Raycast / Rectangle / AltTab / Stats / Karabiner（几乎全部免费） |
+| 12 | ⚡ 效率应用 | Raycast 等核心五件 + 日常增强（Chrome/Obsidian/Shottr/LocalSend/IINA/Tailscale） |
 | 13 | 📦 一键复原自动化 | Brewfile + chezmoi + bootstrap.sh |
 | 14 | ✅ 验收清单 | 逐条命令验证 |
 | 15 | 🪟 附录：Windows 迁移 | 代码走 git、配置重建、依赖目录永不迁移 |
@@ -99,6 +99,7 @@ Terminal   Ghostty · zsh · Starship · JetBrainsMono Nerd Font
 Runtimes   mise (node/python/go) · uv · pnpm
 CLI        ripgrep · fd · bat · eza · fzf · zoxide · jq/yq · httpie · bottom
 Git        gh · lazygit · git-delta · worktree
+Desktop    Raycast · Chrome · Obsidian · Shottr · LocalSend · IINA · Tailscale
 AI Agents  Claude Code · Kimi Code · Codex · DSH · PI · WorkBuddy · ZCode · cc-switch
 Infra      OrbStack (Docker) · Syncthing
 Config     Homebrew Brewfile · chezmoi · bootstrap.sh · dotsync
