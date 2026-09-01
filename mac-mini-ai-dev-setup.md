@@ -337,6 +337,7 @@ MCP（Model Context Protocol）[^mcp]让 Agent 接入外部工具。常用：
 ```bash
 # OrbStack：macOS 上最快的 Docker/Linux 运行环境，取代 Docker Desktop
 brew install --cask orbstack
+brew install lazydocker   # 容器 TUI：lazygit 的 Docker 版，管理容器/镜像
 
 # 数据库等一律容器化，不污染系统
 # docker run -d --name pg -p 5432:5432 -e POSTGRES_PASSWORD=dev postgres:17
@@ -365,6 +366,8 @@ brew install --cask 1password 1password-cli
 
 ## 12. macOS 效率应用
 
+第一梯队（核心效率）：
+
 ```bash
 brew install --cask \
   raycast \          # 启动器（取代 Spotlight，剪贴板历史/窗口管理全包）
@@ -374,7 +377,23 @@ brew install --cask \
   karabiner-elements # 键盘改键（如 CapsLock → Esc/Ctrl）
 ```
 
-收费情况[^free-apps]：Rectangle、AltTab、Stats、Karabiner-Elements **全部免费开源**；Raycast 免费档已覆盖启动器/剪贴板/窗口管理核心功能，Pro（约 $8/月）主要买 AI 与云同步——AI 需求都在终端 Agent 上，免费档够用。
+第二梯队（日常增强，参考 Omarchy[^omarchy] 清单做的 macOS 映射）：
+
+```bash
+brew install --cask \
+  google-chrome \    # 浏览器：前端调试基准
+  obsidian \         # Markdown 笔记：纯 md 文件，Agent 也能直接读写你的知识库
+  shottr \           # 截图标注：滚动截图/打码/量尺寸，免费
+  localsend \        # 跨平台 AirDrop：Windows ↔ Mac 互传文件（见第 15 章）
+  iina \             # 视频播放器：macOS 原生最强
+  tailscale          # mesh VPN：Mac Mini 常开当 home server，外网安全访问
+```
+
+- **Obsidian 的战略价值**：笔记存纯 `.md` 文件——你写的知识库，Agent 可以直接读、直接整理，这是 AI 时代笔记软件和普通文档的分水岭。
+- **Tailscale 的场景**：Mac Mini 常年开着，装好 Tailscale 后，你在公司/外面能安全 SSH 回家里这台机器，跑在上面的 Agent 任务随时接管。
+- 按需自选：LibreOffice（办公套件）、Typora（Markdown 写作，$15 买断）、Spotify、Dropbox。
+
+收费情况[^free-apps]：Rectangle、AltTab、Stats、Karabiner-Elements **全部免费开源**；Raycast 免费档已覆盖启动器/剪贴板/窗口管理核心功能，Pro（约 $8/月）主要买 AI 与云同步——AI 需求都在终端 Agent 上，免费档够用。第二梯队中 Chrome、Obsidian、LocalSend、IINA 免费，Shottr 免费（Pro 可选），Tailscale 个人免费档够用。
 
 ---
 
@@ -452,6 +471,7 @@ ssh -T git@github.com         # SSH 认证
 scp -r /c/Users/TUF/Workspace/<项目> user@<mac-ip>:~/Workspace/
 ```
 
+- 最省事的小文件方案：**LocalSend**（第 12 章已装）——跨平台 AirDrop，同一局域网下 Windows 直接拖给 Mac，不用任何命令。
 - 大文件兜底：exFAT 格式化的移动硬盘（两边原生读写）；或 Mac 开「文件共享」SMB，Windows 资源管理器访问 `\\<mac-ip>` 直接拖拽。
 - **绝不迁**：`node_modules`、`.venv`、`target`、`__pycache__`、`dist`——x86 与 arm64 不通用，到 Mac 后 `mise install && uv sync / pnpm install` 重建。只迁源码 + `.git`。
 
@@ -580,6 +600,8 @@ dotsync() {
 
 [^combo]: **1Password + Keychain 组合的分工**：系统层走 Keychain（SSH passphrase 开机解锁一次、整天无感；iCloud 钥匙串同步系统密码），应用层走 1Password（网站密码、API Key 存储与注入）。典型流程：项目里只放 `.env.tpl` 模板（`KEY=op://Dev/Anthropic/key` 引用，非明文），执行 `op run --env-file=.env.tpl -- claude` 时桌面端指纹授权一次，Key 只存在于进程环境变量。纪律：两者的 SSH Agent **只启用一个**（建议固定在 Keychain），否则 ssh 认证来源混乱。一句话：Keychain 管"系统自己要用的"，1Password 管"你和 Agent 要用的"。
 
-[^free-apps]: **本章应用几乎全免费**：Rectangle、AltTab、Stats、Karabiner-Elements 均为免费开源（Rectangle 另有个 $9.99 的 Pro 版，基础版够用）。Raycast 是免费 + Pro（约 $8/月）模式：免费档已覆盖启动器、剪贴板历史、窗口管理等核心；Pro 主要买 AI 功能和云同步，AI 需求已由终端 Agent 覆盖，可不上。
+[^free-apps]: **本章应用几乎全免费**：第一梯队中 Rectangle、AltTab、Stats、Karabiner-Elements 均为免费开源（Rectangle 另有个 $9.99 的 Pro 版，基础版够用）；Raycast 是免费 + Pro（约 $8/月）模式，免费档已覆盖核心。第二梯队中 Chrome、Obsidian、LocalSend、IINA 免费，Shottr 免费（Pro 可选），Tailscale 个人免费档够用。
+
+[^omarchy]: **Omarchy** 是 DHH（Ruby on Rails 作者）主导的"满配"Linux 发行版（[omarchy.org](https://omarchy.org/manual/)），预装一整套精选开发/效率工具，2025 年很火。本章第二梯队参考其清单做了 macOS 映射；它清单中的 fzf、zoxide、ripgrep、eza、lazygit、Neovim/LazyVim、1Password 等本指南前面章节已覆盖。
 
 [^chezmoi]: **chezmoi 是免费开源的 dotfiles 管理器**（Go 编写单文件程序，Tom Payne 2019 年发布，MPL-2.0 协议，目前该领域最主流）。它把散落各处的点文件收进一个 git 仓库，新机器 `chezmoi init --apply <仓库>` 一条命令全部还原。比手动建软链接强在两点：**模板**（同一仓库适配多台机器差异，如工作机 / 个人机用不同 git 邮箱）和**加密**（敏感配置用 age 加密后入库，私仓泄露也不慌）。

@@ -629,6 +629,7 @@ git worktree add ../proj-feat-b feat-b
   <div class="term reveal">
     <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — containers</span><button class="copy">copy</button></div>
 <pre>brew install --cask orbstack
+brew install lazydocker   <span class="c"># 容器 TUI：lazygit 的 Docker 版</span>
 
 docker run -d --name pg -p 5432:5432 \
   -e POSTGRES_PASSWORD=dev postgres:17
@@ -681,6 +682,21 @@ ssh-add --apple-use-keychain ~/.ssh/id_ed25519
     <div class="tool"><b>Karabiner</b><span>键盘改键：CapsLock → Esc/Ctrl · 免费开源</span></div>
   </div>
   <div class="note reveal"><b>收费情况：</b>Rectangle / AltTab / Stats / Karabiner 全部<b>免费开源</b>；Raycast 免费档已覆盖核心功能，Pro（约 $8/月）主要买 AI 与云同步——AI 需求都在终端 Agent 上，<b>免费档够用</b>。</div>
+
+  <p class="lead reveal" style="margin-top:44px">第二梯队（日常增强，参考 <span class="tip">Omarchy<span class="tip-bubble"><b>Omarchy · DHH 的满配 Linux</b>Ruby on Rails 作者 DHH 主导的 Arch 发行版，预装一整套精选开发/效率工具，2025 年很火。本梯队参考其清单做 macOS 映射；它清单里的 fzf / ripgrep / lazygit / Neovim 等本指南已覆盖。</span></span> 清单做的 macOS 映射）：</p>
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — daily essentials</span><button class="copy">copy</button></div>
+<pre>brew install --cask google-chrome obsidian shottr localsend iina tailscale</pre>
+  </div>
+  <div class="tools reveal">
+    <div class="tool"><b>Chrome</b><span>浏览器 · 前端调试基准 · 免费</span></div>
+    <div class="tool"><b>Obsidian</b><span>Markdown 笔记 · 免费</span><span class="tip-bubble"><b>Agent 时代的知识库</b>笔记存纯 .md 文件——你写的知识库，Agent 可以直接读、直接整理。这是 AI 时代笔记软件和普通文档的分水岭。</span></div>
+    <div class="tool"><b>Shottr</b><span>截图标注 · 滚动截图 / 打码 / 量尺寸 · 免费</span></div>
+    <div class="tool"><b>LocalSend</b><span>跨平台 AirDrop · 免费开源</span><span class="tip-bubble"><b>Windows ↔ Mac 互传</b>同一局域网下直接拖文件，不用命令不用线。第 15 章迁移小文件的最省事路径。</span></div>
+    <div class="tool"><b>IINA</b><span>视频播放器 · macOS 原生最强 · 免费开源</span></div>
+    <div class="tool"><b>Tailscale</b><span>mesh VPN · 个人免费</span><span class="tip-bubble"><b>Mac Mini 常开的绝配</b>装好后，你在公司 / 外面能安全 SSH 回家里这台 Mac Mini，跑在上面的 Agent 任务随时接管。</span></div>
+  </div>
+  <div class="note reveal"><b>按需自选：</b>LibreOffice（办公套件）、Typora（Markdown 写作，$15 买断）、Spotify、Dropbox。</div>
 </section>
 
 <!-- ================= 13 ================= -->
@@ -752,7 +768,7 @@ ssh -T git@github.com          <span class="c"># SSH 认证</span></pre>
   </div>
   <p class="lead reveal">总原则一句话：<strong>代码走 git，配置重建为主，依赖目录永不迁移</strong>。</p>
   <div class="rules reveal">
-    <div class="rule"><div><b>项目文件：git 优先</b>能 push 的全部 push 到 GitHub，Mac 上 clone——历史、分支、remote 全在。未入库的走 scp / SMB / exFAT 硬盘。<b>绝不迁 node_modules / .venv / target / __pycache__</b>：x86 与 arm64 不通用，到 Mac 用 mise / uv / pnpm 一分钟重建，只迁源码 + .git。</div></div>
+    <div class="rule"><div><b>项目文件：git 优先</b>能 push 的全部 push 到 GitHub，Mac 上 clone——历史、分支、remote 全在。未入库的走 scp / LocalSend / exFAT 硬盘（小文件 LocalSend 最省事，见第 12 章）。<b>绝不迁 node_modules / .venv / target / __pycache__</b>：x86 与 arm64 不通用，到 Mac 用 mise / uv / pnpm 一分钟重建，只迁源码 + .git。</div></div>
     <div class="rule"><div><b>配置文件：重建为主，少数可搬</b>VS Code 开 Settings Sync（GitHub 账号）全自动同步；Agent 配置（~/.claude、config.toml）可直接复制，注意改掉 Windows 路径字段；SSH Key 在 Mac 重新生成，API Key 趁机录入 1Password / Keychain。</div></div>
     <div class="rule"><div><b>并行期：Syncthing + git 纪律</b>需要实时同步目录就上 <span class="tip">Syncthing<span class="tip-bubble"><b>Syncthing · 点对点同步</b>免费开源的设备直连同步工具，无云端中转。Workspace 目录双向同步，务必加忽略规则排除 node_modules 等依赖目录。</span></span>（免费开源、点对点）双向同步 Workspace；养成「换机器前 push」的习惯。终态：Mac 主力、Windows 备用、git 为中心，无需长期双向同步。</div></div>
   </div>
