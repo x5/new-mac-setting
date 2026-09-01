@@ -26,6 +26,24 @@ on any Apple Silicon Mac — MacBook / iMac / Mac Studio / Mac Mini
 
 ![Hero](docs/hero.png)
 
+## 🤖 I'm an Agent / 🧑 I'm a Human
+
+**🤖 I'm an Agent** — send this prompt to your agent:
+
+```
+Read https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.md and set up this Mac step by step. Prefer running setup.sh for the bulk install. Ask me before any irreversible action.
+```
+
+Machine-readable summary for agents: [`llms.txt`](https://x5.github.io/new-mac-setting/llms.txt)
+
+**🧑 I'm a Human** — one-command setup on a fresh Mac (idempotent, step-by-step):
+
+```bash
+curl -fsSL https://x5.github.io/new-mac-setting/setup.sh | bash
+```
+
+Or read the [online guide](https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.html) chapter by chapter.
+
 ## ✨ What This Is
 
 A 2026-perspective Mac setup handbook covering the **entire lifecycle** of a new machine:
@@ -46,6 +64,9 @@ Three core principles:
 |---|---|
 | 📄 [`mac-mini-ai-dev-setup.md`](mac-mini-ai-dev-setup.md) · [中文](mac-mini-ai-dev-setup.zh-CN.md) | The full manual. 16 chapters + glossary footnotes, executable section by section |
 | 🎨 [`mac-mini-ai-dev-setup.html`](mac-mini-ai-dev-setup.html) · [🌐 Online](https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.html) · [中文版](https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.zh-CN.html) | Same content as a polished single page: dark terminal aesthetic, chapter nav, hover term tooltips, one-click code copy |
+| ⚡ [`setup.sh`](setup.sh) | Idempotent one-command installer: `curl -fsSL https://x5.github.io/new-mac-setting/setup.sh \| bash` |
+| 🍺 [`Brewfile`](Brewfile) | Full software manifest — `brew bundle` installs everything |
+| 🤖 [`llms.txt`](llms.txt) | Machine-readable summary for AI agents |
 
 | Agent Fleet | Hover Tooltips |
 |---|---|
@@ -136,6 +157,24 @@ Config     Homebrew Brewfile · chezmoi · bootstrap.sh · dotsync
 
 </div>
 
+## 🤖 我是 Agent / 🧑 我是人类
+
+**🤖 我是 Agent** —— 把这段话发给你的 Agent：
+
+```
+阅读 https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.zh-CN.md ，一步步为这台 Mac 完成开发环境配置。批量安装优先运行 setup.sh。任何不可逆操作前先向我确认。
+```
+
+Agent 机器可读摘要：[`llms.txt`](https://x5.github.io/new-mac-setting/llms.txt)
+
+**🧑 我是人类** —— 新 Mac 一键安装（幂等，逐步确认）：
+
+```bash
+curl -fsSL https://x5.github.io/new-mac-setting/setup.sh | bash
+```
+
+或者按章节阅读[在线指南](https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.zh-CN.html)。
+
 ## ✨ 这是什么
 
 一份 2026 年视角的 Mac 开发环境搭建手册，覆盖一台新 Mac 从开箱到长期运维的**完整生命周期**：
@@ -156,6 +195,9 @@ Config     Homebrew Brewfile · chezmoi · bootstrap.sh · dotsync
 |---|---|
 | 📄 [`mac-mini-ai-dev-setup.zh-CN.md`](mac-mini-ai-dev-setup.zh-CN.md) | 完整手册。16 章 + 名词脚注，可直接按章节执行 |
 | 🎨 [`mac-mini-ai-dev-setup.zh-CN.html`](mac-mini-ai-dev-setup.zh-CN.html) · [🌐 在线版](https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.zh-CN.html) | 同内容的单页精美版：深色终端美学、章节导航、悬停术语 tooltip、代码一键复制 |
+| ⚡ [`setup.sh`](setup.sh) | 幂等一键安装脚本：`curl -fsSL https://x5.github.io/new-mac-setting/setup.sh \| bash` |
+| 🍺 [`Brewfile`](Brewfile) | 完整软件清单，`brew bundle` 一键装齐 |
+| 🤖 [`llms.txt`](llms.txt) | 给 AI Agent 的机器可读摘要 |
 
 ## 🚀 使用路径
 

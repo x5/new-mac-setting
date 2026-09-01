@@ -2,6 +2,10 @@
 
 > 🌐 English version: [mac-mini-ai-dev-setup.md](mac-mini-ai-dev-setup.md)
 
+> 🤖 **给 AI Agent 用？** 把这句话发给它：`Read https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.md and set up this Mac step by step. Prefer running setup.sh for the bulk install. Ask me before any irreversible action.`——或参阅 [llms.txt](https://x5.github.io/new-mac-setting/llms.txt)。
+>
+> ⚡ **一键安装**：`curl -fsSL https://x5.github.io/new-mac-setting/setup.sh | bash`（幂等，逐步确认）
+
 > 目标：在一台全新的 Apple Silicon Mac 上，搭建一套**面向 AI Agent 开发**的现代化、可复现、可配置的终极开发环境。适用于 MacBook Air/Pro、iMac、Mac Studio、Mac Mini——一切 Apple Silicon Mac。
 >
 > 原则：一切用代码声明（Brewfile / dotfiles / setup 脚本），换机 30 分钟内完整复原；终端优先（AI Agent 的主战场在终端）；多 Agent 并存（Claude Code / Kimi Code / Codex / DSH / PI / WorkBuddy / ZCode 各取所长）。
@@ -422,17 +426,18 @@ brew install chezmoi
 chezmoi init --apply <你的dotfiles仓库>
 ```
 
-### 13.3 bootstrap.sh（新机器总入口）
+### 13.3 setup.sh（新机器总入口）
+
+本仓库内置了可直接使用的幂等安装脚本 [`setup.sh`](https://github.com/x5/new-mac-setting/blob/main/setup.sh)，覆盖第 1-8 章全流程（macOS 设置、Xcode CLT、Homebrew、完整 [Brewfile](https://github.com/x5/new-mac-setting/blob/main/Brewfile)、shell/Ghostty 配置、mise 运行时、Agent CLI）。新 Mac 上：
 
 ```bash
-#!/bin/bash
-# 新 Mac 只跑这一条：curl -L <你的仓库>/bootstrap.sh | bash
-xcode-select --install 2>/dev/null
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-eval "$(/opt/homebrew/bin/brew shellenv)"
-brew bundle --file=<你的Brewfile>
+curl -fsSL https://x5.github.io/new-mac-setting/setup.sh | bash
+```
+
+每一步执行前都会询问，已安装的内容自动跳过，可重复运行。要复原**你自己的**环境，再追加你的 dotfiles 仓库：
+
+```bash
 chezmoi init --apply <你的dotfiles仓库>
-mise install
 gh auth login
 ```
 

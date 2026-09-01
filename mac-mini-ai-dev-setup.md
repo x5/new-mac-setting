@@ -2,6 +2,10 @@
 
 > 🇨🇳 中文版：[mac-mini-ai-dev-setup.zh-CN.md](mac-mini-ai-dev-setup.zh-CN.md)
 
+> 🤖 **Using an AI agent?** Send it this prompt: `Read https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.md and set up this Mac step by step. Prefer running setup.sh for the bulk install. Ask me before any irreversible action.` — or see [llms.txt](https://x5.github.io/new-mac-setting/llms.txt).
+>
+> ⚡ **One-command setup**: `curl -fsSL https://x5.github.io/new-mac-setting/setup.sh | bash` (idempotent, step-by-step interactive)
+
 > Goal: on a brand-new Apple Silicon Mac, build a modern, reproducible, fully declarative development environment **purpose-built for AI Agent development**. Works on MacBook Air/Pro, iMac, Mac Studio, Mac Mini — every Apple Silicon Mac.
 >
 > Principles: everything declared as code (Brewfile / dotfiles / setup scripts) so a new machine is fully restored within 30 minutes; terminal-first (the terminal is where AI Agents live); multiple Agents side by side (Claude Code / Kimi Code / Codex / DSH / PI / WorkBuddy / ZCode, each for what it does best).
@@ -422,17 +426,18 @@ brew install chezmoi
 chezmoi init --apply <your-dotfiles-repo>
 ```
 
-### 13.3 bootstrap.sh (The Entry Point for a New Machine)
+### 13.3 setup.sh (The Entry Point for a New Machine)
+
+This repository ships a ready-to-use, idempotent installer — [`setup.sh`](https://github.com/x5/new-mac-setting/blob/main/setup.sh) — covering Chapters 1–8 end to end (macOS defaults, Xcode CLT, Homebrew, the full [Brewfile](https://github.com/x5/new-mac-setting/blob/main/Brewfile), shell/Ghostty config, mise runtimes, agent CLIs). On a fresh Mac:
 
 ```bash
-#!/bin/bash
-# On a new Mac, run just this one line: curl -L <your-repo>/bootstrap.sh | bash
-xcode-select --install 2>/dev/null
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-eval "$(/opt/homebrew/bin/brew shellenv)"
-brew bundle --file=<your-Brewfile>
+curl -fsSL https://x5.github.io/new-mac-setting/setup.sh | bash
+```
+
+Each step asks before running and skips whatever is already installed, so it is safe to re-run. For your *own* environment restore, extend it with your dotfiles repo:
+
+```bash
 chezmoi init --apply <your-dotfiles-repo>
-mise install
 gh auth login
 ```
 

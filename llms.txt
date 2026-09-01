@@ -1,0 +1,50 @@
+# Mac × AI Agent — The Complete Development Environment Setup Guide
+
+> A 16-chapter, bilingual (EN/中文) manual for turning a fresh Apple Silicon Mac into an AI-agent-driven development machine. Everything as code: Homebrew Brewfile + chezmoi dotfiles + one-command setup script. Multi-agent fleet: Claude Code, Kimi Code, Codex CLI, DSH (DeepSeek Harness), PI (Pi Agent Harness), WorkBuddy, ZCode.
+
+## One-command setup
+
+Run this in a terminal on the new Mac:
+
+```bash
+curl -fsSL https://x5.github.io/new-mac-setting/setup.sh | bash
+```
+
+Idempotent and interactive: each of the 9 steps (macOS defaults → Xcode CLT → Homebrew → Brewfile → shell config → Ghostty config → mise runtimes → AI agent CLIs → manual finishing touches) asks before running and skips what is already installed.
+
+## For AI agents
+
+To have an agent set up a Mac following this guide, send it this prompt:
+
+```
+Read https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.md and set up this Mac step by step. Prefer running setup.sh for the bulk install. Ask me before any irreversible action.
+```
+
+## Docs
+
+- [Full manual (English)](https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.md)
+- [完整手册（中文）](https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.zh-CN.md)
+- [Single-page guide (English, styled)](https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.html)
+- [单页精美版（中文）](https://x5.github.io/new-mac-setting/mac-mini-ai-dev-setup.zh-CN.html)
+- [setup.sh](https://x5.github.io/new-mac-setting/setup.sh) — one-command installer
+- [Brewfile](https://x5.github.io/new-mac-setting/Brewfile) — full software manifest
+- [Changelog](https://github.com/x5/new-mac-setting/blob/main/CHANGELOG.md)
+
+## Chapters
+
+1. System initialization (FileVault, defaults, Xcode CLT)
+2. Homebrew
+3. Terminal & shell (Ghostty, zsh, Starship, Nerd Font)
+4. Runtimes (mise + uv)
+5. Git toolchain (gh, lazygit, delta, worktree)
+6. Modern CLI toolbox (ripgrep, fd, bat, eza, fzf, zoxide…)
+7. Editors (VS Code, Zed)
+8. AI agent fleet (7 agents + cc-switch)
+9. MCP servers
+10. Containers (OrbStack, lazydocker)
+11. Secrets (Keychain, direnv, age/sops, 1Password optional)
+12. Productivity apps (Raycast core tier + daily tier)
+13. One-command restore (Brewfile, chezmoi, bootstrap)
+14. Acceptance checklist
+15. Migrating from Windows
+16. Day-2 operations (dotsync)

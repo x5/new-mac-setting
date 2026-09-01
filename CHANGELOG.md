@@ -6,6 +6,22 @@ All notable changes to this project are documented in this file.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semantic Versioning](https://semver.org/): new content → minor, fixes → patch, restructure → major.
 格式遵循 Keep a Changelog，版本号遵循语义化版本：内容新增用 minor，修订与勘误用 patch，结构重构用 major。
 
+## [3.1.0] - 2026-08-27
+
+### Added / 新增
+
+- **EN:** `setup.sh` — idempotent one-command installer covering Chapters 1–8 (defaults, Xcode CLT, Homebrew, Brewfile, shell/Ghostty config, mise runtimes, agent CLIs): `curl -fsSL https://x5.github.io/new-mac-setting/setup.sh | bash`
+- **中文：** 新增 `setup.sh` 幂等一键安装脚本，覆盖第 1-8 章全流程：`curl -fsSL https://x5.github.io/new-mac-setting/setup.sh | bash`
+- **EN:** `Brewfile` — full software manifest (formulae + casks, optional items commented).
+- **中文：** 新增 `Brewfile` 完整软件清单（含注释掉的自选项）。
+- **EN:** `llms.txt` — machine-readable summary for AI agents; "I'm an Agent / I'm a Human" entry blocks in README and on both HTML hero sections (with copy buttons).
+- **中文：** 新增 `llms.txt`（Agent 机器可读摘要）；README 与两个 HTML 首页新增「我是 Agent / 我是人类」分流区块（带一键复制）。
+
+### Changed / 变更
+
+- **EN:** §13.3 now points to the real `setup.sh` instead of pseudo-code bootstrap.
+- **中文：** §13.3 的 bootstrap 伪代码替换为真实的 `setup.sh`。
+
 ## [3.0.0] - 2026-08-27
 
 ### Changed / 变更
