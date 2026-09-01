@@ -4,7 +4,7 @@
 
 ## 项目概况
 
-《Mac Mini × AI Agent — 开发环境完全配置指南》。内容型仓库：一份 16 章的 macOS AI Agent 开发环境手册，以 MD 和 HTML 双形态发布，GitHub Pages 自动部署。
+《Mac × AI Agent — 开发环境完全配置指南》。内容型仓库：一份 16 章的 macOS AI Agent 开发环境手册（适用所有 Apple Silicon Mac），以 MD 和 HTML 双形态发布，GitHub Pages 自动部署。
 
 ## 文件结构与职责
 

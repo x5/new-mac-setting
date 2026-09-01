@@ -5,6 +5,13 @@
 格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，
 版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)：内容新增用 minor，修订与勘误用 patch，结构重构用 major。
 
+## [2.0.0] - 2026-08-27
+
+### 变更
+
+- **品牌更名**：「Mac Mini × AI Agent」→「Mac × AI Agent」——手册内容本就适用于所有 Apple Silicon Mac（MacBook / iMac / Mac Studio / Mac Mini），标题与正文同步调整，并明确标注适用范围
+- README / HTML / AGENTS.md 全部同步更名，Hero 截图与社交分享图重制
+
 ## [1.1.0] - 2026-08-27
 
 ### 新增

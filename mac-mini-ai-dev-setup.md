@@ -1,6 +1,6 @@
-# Mac Mini × AI Agent 开发环境完全配置指南
+# Mac × AI Agent 开发环境完全配置指南
 
-> 目标：在一台全新的 Apple Silicon Mac Mini 上，搭建一套**面向 AI Agent 开发**的现代化、可复现、可配置的终极开发环境。
+> 目标：在一台全新的 Apple Silicon Mac 上，搭建一套**面向 AI Agent 开发**的现代化、可复现、可配置的终极开发环境。适用于 MacBook Air/Pro、iMac、Mac Studio、Mac Mini——一切 Apple Silicon Mac。
 >
 > 原则：一切用代码声明（Brewfile / dotfiles / setup 脚本），换机 30 分钟内完整复原；终端优先（AI Agent 的主战场在终端）；多 Agent 并存（Claude Code / Kimi Code / Codex / DSH / PI / WorkBuddy / ZCode 各取所长）。
 
@@ -386,11 +386,11 @@ brew install --cask \
   shottr \           # 截图标注：滚动截图/打码/量尺寸，免费
   localsend \        # 跨平台 AirDrop：Windows ↔ Mac 互传文件（见第 15 章）
   iina \             # 视频播放器：macOS 原生最强
-  tailscale          # mesh VPN：Mac Mini 常开当 home server，外网安全访问
+  tailscale          # mesh VPN：Mac 常开当 home server，外网安全访问
 ```
 
 - **Obsidian 的战略价值**：笔记存纯 `.md` 文件——你写的知识库，Agent 可以直接读、直接整理，这是 AI 时代笔记软件和普通文档的分水岭。
-- **Tailscale 的场景**：Mac Mini 常年开着，装好 Tailscale 后，你在公司/外面能安全 SSH 回家里这台机器，跑在上面的 Agent 任务随时接管。
+- **Tailscale 的场景**：Mac 常年开着，装好 Tailscale 后，你在公司/外面能安全 SSH 回家里这台机器，跑在上面的 Agent 任务随时接管。
 - 按需自选：LibreOffice（办公套件）、Typora（Markdown 写作，$15 买断）、Spotify、Dropbox。
 
 收费情况[^free-apps]：Rectangle、AltTab、Stats、Karabiner-Elements **全部免费开源**；Raycast 免费档已覆盖启动器/剪贴板/窗口管理核心功能，Pro（约 $8/月）主要买 AI 与云同步——AI 需求都在终端 Agent 上，免费档够用。第二梯队中 Chrome、Obsidian、LocalSend、IINA 免费，Shottr 免费（Pro 可选），Tailscale 个人免费档够用。

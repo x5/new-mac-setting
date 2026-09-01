@@ -1,10 +1,10 @@
 <div align="center">
 
-# 🖥️ Mac Mini × AI Agent — 开发环境完全配置指南
+# 🖥️ Mac × AI Agent — 开发环境完全配置指南
 
 **The Ultimate macOS Setup for AI-Agent-Driven Development (2026)**
 
-在一台全新的 Apple Silicon Mac Mini 上，搭建面向 AI Agent 开发的<br>
+在任何一台 Apple Silicon Mac（MacBook / iMac / Mac Studio / Mac Mini）上，搭建面向 AI Agent 开发的<br>
 现代化、可复现、可配置的终极开发环境
 
 [![macOS](https://img.shields.io/badge/macOS-Apple%20Silicon-000000?logo=apple&logoColor=white)](https://www.apple.com/macos/)
@@ -28,7 +28,7 @@
 
 ## ✨ 这是什么
 
-一份 2026 年视角的 Mac 开发环境搭建手册，覆盖一台新 Mac Mini 从开箱到长期运维的**完整生命周期**：
+一份 2026 年视角的 Mac 开发环境搭建手册，覆盖一台新 Mac 从开箱到长期运维的**完整生命周期**：
 
 ```
 初始化 (§1-12)  →  资产化 (§13)  →  验收 (§14)  →  旧机迁移 (§15)  →  日常运维 (§16)
@@ -116,7 +116,7 @@ Config     Homebrew Brewfile · chezmoi · bootstrap.sh · dotsync
 
 ## 🔎 SEO Keywords
 
-macOS setup, Mac Mini developer environment, AI coding agents, Claude Code, Kimi Code, Codex CLI, DeepSeek Harness, dotfiles, chezmoi, Homebrew Brewfile, Ghostty terminal, mise, uv, OrbStack, 开发环境配置, 苹果电脑开发环境, AI 编程工具
+macOS setup, Mac developer environment, Mac Mini, MacBook, AI coding agents, Claude Code, Kimi Code, Codex CLI, DeepSeek Harness, dotfiles, chezmoi, Homebrew Brewfile, Ghostty terminal, mise, uv, OrbStack, 开发环境配置, 苹果电脑开发环境, AI 编程工具
 
 ## 📄 License
 
