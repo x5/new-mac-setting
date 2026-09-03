@@ -319,6 +319,23 @@ git worktree add ../proj-feat-b feat-b
 # Window 2: cd ../proj-feat-b && kimi
 ```
 
+### 8.5 herdr: The Agent Runtime (Where Agents Live)
+
+The fleet from 8.1 needs somewhere to live. **herdr**[^herdr] is an agent runtime: a background server that holds real terminal sessions for your coding agents. Agents keep running when the lid closes, the network drops, or the machine reboots — and you reattach from any device. It reads every pane and marks each agent working / blocked / idle, so the parallel workflow from 8.4 stops being a pile of terminal windows. Its CLI and socket API are one surface: agents can drive it themselves — split panes, start each other, prompt each other, wait on each other. It detects 21 agent CLIs out of the box (Claude Code, Codex, PI, opencode, Cursor, Grok, Copilot…) and ships as a single binary for macOS / Linux / Windows. Think of it as the agent-native successor to tmux: the runtime layer the fleet lives on.
+
+```bash
+# Preferred: Homebrew — updates ride along with brew upgrade
+brew install herdr
+
+# Alternative: mise (on old mise, fall back to: mise use -g github:herdrdev/herdr)
+mise use -g herdr
+
+# Direct installer — only direct installs use `herdr update` / `herdr channel set preview`
+curl -fsSL https://herdr.dev/install.sh | sh
+```
+
+Caveat: herdr is a young (YC-backed) project — stay on the stable channel and prefer the brew-managed install so updates come through `brew upgrade`.
+
 ---
 
 ## 9. MCP: Giving Agents "Hands"
@@ -600,6 +617,8 @@ dotsync() {
 [^mcp]: **MCP (Model Context Protocol) is the standardized socket between agents and external tools** — an open protocol initiated by Anthropic in late 2024, now widely supported. Think USB-C: before it, every agent × every tool needed a custom integration (N×M); with it, an agent implements one MCP client and a tool implements one MCP server, and everything interconnects (N+M). A server exposes three things: **tools** (callable functions — 99% of daily use), **resources** (data), and **prompts** (templates). Local servers are child processes of the agent (stdio); remote ones speak HTTP.
 
 [^mcpm]: **mcpm ([mcpm.sh](https://mcpm.sh/)) is an open-source MCP package manager**: Homebrew for MCP servers — search and install from a central registry, group servers into profiles (work/personal) you can toggle, sync one config to many clients, and aggregate multiple servers behind a single router endpoint. Caveat: native Claude Code support is limited and needs manual wiring. The easier daily answer is cc-switch's built-in MCP management.
+
+[^herdr]: **herdr ([herdr.dev](https://herdr.dev/)) is an agent runtime — the agent-native successor to tmux**: a background server that holds persistent terminal sessions for coding agents, surviving lid close, network drops, and reboots, reattachable from any device. It reads every pane and labels each agent working / blocked / idle; its CLI and socket API are a single surface, so agents themselves can split panes and start / prompt / wait on each other; 21 agent CLIs detected out of the box. Single binary for macOS / Linux / Windows. Caveat: a young, YC-backed project — stay on the stable channel and prefer brew-managed installs over the direct installer.
 
 [^orbstack]: **OrbStack is the work of indie developer Danny Lin (kdrag0n)** — a one-person company, launched 2023. Previously known in the Android custom-kernel scene (Proton Kernel), he rewrote the entire Docker + Linux virtualization stack natively in Swift/Rust: instant startup, near-zero idle CPU, far better battery life than Docker Desktop. Famous as "one person beating Docker's official product". Free for personal use, paid for business.
 

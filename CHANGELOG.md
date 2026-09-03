@@ -6,6 +6,17 @@ All notable changes to this project are documented in this file.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semantic Versioning](https://semver.org/): new content → minor, fixes → patch, restructure → major.
 格式遵循 Keep a Changelog，版本号遵循语义化版本：内容新增用 minor，修订与勘误用 patch，结构重构用 major。
 
+## [3.2.0] - 2026-09-03
+
+### Added / 新增
+
+- **EN:** §8.5 **herdr: The Agent Runtime (Where Agents Live)** — a background server holding persistent terminal sessions for coding agents (survives lid close / network drops / reboots, reattach from any device; per-pane working / blocked / idle status; agent-drivable CLI + socket API; 21 agent CLIs detected out of the box) — the agent-native successor to tmux. New glossary footnote `[^herdr]`, install via `brew install herdr` / `mise use -g herdr` / direct installer. Mirrored in both HTML pages (note + tooltip + term card).
+- **中文：** 新增 §8.5「herdr：Agent 运行时（Agent 的栖身之所）」——为 coding agent 托管持久终端会话的后台常驻服务（合盖 / 断网 / 重启不中断，任意设备 reattach；逐窗格标记 working / blocked / idle；CLI + socket API 可被 Agent 自己驱动；开箱识别 21 种 Agent CLI），agent 时代的 tmux 继任者。新增 `[^herdr]` 脚注，安装方式 `brew install herdr` / `mise use -g herdr` / 官方脚本；两个 HTML 页面同步（note + tooltip + 代码卡）。
+- **EN:** `Brewfile` — new `brew "herdr"` entry under `# ---- Agent runtime ----`.
+- **中文：** `Brewfile` 新增 `brew "herdr"`（`# ---- Agent runtime ----` 分组）。
+- **EN:** README (bilingual) and `llms.txt` now mention herdr as the agent runtime companion alongside the seven-agent fleet (agent count unchanged — herdr is infrastructure).
+- **中文：** README（双语）与 `llms.txt` 补充 herdr 作为阵容的运行时层（七件套数量不变，herdr 属基础设施）。
+
 ## [3.1.0] - 2026-08-27
 
 ### Added / 新增

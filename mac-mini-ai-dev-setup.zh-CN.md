@@ -319,6 +319,23 @@ git worktree add ../proj-feat-b feat-b
 # 窗口 2: cd ../proj-feat-b && kimi
 ```
 
+### 8.5 herdr：Agent 运行时（Agent 的栖身之所）
+
+8.1 的阵容需要有个地方「住」。**herdr**[^herdr] 是一个 Agent 运行时：一台后台常驻服务器，为 coding agent 托管真实的终端会话——合盖、断网、重启都不中断，任意设备随时 reattach。它读取每个窗格，把每个 Agent 标记为 working / blocked / idle，8.4 的并行工作流不再是一堆终端窗口。它的 CLI 和 socket API 是同一个面：Agent 可以自己动手——分窗格、拉起彼此、互相发 prompt、互相等待。开箱识别 21 种 Agent CLI（Claude Code、Codex、PI、opencode、Cursor、Grok、Copilot……），macOS / Linux / Windows 单二进制交付。可以把它理解为 agent 时代的 tmux 继任者：整个阵容栖身的运行时层。
+
+```bash
+# 首选 Homebrew——更新随 brew upgrade 一起走
+brew install herdr
+
+# 备选 mise（旧版 mise 用：mise use -g github:herdrdev/herdr）
+mise use -g herdr
+
+# 直接安装脚本——只有直接安装才用 `herdr update` / `herdr channel set preview`
+curl -fsSL https://herdr.dev/install.sh | sh
+```
+
+注意：herdr 是年轻项目（YC 背景），请留在 stable channel，优先 brew 安装方式，让更新随 `brew upgrade` 一起走。
+
 ---
 
 ## 9. MCP：给 Agent 装上"手"
@@ -600,6 +617,8 @@ dotsync() {
 [^mcp]: **MCP（Model Context Protocol）是 Agent 与外部工具之间的"标准化插座"**，Anthropic 于 2024 年底发起的开放协议，现已被各家 Agent 广泛支持。类比 USB-C：没有它之前，每个 Agent 接每个工具都要定制集成（N×M）；有了它，Agent 实现一次 MCP 客户端、工具方实现一次 MCP Server 即可互插（N+M）。Server 向 Agent 暴露三样东西：**tools**（可调用函数，日常 99% 的用途）、**resources**（数据）、**prompts**（提示词模板）。本地 Server 是 Agent 启动的子进程（stdio 通信），远程走 HTTP。
 
 [^mcpm]: **mcpm（[mcpm.sh](https://mcpm.sh/)）是开源的 MCP 包管理器**：像 Homebrew 管软件一样管 MCP Server——中央注册表搜索安装、按 profile 分组启停（工作 / 个人环境一键切换）、一处配置同步到多个客户端，路由器还能把多个 Server 聚合成一个端点共享会话。注意：对 Claude Code 的原生支持有限，需手动接线。日常更省心的选择是 cc-switch 内置的 MCP 集中管理。
+
+[^herdr]: **herdr（[herdr.dev](https://herdr.dev/)）是 Agent 运行时——agent 时代的 tmux 继任者**：一台后台常驻服务器，为 coding agent 托管持久终端会话，合盖、断网、重启都不中断，任意设备可 reattach。它读取每个窗格，把每个 Agent 标记为 working / blocked / idle；CLI 和 socket API 是同一个面，Agent 自己就能分窗格、拉起彼此、互相 prompt、互相等待；开箱识别 21 种 Agent CLI。macOS / Linux / Windows 单二进制。注意：项目年轻（YC 背景），请留在 stable channel，优先 brew 安装方式而非直接安装脚本。
 
 [^orbstack]: **OrbStack 是独立开发者 Danny Lin（kdrag0n）的作品**——一个人创办的公司，2023 年发布。他此前是 Android 定制内核圈知名开发者（Proton Kernel 作者），转战 macOS 后用 Swift / Rust 原生重写整套 Docker + Linux 虚拟化栈：启动秒级、空闲几乎零 CPU、续航消耗远低于 Docker Desktop。口碑来自"一个人打败了 Docker 官方产品"。个人使用免费，商用付费。
 

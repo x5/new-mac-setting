@@ -605,6 +605,15 @@ git worktree add ../proj-feat-b feat-b
 <span class="c"># Window 1:  cd ../proj-feat-a && claude</span>
 <span class="c"># Window 2:  cd ../proj-feat-b && kimi</span></pre>
   </div>
+
+  <div class="note reveal"><b>Runtime: <span class="tip">herdr<span class="tip-bubble"><b>herdr · Agent Runtime</b>A background server that holds real terminal sessions for coding agents — agents keep running through lid close, network drops and reboots, and you reattach from any device. It reads every pane and marks each agent working / blocked / idle; its CLI + socket API are one surface, so agents can split panes and start / prompt / wait on each other. Detects 21 agent CLIs out of the box; single binary for macOS / Linux / Windows. Young YC-backed project: stay on the stable channel, prefer brew-managed installs.</span></span> — where the agent fleet lives</b>. The seven agents above run inside herdr instead of loose terminal windows: the <b>agent-native successor to tmux</b>, the runtime layer the fleet lives on.</div>
+
+  <div class="term reveal">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — herdr agent runtime</span><button class="copy">copy</button></div>
+<pre>brew install herdr                            <span class="c"># preferred: updates ride along with brew upgrade</span>
+mise use -g herdr                             <span class="c"># alternative (old mise: mise use -g github:herdrdev/herdr)</span>
+curl -fsSL https://herdr.dev/install.sh | sh  <span class="c"># direct installer; only these use herdr update</span></pre>
+  </div>
 </section>
 
 <!-- ================= 09 ================= -->

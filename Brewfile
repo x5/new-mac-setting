@@ -35,6 +35,9 @@ brew "duf"
 brew "bottom"
 brew "tlrc"
 
+# ---- Agent runtime ----
+brew "herdr"
+
 # ---- Secrets & dotfiles ----
 brew "direnv"
 brew "age"
