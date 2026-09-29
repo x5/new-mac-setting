@@ -6,6 +6,17 @@ All notable changes to this project are documented in this file.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semantic Versioning](https://semver.org/): new content → minor, fixes → patch, restructure → major.
 格式遵循 Keep a Changelog，版本号遵循语义化版本：内容新增用 minor，修订与勘误用 patch，结构重构用 major。
 
+## [3.3.0] - 2026-09-29
+
+### Changed / 变更
+
+- **EN:** §8.5 default agent runtime switched from herdr to **Paseo** ([paseo.sh](https://paseo.sh/)) — a self-hosted, open-source (Apache 2.0) control plane for coding agents: persistent per-task workspaces with working / ready-to-review / done states, native mobile app (full desktop parity) + web access from anywhere (E2E-encrypted relay / LAN / own tunnel), agent-drivable MCP / CLI / TypeScript SDK, built-in git-worktree isolation and subagent fan-out; Claude Code, Codex, OpenCode, PI, Cursor + 30 more via ACP. Install via `brew install --cask paseo` or DMG from GitHub Releases. Footnote `[^herdr]` replaced by `[^paseo]`; herdr demoted to a terminal-first alternative (`brew install herdr`). Mirrored in both HTML pages (note + tooltip + term card).
+- **中文：** §8.5 默认 Agent 运行时由 herdr 换为 **Paseo**（[paseo.sh](https://paseo.sh/)）——开源自托管（Apache 2.0）的 coding agent 控制平面：按任务的持久工作区、working / ready to review / done 状态流转、原生移动端（与桌面端完全对等）+ 网页随处接入（端到端加密中继 / 局域网 / 自建隧道）、MCP / CLI / TypeScript SDK 可被 Agent 驱动、内建 git worktree 隔离与 subagent 扇出；支持 Claude Code、Codex、OpenCode、PI、Cursor 及 ACP 协议 30+ Agent。安装方式 `brew install --cask paseo` 或 GitHub Releases DMG。脚注 `[^herdr]` 更换为 `[^paseo]`；herdr 降级为终端优先的替代（`brew install herdr`）。两个 HTML 页面同步（note + tooltip + 代码卡）。
+- **EN:** `Brewfile` — `brew "herdr"` replaced by `cask "paseo"` under `# ---- Agent runtime ----`.
+- **中文：** `Brewfile` 中 `brew "herdr"` 替换为 `cask "paseo"`（`# ---- Agent runtime ----` 分组）。
+- **EN:** README (bilingual) and `llms.txt` now feature Paseo as the runtime layer; herdr listed as an alternative (agent count unchanged — the runtime is infrastructure).
+- **中文：** README（双语）与 `llms.txt` 改为以 Paseo 为运行时层，herdr 列为备选（七件套数量不变，运行时属基础设施）。
+
 ## [3.2.0] - 2026-09-03
 
 ### Added / 新增

@@ -606,13 +606,12 @@ git worktree add ../proj-feat-b feat-b
 <span class="c"># 窗口 2:  cd ../proj-feat-b && kimi</span></pre>
   </div>
 
-  <div class="note reveal"><b>运行时：<span class="tip">herdr<span class="tip-bubble"><b>herdr · Agent 运行时</b>一台后台常驻服务器，为 coding agent 托管真实终端会话——合盖、断网、重启都不中断，任意设备随时 reattach。读取每个窗格，把每个 Agent 标记为 working / blocked / idle；CLI + socket API 同一个面，Agent 可以自己分窗格、拉起彼此、互相 prompt、互相等待。开箱识别 21 种 Agent CLI，macOS / Linux / Windows 单二进制。年轻项目（YC 背景）：留在 stable channel，优先 brew 安装。</span></span> —— Agent 阵容的栖身之所</b>。上面七件套跑在 herdr 里，而不是一堆散落的终端窗口：它是 <b>agent 时代的 tmux 继任者</b>，整个阵容栖身的运行时层。</div>
+  <div class="note reveal"><b>运行时：<span class="tip">Paseo<span class="tip-bubble"><b>Paseo · Agent 控制平面</b>自托管（Apache 2.0 开源）的后台守护进程：直接驱动机器上已装好的 coding agent，不改变其行为，为每个任务提供持久工作区（working / ready to review / done 状态流转、历史、任务调度、shell 访问）。原生移动端（与桌面端完全对等）和网页端经端到端加密中继 / 局域网 / 自建隧道随处接入；MCP + CLI + TypeScript SDK 是同一个面，Agent 可以自己驱动——subagent 扇出与 git worktree 隔离内建。开箱支持 Claude Code、Codex、OpenCode、PI、Cursor，ACP 再加 30+。v0.x、独立维护——优先 brew cask。</span></span> —— Agent 阵容的栖身之所</b>。上面七件套跑在 Paseo 的工作区里，而不是一堆散落的终端窗口：整个阵容栖身的控制平面层，任意设备接入。终端优先的替代：herdr（<code>brew install herdr</code>）——tmux 式窗格，解决同一问题。</div>
 
   <div class="term reveal">
-    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — herdr agent 运行时</span><button class="copy">copy</button></div>
-<pre>brew install herdr                            <span class="c"># 首选：更新随 brew upgrade 一起走</span>
-mise use -g herdr                             <span class="c"># 备选（旧版 mise：mise use -g github:herdrdev/herdr）</span>
-curl -fsSL https://herdr.dev/install.sh | sh  <span class="c"># 直接安装；只有这种方式才用 herdr update</span></pre>
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — Paseo agent 运行时</span><button class="copy">copy</button></div>
+<pre>brew install --cask paseo                     <span class="c"># 首选：更新随 brew upgrade 一起走</span>
+<span class="c"># 备选：GitHub Releases 下载 DMG —— github.com/getpaseo/paseo/releases</span></pre>
   </div>
 </section>
 

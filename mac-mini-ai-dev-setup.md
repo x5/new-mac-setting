@@ -319,22 +319,21 @@ git worktree add ../proj-feat-b feat-b
 # Window 2: cd ../proj-feat-b && kimi
 ```
 
-### 8.5 herdr: The Agent Runtime (Where Agents Live)
+### 8.5 Paseo: The Agent Control Plane (Where Agents Live)
 
-The fleet from 8.1 needs somewhere to live. **herdr**[^herdr] is an agent runtime: a background server that holds real terminal sessions for your coding agents. Agents keep running when the lid closes, the network drops, or the machine reboots — and you reattach from any device. It reads every pane and marks each agent working / blocked / idle, so the parallel workflow from 8.4 stops being a pile of terminal windows. Its CLI and socket API are one surface: agents can drive it themselves — split panes, start each other, prompt each other, wait on each other. It detects 21 agent CLIs out of the box (Claude Code, Codex, PI, opencode, Cursor, Grok, Copilot…) and ships as a single binary for macOS / Linux / Windows. Think of it as the agent-native successor to tmux: the runtime layer the fleet lives on.
+The fleet from 8.1 needs somewhere to live. **Paseo**[^paseo] is a self-hosted control plane for coding agents: a background daemon that runs the agents already installed on your machine — unmodified — and gives every task a persistent workspace. Agents keep running when the lid closes or the network drops; each workspace carries its own state (working / ready to review / done), so the parallel workflow from 8.4 stops being a pile of terminal windows. Reach it from any device: the native mobile app (App Store / Google Play) has full desktop parity, and the web app connects over an end-to-end encrypted relay, the local network, or your own tunnel (Tailscale from Chapter 12). Agents can drive it themselves — MCP, CLI, and a TypeScript SDK are one surface for starting each other, fanning out subagents, and scheduling tasks; git-worktree isolation is built in. Claude Code, Codex, OpenCode, PI, Cursor and 30+ more agents are supported via ACP. Open source (Apache 2.0), solo-maintained, no investors — self-hosted, so your data stays on your machine.
 
 ```bash
-# Preferred: Homebrew — updates ride along with brew upgrade
-brew install herdr
+# Preferred: Homebrew cask — updates ride along with brew upgrade
+brew install --cask paseo
 
-# Alternative: mise (on old mise, fall back to: mise use -g github:herdrdev/herdr)
-mise use -g herdr
-
-# Direct installer — only direct installs use `herdr update` / `herdr channel set preview`
-curl -fsSL https://herdr.dev/install.sh | sh
+# Alternative: DMG from GitHub Releases
+# https://github.com/getpaseo/paseo/releases
 ```
 
-Caveat: herdr is a young (YC-backed) project — stay on the stable channel and prefer the brew-managed install so updates come through `brew upgrade`.
+Caveat: Paseo is v0.x and solo-maintained — releases move fast; stay on the brew-managed cask so updates ride along with `brew upgrade`.
+
+Terminal-first alternative: **herdr** ([herdr.dev](https://herdr.dev/)) takes a tmux-style, pane-based approach to the same problem — `brew install herdr` if you'd rather stay in the terminal.
 
 ---
 
@@ -618,7 +617,7 @@ dotsync() {
 
 [^mcpm]: **mcpm ([mcpm.sh](https://mcpm.sh/)) is an open-source MCP package manager**: Homebrew for MCP servers — search and install from a central registry, group servers into profiles (work/personal) you can toggle, sync one config to many clients, and aggregate multiple servers behind a single router endpoint. Caveat: native Claude Code support is limited and needs manual wiring. The easier daily answer is cc-switch's built-in MCP management.
 
-[^herdr]: **herdr ([herdr.dev](https://herdr.dev/)) is an agent runtime — the agent-native successor to tmux**: a background server that holds persistent terminal sessions for coding agents, surviving lid close, network drops, and reboots, reattachable from any device. It reads every pane and labels each agent working / blocked / idle; its CLI and socket API are a single surface, so agents themselves can split panes and start / prompt / wait on each other; 21 agent CLIs detected out of the box. Single binary for macOS / Linux / Windows. Caveat: a young, YC-backed project — stay on the stable channel and prefer brew-managed installs over the direct installer.
+[^paseo]: **Paseo ([paseo.sh](https://paseo.sh/)) is a self-hosted control plane for coding agents**: a background daemon that runs the agents already installed on your machine without modifying them, giving every task a persistent workspace with its own state (working / ready to review / done), plus workspace history, task scheduling, and shell access. Reachable from anywhere via the native mobile app (full desktop parity, App Store / Google Play) or the web app, over an end-to-end encrypted relay, the local network, or your own tunnel (Tailscale). Agents drive it themselves through one MCP / CLI / TypeScript SDK surface; subagent fan-out and git-worktree isolation are built in. Claude Code, Codex, OpenCode, PI, Cursor and 30+ more via ACP. Open source (Apache 2.0), solo-maintained, no investors — self-hosted, so your data stays on your machine. Caveat: v0.x, fast-moving releases — prefer the brew cask.
 
 [^orbstack]: **OrbStack is the work of indie developer Danny Lin (kdrag0n)** — a one-person company, launched 2023. Previously known in the Android custom-kernel scene (Proton Kernel), he rewrote the entire Docker + Linux virtualization stack natively in Swift/Rust: instant startup, near-zero idle CPU, far better battery life than Docker Desktop. Famous as "one person beating Docker's official product". Free for personal use, paid for business.
 

@@ -319,22 +319,21 @@ git worktree add ../proj-feat-b feat-b
 # 窗口 2: cd ../proj-feat-b && kimi
 ```
 
-### 8.5 herdr：Agent 运行时（Agent 的栖身之所）
+### 8.5 Paseo：Agent 控制平面（Agent 的栖身之所）
 
-8.1 的阵容需要有个地方「住」。**herdr**[^herdr] 是一个 Agent 运行时：一台后台常驻服务器，为 coding agent 托管真实的终端会话——合盖、断网、重启都不中断，任意设备随时 reattach。它读取每个窗格，把每个 Agent 标记为 working / blocked / idle，8.4 的并行工作流不再是一堆终端窗口。它的 CLI 和 socket API 是同一个面：Agent 可以自己动手——分窗格、拉起彼此、互相发 prompt、互相等待。开箱识别 21 种 Agent CLI（Claude Code、Codex、PI、opencode、Cursor、Grok、Copilot……），macOS / Linux / Windows 单二进制交付。可以把它理解为 agent 时代的 tmux 继任者：整个阵容栖身的运行时层。
+8.1 的阵容需要有个地方「住」。**Paseo**[^paseo] 是一个自托管的 coding agent 控制平面：一个后台常驻守护进程，直接驱动你机器上已装好的 Agent——不改它们的行为——并为每个任务提供持久工作区。合盖、断网都不中断；每个工作区有自己的状态流转（working / ready to review / done），8.4 的并行工作流不再是一堆终端窗口。任意设备接入：原生移动端（App Store / Google Play）与桌面端功能完全对等，网页端通过端到端加密中继、局域网或自建隧道（第 12 章的 Tailscale）连回你的机器。Agent 也能自己动手——MCP、CLI 和 TypeScript SDK 是同一个面：互相拉起、扇出 subagent、调度任务都行，git worktree 隔离内建。开箱支持 Claude Code、Codex、OpenCode、PI、Cursor，经 ACP 协议再加 30+。开源（Apache 2.0）、独立维护人、无投资方——自托管，数据都在你自己机器上。
 
 ```bash
-# 首选 Homebrew——更新随 brew upgrade 一起走
-brew install herdr
+# 首选 Homebrew cask——更新随 brew upgrade 一起走
+brew install --cask paseo
 
-# 备选 mise（旧版 mise 用：mise use -g github:herdrdev/herdr）
-mise use -g herdr
-
-# 直接安装脚本——只有直接安装才用 `herdr update` / `herdr channel set preview`
-curl -fsSL https://herdr.dev/install.sh | sh
+# 备选：GitHub Releases 下载 DMG
+# https://github.com/getpaseo/paseo/releases
 ```
 
-注意：herdr 是年轻项目（YC 背景），请留在 stable channel，优先 brew 安装方式，让更新随 `brew upgrade` 一起走。
+注意：Paseo 还在 v0.x，独立维护人、迭代很快——优先 brew cask 安装方式，让更新随 `brew upgrade` 一起走。
+
+终端优先的替代：**herdr**（[herdr.dev](https://herdr.dev/)）用 tmux 式的窗格思路解决同一问题——想留在终端里就 `brew install herdr`。
 
 ---
 
@@ -618,7 +617,7 @@ dotsync() {
 
 [^mcpm]: **mcpm（[mcpm.sh](https://mcpm.sh/)）是开源的 MCP 包管理器**：像 Homebrew 管软件一样管 MCP Server——中央注册表搜索安装、按 profile 分组启停（工作 / 个人环境一键切换）、一处配置同步到多个客户端，路由器还能把多个 Server 聚合成一个端点共享会话。注意：对 Claude Code 的原生支持有限，需手动接线。日常更省心的选择是 cc-switch 内置的 MCP 集中管理。
 
-[^herdr]: **herdr（[herdr.dev](https://herdr.dev/)）是 Agent 运行时——agent 时代的 tmux 继任者**：一台后台常驻服务器，为 coding agent 托管持久终端会话，合盖、断网、重启都不中断，任意设备可 reattach。它读取每个窗格，把每个 Agent 标记为 working / blocked / idle；CLI 和 socket API 是同一个面，Agent 自己就能分窗格、拉起彼此、互相 prompt、互相等待；开箱识别 21 种 Agent CLI。macOS / Linux / Windows 单二进制。注意：项目年轻（YC 背景），请留在 stable channel，优先 brew 安装方式而非直接安装脚本。
+[^paseo]: **Paseo（[paseo.sh](https://paseo.sh/)）是自托管的 coding agent 控制平面**：一个后台守护进程，驱动你机器上已装好的 Agent 而不改变其行为，为每个任务提供带状态流转（working / ready to review / done）的持久工作区，另有工作区历史、任务调度和 shell 访问。任意设备接入：原生移动端（与桌面端完全对等，App Store / Google Play）或网页端，走端到端加密中继、局域网或自建隧道（Tailscale）。Agent 通过 MCP / CLI / TypeScript SDK 同一个面自己驱动：subagent 扇出与 git worktree 隔离都是内建的。开箱支持 Claude Code、Codex、OpenCode、PI、Cursor，经 ACP 再加 30+。开源（Apache 2.0）、独立维护、无投资方；自托管，数据留在自己机器。注意：v0.x 阶段，迭代较快——优先 brew cask 安装。
 
 [^orbstack]: **OrbStack 是独立开发者 Danny Lin（kdrag0n）的作品**——一个人创办的公司，2023 年发布。他此前是 Android 定制内核圈知名开发者（Proton Kernel 作者），转战 macOS 后用 Swift / Rust 原生重写整套 Docker + Linux 虚拟化栈：启动秒级、空闲几乎零 CPU、续航消耗远低于 Docker Desktop。口碑来自"一个人打败了 Docker 官方产品"。个人使用免费，商用付费。
 

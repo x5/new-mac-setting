@@ -36,7 +36,7 @@ brew "bottom"
 brew "tlrc"
 
 # ---- Agent runtime ----
-brew "herdr"
+cask "paseo"
 
 # ---- Secrets & dotfiles ----
 brew "direnv"

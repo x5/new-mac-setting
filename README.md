@@ -56,7 +56,7 @@ Three core principles:
 
 - 📜 **Everything as code** — Brewfile + dotfiles + bootstrap script; restore a new machine in 30 minutes
 - ⌨️ **Terminal-first** — the AI agent battleground: Ghostty + zsh + Starship + Nerd Font
-- 🤖 **Multi-agent fleet** — Claude Code / Kimi Code / Codex / DSH / PI / WorkBuddy / ZCode, picked per task, with cc-switch as the unified provider switcher and herdr as the agent runtime the fleet lives on
+- 🤖 **Multi-agent fleet** — Claude Code / Kimi Code / Codex / DSH / PI / WorkBuddy / ZCode, picked per task, with cc-switch as the unified provider switcher and Paseo as the self-hosted agent runtime the fleet lives on
 
 ## 📖 Formats
 
@@ -83,7 +83,7 @@ Three core principles:
 | 05 | 🌿 Git Toolchain | gh, lazygit, git-delta, worktree |
 | 06 | 🧰 Modern CLI Toolbox | ripgrep / fd / bat / eza / fzf / zoxide … 13 tools, all cross-platform |
 | 07 | 📝 Editors | VS Code primary + Zed lightweight |
-| 08 | 🤖 AI Agent Fleet | 7 agents + cc-switch provider switcher + herdr agent runtime |
+| 08 | 🤖 AI Agent Fleet | 7 agents + cc-switch provider switcher + Paseo agent runtime |
 | 09 | 🔌 MCP | Playwright / Context7 / GitHub / Figma, install on demand |
 | 10 | 🐳 Containers | OrbStack replaces Docker Desktop |
 | 11 | 🔐 Secrets | free-first: Keychain + direnv + age/sops; 1Password optional |
@@ -113,7 +113,7 @@ Three core principles:
 | **ZCode (Zhipu)** | desktop ADE: Goal long-task management, bot remote triggers, deep GLM-5.3 integration |
 
 Companion: [cc-switch](https://github.com/farion1231/cc-switch) — unified API provider management, one-click switching.
-Runtime: [herdr](https://herdr.dev/) — persistent terminal sessions for the fleet (survives lid close / reboot, reattach from anywhere); the agent-native successor to tmux.
+Runtime: [Paseo](https://paseo.sh/) — self-hosted control plane for the fleet (persistent per-task workspaces, native mobile + web access from anywhere, agent-drivable MCP / CLI / SDK); terminal-first alternative: [herdr](https://herdr.dev/).
 
 ## 🧱 Tech Stack at a Glance
 
@@ -123,7 +123,7 @@ Runtimes   mise (node/python/go) · uv · pnpm
 CLI        ripgrep · fd · bat · eza · fzf · zoxide · jq/yq · httpie · bottom
 Git        gh · lazygit · git-delta · worktree
 Desktop    Raycast · Chrome · Obsidian · Shottr · LocalSend · IINA · Tailscale
-AI Agents  Claude Code · Kimi Code · Codex · DSH · PI · WorkBuddy · ZCode · cc-switch · herdr
+AI Agents  Claude Code · Kimi Code · Codex · DSH · PI · WorkBuddy · ZCode · cc-switch · Paseo
 Infra      OrbStack (Docker) · Syncthing
 Config     Homebrew Brewfile · chezmoi · bootstrap.sh · dotsync
 ```
@@ -133,7 +133,7 @@ Config     Homebrew Brewfile · chezmoi · bootstrap.sh · dotsync
 - [2026 Mac Setup for Web Development — Robin Wieruch](https://www.robinwieruch.de/mac-setup-web-development/)
 - [Best AI Coding Agent Harness 2026](https://aitoolsrecap.com/Blog/best-ai-coding-agent-harness-2026)
 - [Kimi Code Docs](https://www.kimi.com/code/docs/)
-- [cc-switch](https://github.com/farion1231/cc-switch) · [herdr](https://herdr.dev/) · [mcpm](https://mcpm.sh/) · [chezmoi](https://www.chezmoi.io/) · [OrbStack](https://orbstack.dev/)
+- [cc-switch](https://github.com/farion1231/cc-switch) · [Paseo](https://paseo.sh/) · [herdr](https://herdr.dev/) · [mcpm](https://mcpm.sh/) · [chezmoi](https://www.chezmoi.io/) · [OrbStack](https://orbstack.dev/)
 - 📐 [GitHub Publishing Standard (SOP)](docs/readme-standard.md) — the methodology behind this repo's README / topics / settings
 
 ## 📄 License
@@ -188,7 +188,7 @@ curl -fsSL https://x5.github.io/new-mac-setting/setup.sh | bash
 
 - 📜 **一切用代码声明** —— Brewfile + dotfiles + bootstrap 脚本，换机 30 分钟完整复原
 - ⌨️ **终端优先** —— AI Agent 的主战场在终端：Ghostty + zsh + Starship + Nerd Font
-- 🤖 **多 Agent 并存** —— Claude Code / Kimi Code / Codex / DSH / PI / WorkBuddy / ZCode 七件套，按任务选型，配合 cc-switch 统一切换供应商，herdr 作为整个阵容栖身的 Agent 运行时
+- 🤖 **多 Agent 并存** —— Claude Code / Kimi Code / Codex / DSH / PI / WorkBuddy / ZCode 七件套，按任务选型，配合 cc-switch 统一切换供应商，Paseo（自托管）作为整个阵容栖身的 Agent 运行时
 
 ## 📖 内容形态
 
@@ -220,7 +220,7 @@ curl -fsSL https://x5.github.io/new-mac-setting/setup.sh | bash
 | **ZCode（智谱）** | 桌面 ADE：Goal 长程任务、Bot 远程唤起、GLM-5.3 深度集成 |
 
 配套：[cc-switch](https://github.com/farion1231/cc-switch) 统一管理各家 API 供应商，一键切换。
-运行时：[herdr](https://herdr.dev/) 为阵容托管持久终端会话（合盖 / 重启不中断，任意设备 reattach），agent 时代的 tmux 继任者。
+运行时：[Paseo](https://paseo.sh/) —— 自托管的 Agent 控制平面，为阵容提供按任务划分的持久工作区，原生移动端 + 网页随处接入，MCP / CLI / SDK 可被 Agent 自己驱动；终端优先的替代：[herdr](https://herdr.dev/)。
 
 ## 🔎 SEO Keywords
 

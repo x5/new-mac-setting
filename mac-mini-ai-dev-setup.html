@@ -606,13 +606,12 @@ git worktree add ../proj-feat-b feat-b
 <span class="c"># Window 2:  cd ../proj-feat-b && kimi</span></pre>
   </div>
 
-  <div class="note reveal"><b>Runtime: <span class="tip">herdr<span class="tip-bubble"><b>herdr · Agent Runtime</b>A background server that holds real terminal sessions for coding agents — agents keep running through lid close, network drops and reboots, and you reattach from any device. It reads every pane and marks each agent working / blocked / idle; its CLI + socket API are one surface, so agents can split panes and start / prompt / wait on each other. Detects 21 agent CLIs out of the box; single binary for macOS / Linux / Windows. Young YC-backed project: stay on the stable channel, prefer brew-managed installs.</span></span> — where the agent fleet lives</b>. The seven agents above run inside herdr instead of loose terminal windows: the <b>agent-native successor to tmux</b>, the runtime layer the fleet lives on.</div>
+  <div class="note reveal"><b>Runtime: <span class="tip">Paseo<span class="tip-bubble"><b>Paseo · Agent Control Plane</b>A self-hosted, open-source (Apache 2.0) daemon that runs the coding agents already installed on your machine — unmodified — with a persistent workspace per task (working / ready to review / done, history, task scheduling, shell access). Native mobile app (full desktop parity) and web UI connect over an E2E-encrypted relay, LAN, or your own tunnel; MCP + CLI + TypeScript SDK are one surface agents can drive themselves — subagent fan-out and git-worktree isolation built in. Claude Code, Codex, OpenCode, Pi, Cursor + 30 more via ACP. v0.x, solo-maintained — prefer the brew cask.</span></span> — where the agent fleet lives</b>. The seven agents above run as Paseo workspaces instead of loose terminal windows: the control plane layer the fleet lives on, reachable from any device. Terminal-first alternative: herdr (<code>brew install herdr</code>) — tmux-style panes for the same job.</div>
 
   <div class="term reveal">
-    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — herdr agent runtime</span><button class="copy">copy</button></div>
-<pre>brew install herdr                            <span class="c"># preferred: updates ride along with brew upgrade</span>
-mise use -g herdr                             <span class="c"># alternative (old mise: mise use -g github:herdrdev/herdr)</span>
-curl -fsSL https://herdr.dev/install.sh | sh  <span class="c"># direct installer; only these use herdr update</span></pre>
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">zsh — Paseo agent runtime</span><button class="copy">copy</button></div>
+<pre>brew install --cask paseo                     <span class="c"># preferred: updates ride along with brew upgrade</span>
+<span class="c"># alternative: DMG from GitHub Releases — github.com/getpaseo/paseo/releases</span></pre>
   </div>
 </section>
 
