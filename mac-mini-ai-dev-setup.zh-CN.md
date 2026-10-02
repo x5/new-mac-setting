@@ -327,13 +327,16 @@ git worktree add ../proj-feat-b feat-b
 # 首选 Homebrew cask——更新随 brew upgrade 一起走
 brew install --cask paseo
 
+# 终端会话运行时（同样在 Brewfile 里）
+brew install herdr
+
 # 备选：GitHub Releases 下载 DMG
 # https://github.com/getpaseo/paseo/releases
 ```
 
 注意：Paseo 还在 v0.x，独立维护人、迭代很快——优先 brew cask 安装方式，让更新随 `brew upgrade` 一起走。
 
-终端优先的替代：**herdr**（[herdr.dev](https://herdr.dev/)）用 tmux 式的窗格思路解决同一问题——想留在终端里就 `brew install herdr`。
+运行时故事的另一半：**herdr**（[herdr.dev](https://herdr.dev/)）持有持久终端会话——tmux 式的 PTY 窗格，断线不中断，任意设备 reattach。两者并不冲突：Paseo 编排任务工作区，herdr 托管终端会话。Brewfile 两个都装——手机上盯进度的长任务交给 Paseo，想离开再回来的终端交给 herdr。
 
 ---
 

@@ -56,7 +56,7 @@ Three core principles:
 
 - 📜 **Everything as code** — Brewfile + dotfiles + bootstrap script; restore a new machine in 30 minutes
 - ⌨️ **Terminal-first** — the AI agent battleground: Ghostty + zsh + Starship + Nerd Font
-- 🤖 **Multi-agent fleet** — Claude Code / Kimi Code / Codex / DSH / PI / WorkBuddy / ZCode, picked per task, with cc-switch as the unified provider switcher and Paseo as the self-hosted agent runtime the fleet lives on
+- 🤖 **Multi-agent fleet** — Claude Code / Kimi Code / Codex / DSH / PI / WorkBuddy / ZCode, picked per task, with cc-switch as the unified provider switcher, Paseo as the self-hosted agent control plane, and herdr for persistent terminal sessions
 
 ## 📖 Formats
 
@@ -83,7 +83,7 @@ Three core principles:
 | 05 | 🌿 Git Toolchain | gh, lazygit, git-delta, worktree |
 | 06 | 🧰 Modern CLI Toolbox | ripgrep / fd / bat / eza / fzf / zoxide … 13 tools, all cross-platform |
 | 07 | 📝 Editors | VS Code primary + Zed lightweight |
-| 08 | 🤖 AI Agent Fleet | 7 agents + cc-switch provider switcher + Paseo agent runtime |
+| 08 | 🤖 AI Agent Fleet | 7 agents + cc-switch + Paseo & herdr runtimes |
 | 09 | 🔌 MCP | Playwright / Context7 / GitHub / Figma, install on demand |
 | 10 | 🐳 Containers | OrbStack replaces Docker Desktop |
 | 11 | 🔐 Secrets | free-first: Keychain + direnv + age/sops; 1Password optional |
@@ -113,7 +113,7 @@ Three core principles:
 | **ZCode (Zhipu)** | desktop ADE: Goal long-task management, bot remote triggers, deep GLM-5.3 integration |
 
 Companion: [cc-switch](https://github.com/farion1231/cc-switch) — unified API provider management, one-click switching.
-Runtime: [Paseo](https://paseo.sh/) — self-hosted control plane for the fleet (persistent per-task workspaces, native mobile + web access from anywhere, agent-drivable MCP / CLI / SDK); terminal-first alternative: [herdr](https://herdr.dev/).
+Runtime: [Paseo](https://paseo.sh/) — self-hosted control plane for the fleet (persistent per-task workspaces, native mobile + web access from anywhere, agent-drivable MCP / CLI / SDK); paired with [herdr](https://herdr.dev/) for persistent terminal sessions — complementary, both in the Brewfile.
 
 ## 🧱 Tech Stack at a Glance
 
@@ -123,7 +123,7 @@ Runtimes   mise (node/python/go) · uv · pnpm
 CLI        ripgrep · fd · bat · eza · fzf · zoxide · jq/yq · httpie · bottom
 Git        gh · lazygit · git-delta · worktree
 Desktop    Raycast · Chrome · Obsidian · Shottr · LocalSend · IINA · Tailscale
-AI Agents  Claude Code · Kimi Code · Codex · DSH · PI · WorkBuddy · ZCode · cc-switch · Paseo
+AI Agents  Claude Code · Kimi Code · Codex · DSH · PI · WorkBuddy · ZCode · cc-switch · Paseo · herdr
 Infra      OrbStack (Docker) · Syncthing
 Config     Homebrew Brewfile · chezmoi · bootstrap.sh · dotsync
 ```
@@ -188,7 +188,7 @@ curl -fsSL https://x5.github.io/new-mac-setting/setup.sh | bash
 
 - 📜 **一切用代码声明** —— Brewfile + dotfiles + bootstrap 脚本，换机 30 分钟完整复原
 - ⌨️ **终端优先** —— AI Agent 的主战场在终端：Ghostty + zsh + Starship + Nerd Font
-- 🤖 **多 Agent 并存** —— Claude Code / Kimi Code / Codex / DSH / PI / WorkBuddy / ZCode 七件套，按任务选型，配合 cc-switch 统一切换供应商，Paseo（自托管）作为整个阵容栖身的 Agent 运行时
+- 🤖 **多 Agent 并存** —— Claude Code / Kimi Code / Codex / DSH / PI / WorkBuddy / ZCode 七件套，按任务选型，配合 cc-switch 统一切换供应商，Paseo（自托管控制平面）与 herdr（持久终端会话）共同构成阵容的运行时层
 
 ## 📖 内容形态
 
@@ -220,7 +220,7 @@ curl -fsSL https://x5.github.io/new-mac-setting/setup.sh | bash
 | **ZCode（智谱）** | 桌面 ADE：Goal 长程任务、Bot 远程唤起、GLM-5.3 深度集成 |
 
 配套：[cc-switch](https://github.com/farion1231/cc-switch) 统一管理各家 API 供应商，一键切换。
-运行时：[Paseo](https://paseo.sh/) —— 自托管的 Agent 控制平面，为阵容提供按任务划分的持久工作区，原生移动端 + 网页随处接入，MCP / CLI / SDK 可被 Agent 自己驱动；终端优先的替代：[herdr](https://herdr.dev/)。
+运行时：[Paseo](https://paseo.sh/) —— 自托管的 Agent 控制平面，为阵容提供按任务划分的持久工作区，原生移动端 + 网页随处接入，MCP / CLI / SDK 可被 Agent 自己驱动；搭配 [herdr](https://herdr.dev/) 托管持久终端会话——两者互补，均在 Brewfile 中。
 
 ## 🔎 SEO Keywords
 

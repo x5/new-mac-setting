@@ -6,7 +6,14 @@ All notable changes to this project are documented in this file.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semantic Versioning](https://semver.org/): new content → minor, fixes → patch, restructure → major.
 格式遵循 Keep a Changelog，版本号遵循语义化版本：内容新增用 minor，修订与勘误用 patch，结构重构用 major。
 
-## [3.3.0] - 2026-09-29
+## [3.3.1] - 2026-10-03
+
+### Changed / 变更
+
+- **EN:** `Brewfile` — `brew "herdr"` reinstated under `# ---- Agent runtime ----` alongside `cask "paseo"`: the two runtimes are complementary, not competing (Paseo = self-hosted control plane for task workspaces; herdr = persistent terminal sessions). §8.5's closing paragraph now positions herdr as the other half of the runtime story instead of a manual-install alternative, and the install block gains `brew install herdr`. README / `llms.txt` / both HTML pages synced.
+- **中文：** `Brewfile` 在 `# ---- Agent runtime ----` 分组恢复 `brew "herdr"`，与 `cask "paseo"` 并存：两个运行时互补而非竞争（Paseo = 自托管控制平面，管任务工作区；herdr = 持久终端会话）。§8.5 结尾段把 herdr 从「手动安装的替代」改为「运行时故事的另一半」，安装块新增 `brew install herdr`。README / `llms.txt` / 两个 HTML 页面同步。
+
+## [3.3.0] - 2026-10-03
 
 ### Changed / 变更
 

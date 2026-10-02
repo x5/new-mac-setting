@@ -327,13 +327,16 @@ The fleet from 8.1 needs somewhere to live. **Paseo**[^paseo] is a self-hosted c
 # Preferred: Homebrew cask — updates ride along with brew upgrade
 brew install --cask paseo
 
+# Terminal-session runtime (also in the Brewfile)
+brew install herdr
+
 # Alternative: DMG from GitHub Releases
 # https://github.com/getpaseo/paseo/releases
 ```
 
 Caveat: Paseo is v0.x and solo-maintained — releases move fast; stay on the brew-managed cask so updates ride along with `brew upgrade`.
 
-Terminal-first alternative: **herdr** ([herdr.dev](https://herdr.dev/)) takes a tmux-style, pane-based approach to the same problem — `brew install herdr` if you'd rather stay in the terminal.
+The other half of the runtime story: **herdr** ([herdr.dev](https://herdr.dev/)) holds persistent terminal sessions — tmux-style PTY panes that survive disconnects and reattach from any device. The two don't conflict: Paseo orchestrates task workspaces, herdr holds terminal sessions. The Brewfile installs both — long-running tasks you monitor from your phone go to Paseo; a terminal you want to step away from and come back to goes to herdr.
 
 ---
 

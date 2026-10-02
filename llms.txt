@@ -1,6 +1,6 @@
 # Mac × AI Agent — The Complete Development Environment Setup Guide
 
-> A 16-chapter, bilingual (EN/中文) manual for turning a fresh Apple Silicon Mac into an AI-agent-driven development machine. Everything as code: Homebrew Brewfile + chezmoi dotfiles + one-command setup script. Multi-agent fleet: Claude Code, Kimi Code, Codex CLI, DSH (DeepSeek Harness), PI (Pi Agent Harness), WorkBuddy, ZCode — with Paseo as the agent runtime layer (self-hosted control plane: persistent workspaces, mobile/web access from anywhere, agent-drivable MCP / CLI / SDK; terminal-first alternative: herdr).
+> A 16-chapter, bilingual (EN/中文) manual for turning a fresh Apple Silicon Mac into an AI-agent-driven development machine. Everything as code: Homebrew Brewfile + chezmoi dotfiles + one-command setup script. Multi-agent fleet: Claude Code, Kimi Code, Codex CLI, DSH (DeepSeek Harness), PI (Pi Agent Harness), WorkBuddy, ZCode — with Paseo as the agent control plane (self-hosted: persistent task workspaces, mobile/web access from anywhere, agent-drivable MCP / CLI / SDK) and herdr for persistent terminal sessions; complementary runtimes, both in the Brewfile.
 
 ## One-command setup
 
